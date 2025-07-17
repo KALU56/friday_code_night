@@ -43,16 +43,8 @@ class CalculaterUi extends StatelessWidget {
               onPressed: () {},
               child: const Text('+'),
             ),
-            
-            ],
-            
-            
-            ),
-            const SizedBox(height: 20),
-          
-             Row(
-              children:[
-                Expanded(
+            SizedBox(width: 10),
+            Expanded(
             child:
           
             
@@ -70,7 +62,50 @@ class CalculaterUi extends StatelessWidget {
               child: const Text('='),
             ),
             
-            ],  
+            ],// children row 1
+            
+            
+            ),// row 1
+            const SizedBox(height: 20),
+            Row(
+              children:[
+                Expanded(
+            child:
+          
+            
+               TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Enter the first number ',
+            ),
+               ),
+
+           ),
+           SizedBox(width: 10),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('-'),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+            child:
+          
+            
+               TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Enter the first number ',
+            ),
+               ),
+
+           ),
+           SizedBox(width: 10),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('='),
+            ),
+            
+            ],// children row 1
             
             
             ),
