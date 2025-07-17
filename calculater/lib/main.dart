@@ -25,7 +25,9 @@ class CalculaterUi extends StatelessWidget {
           child: Column(
           children:[
             Row(
+              
               children:[
+                SizedBox(height: 40),
                 Expanded(
             child:
           
@@ -61,12 +63,28 @@ class CalculaterUi extends StatelessWidget {
               onPressed: () {},
               child: const Text('='),
             ),
+              Expanded(
+            child:
+          
+            
+               TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Result', 
+            ),
+               ),
+
+           ),
             
             ],// children row 1
             
             
             ),// row 1
-            const SizedBox(height: 20),
+
+
+
+            
+            const SizedBox(height: 40),
             Row(
               children:[
                 Expanded(
@@ -104,11 +122,23 @@ class CalculaterUi extends StatelessWidget {
               onPressed: () {},
               child: const Text('='),
             ),
+              Expanded(
+            child:
+          
             
-            ],// children row 1
-            
-            
+               TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Result', 
             ),
+               ),
+
+           ),
+            
+            ],// children row 2
+            
+            
+            ),//row2
     
         
         ],
