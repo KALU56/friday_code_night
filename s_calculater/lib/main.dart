@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const s_Calculater());
+  runApp(const Calculator());
 }
-class s_Calculater extends StatelessWidget {
-  const s_Calculater({super.key});
+class Calculator extends StatelessWidget {
+  const Calculator({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Calculator',
-      home: s_CalculaterUi(),
+      home: CalculatorUi(),
     );
   }
 }
-class s_CalculaterUi extends StatelessWidget {
-  const s_CalculaterUi({super.key});
+class CalculatorUi extends StatelessWidget {
+  const CalculatorUi({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
 
-      appBar: PreferredSize(preferredSize: Size.fromHeight(100), 
+      appBar: PreferredSize(preferredSize: Size.fromHeight(230), 
       child: AppBar(
         
         backgroundColor: const Color.fromARGB(255, 163, 81, 56),
@@ -35,74 +35,242 @@ class s_CalculaterUi extends StatelessWidget {
           children: [
             Row(
               children: [
-                ElevatedButton(onPressed: (){}, child: Text("AC")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text("()")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" %")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" /")),
-                SizedBox(width: 10),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("AC"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("( )"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("%"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("/"),
+                  
+                  ),
+                ),
+                
+                
             
               ],
-            ),/////number1 row
+            ),/////number1 col
+
+              SizedBox(height: 20),
+
+              Row(
+               children: [
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("7"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("8"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("9"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("*"),
+                  
+                  ),
+                ),
+                
+                
+            
+              ],
+            ),///////number4 col
+              SizedBox(height: 20),
 
 
               Row(
-              children: [
-                ElevatedButton(onPressed: (){}, child: Text(" 7")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" 8")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" 9")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" *")),
-                SizedBox(width: 10),
+               children: [
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("4"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("5"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("6"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("-"),
+                  
+                  ),
+                ),
+                
+                
             
               ],
-            ),/////number2 row
-
-
+            ),///////number5 col
+              SizedBox(height: 20),
               Row(
-              children: [
-                ElevatedButton(onPressed: (){}, child: Text(" 4")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" 5")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" 6")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" -")),
-                SizedBox(width: 10),
+               children: [
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("1"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("2"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("3"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("+"),
+                  
+                  ),
+                ),
+                
+                
             
               ],
-            ),///////number3 row
-
+            ),///////number6 col
+              SizedBox(height: 20), 
               Row(
-              children: [
-                ElevatedButton(onPressed: (){}, child: Text("1 ")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" 2")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text("3 ")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" +")),
-                SizedBox(width: 10),
+               children: [
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("0"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("."),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("x"),
+                  
+                  ),
+                ),
+                SizedBox(width: 15),
+                SizedBox(
+                  height: 70,
+                  width: 65,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("="),
+                  
+                  ),
+                ),
+                
+                
             
               ],
-            ),///////number4 row
-              Row(
-              children: [
-                ElevatedButton(onPressed: (){}, child: Text(" 0")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" .")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" x")),
-                SizedBox(width: 10),
-                ElevatedButton(onPressed: (){}, child: Text(" =")),
-                SizedBox(width: 10),
-            
-              ],
-            ),///////number5 row
+            ),///////number7 col
           ],
           
         ),
