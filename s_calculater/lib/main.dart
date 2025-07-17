@@ -9,6 +9,7 @@ class Calculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      
       title: 'Calculator',
       home: CalculatorUi(),
     );
@@ -25,7 +26,7 @@ class CalculatorUi extends StatelessWidget {
       appBar: PreferredSize(preferredSize: Size.fromHeight(230), 
       child: AppBar(
         
-        backgroundColor: const Color.fromARGB(255, 163, 81, 56),
+        backgroundColor: const Color.fromARGB(255, 114, 103, 100),
       )),
 
 
@@ -127,7 +128,7 @@ class CalculatorUi extends StatelessWidget {
                 
             
               ],
-            ),///////number4 col
+            ),///////number2 col
               SizedBox(height: 20),
 
 
@@ -176,7 +177,10 @@ class CalculatorUi extends StatelessWidget {
                 
             
               ],
-            ),///////number5 col
+            ),///////number3 col
+
+
+
               SizedBox(height: 20),
               Row(
                children: [
@@ -223,7 +227,7 @@ class CalculatorUi extends StatelessWidget {
                 
             
               ],
-            ),///////number6 col
+            ),///////number4 col
               SizedBox(height: 20), 
               Row(
                children: [
@@ -270,7 +274,7 @@ class CalculatorUi extends StatelessWidget {
                 
             
               ],
-            ),///////number7 col
+            ),///////number5 col
           ],
           
         ),
