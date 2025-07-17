@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 void main(){
-  runApp(MyApp());
+  runApp(Kal());
 
 }
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Kal extends StatelessWidget {
+  const Kal({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'first practce app',
-      home: homepage(), 
+      home: Homepage(), 
     );
   }
 }
-class homepage extends StatelessWidget{
-  const homepage({super.key});
+class Homepage extends StatelessWidget{
+  const Homepage({super.key});
   @override
   Widget build(BuildContext context) {
   
