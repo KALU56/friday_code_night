@@ -74,14 +74,18 @@ class Login extends StatelessWidget {
           SizedBox(height: 20,),
           
            Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.g_mobiledata, color: Colors.red),
-                SizedBox(width: 10),
-                Text('Log in with Google'),
-              ],
-            ),
+                child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/images/google.png',
+                        height: 24,
+                        width: 24,
+                      ),
+                      SizedBox(width: 10),
+                      Text("Sign in with Google"),
+                    ],
+                  ),
            ),
             
           SizedBox(height: 20,),

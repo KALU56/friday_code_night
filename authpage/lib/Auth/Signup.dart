@@ -79,33 +79,45 @@ class Signup extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    
-                    Icon(Icons.g_mobiledata, color: Colors.red),
-                    SizedBox(width: 10),
-                    Text('Log in with GitHub'),
-                  ],
-                ),
+               Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/images/github.png',
+                        height: 24,
+                        width: 24,
+                      ),
+                      SizedBox(width: 10),
+                      Text("Sign in with github"),
+                    ],
+                  ),
                 SizedBox(height: 10),
-                Row(
-                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.g_mobiledata, color: Colors.red),
-                    SizedBox(width: 10),
-                    Text('Log in with Google'),
-                  ],
-                ),
+               Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/images/google.png',
+                        height: 24,
+                        width: 24,
+                      ),
+                      SizedBox(width: 10),
+                      Text("Sign in with Google"),
+                    ],
+                  ),
+                
                 SizedBox(height: 10),
-                Row(
-                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.facebook, color: Colors.blue),
-                    SizedBox(width: 10),
-                    Text('Log in with Facebook'),
-                  ],
-                ),
+               Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/images/facebook.png',
+                        height: 24,
+                        width: 24,
+                      ),
+                      SizedBox(width: 10),
+                      Text("Sign in with facebook"),
+                    ],
+                  ),
               ],
             ),
                    ) ,
