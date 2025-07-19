@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Login.dart';
 
 class Signup extends StatelessWidget {
   const Signup({super.key});
@@ -6,20 +7,23 @@ class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Register Account!'),
-        
-      ),
+    
       body: SingleChildScrollView(
         child:Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
+          SizedBox(height: 15,),
+          Text('Register Account! ',
+            style: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 20, 
+  ),),
           SizedBox(height: 15,),
 
-          Text('Fill your details or continue with social media'),
+          Text('Fill your details or continue '),
+          Text('with social media'),
           SizedBox(height: 15,),
           Text('Name'),
           TextField(
@@ -65,7 +69,7 @@ class Signup extends StatelessWidget {
             
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color.fromARGB(255, 23, 223, 156),
               
             ),
               child:Center(child: Text('Signup'),),),
@@ -126,7 +130,27 @@ class Signup extends StatelessWidget {
 
             
           SizedBox(height: 20,),
-          Text('Already have an account? login'),
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  
+                 Text('Aleady have an account? '),
+                 SizedBox(width: 10,),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Login()),
+                      );
+                    },
+                    child: Text('Login'),
+                  ),
+                  
+
+                ],
+              ),
+            )
         
         ],
         )

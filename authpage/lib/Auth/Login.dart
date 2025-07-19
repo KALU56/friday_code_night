@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Auth//Signup.dart';
+import 'Signup.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -7,21 +7,24 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Welcome Back!'),
-        
-      ),
+     
       body: SingleChildScrollView(
       child:Padding(
           padding: const EdgeInsets.all(16.0),    
       child :Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
+          SizedBox(height: 45,),
+          Text('Welcome Back!',
+            style: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 20, 
+  ),),
           SizedBox(height: 15,),
 
-          Text('Fill your details or continue with social media'),
-          SizedBox(height: 15,),
+          Text('Fill your details or continue '),
+          Text('with social media'),
+          SizedBox(height: 25,),
           Text('Email'),
           TextField(
             decoration: InputDecoration(
@@ -61,7 +64,7 @@ class Login extends StatelessWidget {
             
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color.fromARGB(255, 23, 223, 156),
               
             ),
               
@@ -90,10 +93,12 @@ class Login extends StatelessWidget {
             
           SizedBox(height: 20,),
             Center(
-              child: Column(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('New User? Create an account'),
+                  
+                 Text('New User? '),
+                 SizedBox(width: 10,),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -101,8 +106,10 @@ class Login extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Signup()),
                       );
                     },
-                    child: Text('Sign Up'),
+                    child: Text('Create an account'),
                   ),
+                  
+
                 ],
               ),
             )
