@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../components/bootom_nav.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+  
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -72,12 +72,12 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     const SizedBox(width: 12),
-                    _buildCoffeeChip("Cappuccino"),
-                    _buildCoffeeChip("Ethiopian Coffee"),
-                    _buildCoffeeChip("Arab Coffee"),
-                    _buildCoffeeChip("Macchiato"),
-                    _buildCoffeeChip("Latte"),
-                    _buildCoffeeChip("Turkish Coffee"),
+                    Coffee("Cappuccino"),
+                    Coffee("Ethiopian Coffee"),
+                    Coffee("Arab Coffee"),
+                    Coffee("Macchiato"),
+                    Coffee("Latte"),
+                    Coffee("Turkish Coffee"),
                     const SizedBox(width: 16),
                   ],
                 ),
@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-  Widget _buildCoffeeChip(String label) {
+  Widget Coffee(String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Chip(
