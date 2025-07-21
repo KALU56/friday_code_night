@@ -1,5 +1,19 @@
 import 'package:flutter/material.dart';
+// Product model to hold data
+class Product {
+  final String name;
+  final String price;
+  final String imagePath;
 
+  Product({required this.name, required this.price, required this.imagePath});
+}
+
+// Sample product list
+final List<Product> products = [
+  Product(name: 'COFFEE', price: 'ETB 500', imagePath: 'assets/images/coffee1.webp'),
+  Product(name: 'COFFEES', price: 'ETB 750', imagePath: 'assets/images/coffee2.webp'),
+  Product(name: 'COFFEE', price: 'ETB 600', imagePath: 'assets/images/coffee3.webp'),
+];
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -83,7 +97,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             SizedBox(height: 20),
-   
+            Container(
+              child:ProductList(),),
+            
+             
 
           ],
           
@@ -94,8 +111,79 @@ class HomePage extends StatelessWidget {
   
     );
   }
+}class ProductList extends StatelessWidget {
+  const ProductList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      shrinkWrap: true,                             // Add this
+      physics: const NeverScrollableScrollPhysics(), // And this
+      itemCount: products.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,         // 2 cards per row
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 0.99,     // Adjust height
+      ),
+      itemBuilder: (context, index) {
+        return ProductCard(product: products[index]);
+      },
+    );
+  }
 }
 
+class ProductCard extends StatelessWidget {
+  final Product product;
+
+  const ProductCard({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.asset(
+                product.imagePath,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              product.name,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              product.price,
+              style: const TextStyle(fontSize: 14, color: Colors.green),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                print('Added ${product.name} to cart');
+              },
+              child: const Text('Add to Cart'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
   Widget Coffee(String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -106,3 +194,35 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+class BottomNav extends StatefulWidget {
+  const BottomNav({super.key});
+
+  @override
+  State<BottomNav> createState() => _BottomNavState();
+}
+
+class _BottomNavState extends State<BottomNav> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+                    BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+
+        ],
+      ),
+
+    );
+  }
+}
