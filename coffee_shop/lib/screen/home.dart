@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// Product model to hold data
+
 class Product {
   final String name;
   final String price;
@@ -8,7 +8,7 @@ class Product {
   Product({required this.name, required this.price, required this.imagePath});
 }
 
-// Sample product list
+
 final List<Product> products = [
   Product(name: 'COFFEE', price: 'ETB 500', imagePath: 'assets/images/coffee1.webp'),
   Product(name: 'COFFEES', price: 'ETB 750', imagePath: 'assets/images/coffee2.webp'),
@@ -86,12 +86,12 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     const SizedBox(width: 12),
-                    Coffee("Cappuccino"),
-                    Coffee("Ethiopian Coffee"),
-                    Coffee("Arab Coffee"),
-                    Coffee("Macchiato"),
-                    Coffee("Latte"),
-                    Coffee("Turkish Coffee"),
+                    coffee("Cappuccino"),
+                    coffee("Ethiopian Coffee"),
+                    coffee("Arab Coffee"),
+                    coffee("Macchiato"),
+                    coffee("Latte"),
+                    coffee("Turkish Coffee"),
                     const SizedBox(width: 16),
                   ],
                 ),
@@ -118,14 +118,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.all(16),
-      shrinkWrap: true,                             // Add this
-      physics: const NeverScrollableScrollPhysics(), // And this
+      shrinkWrap: true,                             
+      physics: const NeverScrollableScrollPhysics(), 
       itemCount: products.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,         // 2 cards per row
+        crossAxisCount: 2,         
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.99,     // Adjust height
+        childAspectRatio: 0.99,     
       ),
       itemBuilder: (context, index) {
         return ProductCard(product: products[index]);
@@ -174,7 +174,7 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                print('Added ${product.name} to cart');
+                
               },
               child: const Text('Add to Cart'),
             ),
@@ -184,7 +184,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-  Widget Coffee(String label) {
+  Widget coffee(String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Chip(
@@ -194,35 +194,3 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
-class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
-
-  @override
-  State<BottomNav> createState() => _BottomNavState();
-}
-
-class _BottomNavState extends State<BottomNav> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-                    BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-
-        ],
-      ),
-
-    );
-  }
-}

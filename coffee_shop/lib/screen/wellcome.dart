@@ -104,7 +104,7 @@ class Wellcome extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/Home');
+                Navigator.pushNamed(context, '/main');
               },
               
               style: ElevatedButton.styleFrom(
