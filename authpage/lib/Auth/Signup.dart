@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'Login.dart';
-
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   const Signup({super.key});
+
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,9 @@ class Signup extends StatelessWidget {
           Text('Name'),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               hintText: 'Enter your Name',
             ),
             keyboardType: TextInputType.emailAddress,
@@ -37,20 +45,37 @@ class Signup extends StatelessWidget {
           Text('Email'),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               hintText: 'Enter your email',
             ),
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 20,),
-          Text('Password'),
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter your password',
-            ),
-            obscureText: true,
-          ),
+              Text('Password'),
+              TextField(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  hintText: 'Enter your password',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                        
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+              ),
           SizedBox(height: 20,),
             Row(
               children: [
@@ -70,6 +95,8 @@ class Signup extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 23, 223, 156),
+                 foregroundColor: const Color.fromARGB(255, 248, 245, 245),
+                  minimumSize: const Size(double.infinity, 50), 
               
             ),
               child:Center(child: Text('Signup'),),),
@@ -83,7 +110,20 @@ class Signup extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-               Row(
+                     ElevatedButton(onPressed: (){}, 
+           style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 255, 254, 254),
+    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12), 
+    
+    ),
+
+           ),
+           child:  Center(
+                child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
@@ -92,11 +132,25 @@ class Signup extends StatelessWidget {
                         width: 24,
                       ),
                       SizedBox(width: 10),
-                      Text("Sign in with github"),
+                      Text("continue with Github"),
                     ],
                   ),
+           ),),
                 SizedBox(height: 10),
-               Row(
+                      ElevatedButton(onPressed: (){}, 
+           style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 255, 254, 254),
+    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12), 
+    
+    ),
+
+           ),
+           child:  Center(
+                child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
@@ -105,12 +159,26 @@ class Signup extends StatelessWidget {
                         width: 24,
                       ),
                       SizedBox(width: 10),
-                      Text("Sign in with Google"),
+                      Text("continue with  Google"),
                     ],
                   ),
+           ),),
                 
                 SizedBox(height: 10),
-               Row(
+                       ElevatedButton(onPressed: (){}, 
+           style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 255, 254, 254),
+    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12), 
+    
+    ),
+
+           ),
+           child:  Center(
+                child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
@@ -119,9 +187,10 @@ class Signup extends StatelessWidget {
                         width: 24,
                       ),
                       SizedBox(width: 10),
-                      Text("Sign in with facebook"),
+                      Text("continue with Facebook"),
                     ],
                   ),
+           ),),
               ],
             ),
                    ) ,

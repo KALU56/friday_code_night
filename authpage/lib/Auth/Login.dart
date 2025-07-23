@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'Signup.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,35 +34,63 @@ class Login extends StatelessWidget {
           Text('Email'),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               hintText: 'Enter your email',
             ),
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 20,),
-          Text('Password'),
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter your password',
-            ),
-            obscureText: true,
-          ),
+              TextField(
+                obscureText: _obscurePassword, 
+                decoration: InputDecoration(
+                  hintText: 'Enter your password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+              ),
           SizedBox(height: 20,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Checkbox(
-                  value: false,
+                Container(
+                 child: Row(
+                  children: [
+                                  Checkbox(
+                  value: true,
                   onChanged: null,
                 ),
                 Text('Remember me'),
-                SizedBox(width: 50,),
-                Text('forget password?'),
+                  ],
+                 )
+        
+                ),
+           
+              GestureDetector(
+
+      child: const Text(
+        'Forgot Password',
+        style: TextStyle(
+          
+          decoration: TextDecoration.underline,
+        ),
+      ),),
 
               ],
             ),
-
-          
+    
           
           SizedBox(height: 20,),
           ElevatedButton(
@@ -65,7 +99,12 @@ class Login extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 23, 223, 156),
-              
+              foregroundColor: const Color.fromARGB(255, 248, 245, 245),
+                  minimumSize: const Size(double.infinity, 50), 
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12), 
+    ),
+
             ),
               
           
@@ -75,8 +114,19 @@ class Login extends StatelessWidget {
 
           
           SizedBox(height: 20,),
-          
-           Center(
+           ElevatedButton(onPressed: (){}, 
+           style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 255, 254, 254),
+    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12), 
+    
+    ),
+
+           ),
+           child:  Center(
                 child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -89,7 +139,9 @@ class Login extends StatelessWidget {
                       Text("Sign in with Google"),
                     ],
                   ),
-           ),
+           ),),
+          
+  
             
           SizedBox(height: 20,),
             Center(
