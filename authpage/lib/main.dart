@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Auth/Login.dart';
-import 'Auth/Signup.dart';
+import 'Auth/login.dart';
+import 'Auth/signup.dart';
 void main() {
   runApp(const MyAuth());
 }

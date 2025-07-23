@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Signup.dart';
+import '../core/assets.dart';
+import 'signup.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -136,7 +137,7 @@ class _LoginState extends State<Login> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
-                        'assets/images/google.png',
+                        Assets.googleImage,
                         height: 24,
                         width: 24,
                       ),
