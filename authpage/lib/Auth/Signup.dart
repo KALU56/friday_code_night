@@ -31,7 +31,13 @@ class _SignupState extends State<Signup> {
           Text('Fill your details or continue '),
           Text('with social media'),
           SizedBox(height: 15,),
-          Text('Name'),
+                    Text(
+            'Name',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          
           TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(
@@ -42,7 +48,10 @@ class _SignupState extends State<Signup> {
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 20,),
-          Text('Email'),
+          Text('Email',
+                      style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),),
           TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(
@@ -53,12 +62,16 @@ class _SignupState extends State<Signup> {
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 20,),
-              Text('Password'),
+              Text('Password',
+                          style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),),
               TextField(
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+                    
                   ),
                   hintText: 'Enter your password',
                   suffixIcon: IconButton(
@@ -95,9 +108,11 @@ class _SignupState extends State<Signup> {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 23, 223, 156),
-                 foregroundColor: const Color.fromARGB(255, 248, 245, 245),
+                 foregroundColor: const Color.fromARGB(255, 100, 98, 98),
                   minimumSize: const Size(double.infinity, 50), 
-              
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), 
+                  ),
             ),
               child:Center(child: Text('Signup'),),),
           
@@ -113,7 +128,7 @@ class _SignupState extends State<Signup> {
                      ElevatedButton(onPressed: (){}, 
            style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+    foregroundColor: const Color.fromARGB(255, 100, 98, 98),
 
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     shape: RoundedRectangleBorder(
@@ -140,7 +155,7 @@ class _SignupState extends State<Signup> {
                       ElevatedButton(onPressed: (){}, 
            style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+    foregroundColor: const Color.fromARGB(255, 100, 98, 98),
 
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     shape: RoundedRectangleBorder(
@@ -168,7 +183,7 @@ class _SignupState extends State<Signup> {
                        ElevatedButton(onPressed: (){}, 
            style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-    foregroundColor: const Color.fromARGB(255, 177, 176, 176),
+    foregroundColor: const Color.fromARGB(255, 100, 98, 98),
 
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     shape: RoundedRectangleBorder(
@@ -201,22 +216,26 @@ class _SignupState extends State<Signup> {
           SizedBox(height: 20,),
             Center(
               child: Row(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-                 Text('Aleady have an account? '),
-                 SizedBox(width: 10,),
-                  ElevatedButton(
-                    onPressed: () {
+                  const Text('Already have an account? '),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const Login()),
                       );
                     },
-                    child: Text('Login'),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                             
+                        fontWeight: FontWeight.bold,
+                       
+                      ),
+                    ),
                   ),
-                  
-
                 ],
               ),
             )
