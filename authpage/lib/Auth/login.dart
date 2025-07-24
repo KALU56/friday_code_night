@@ -139,7 +139,9 @@ class _LoginState extends State<Login> {
           ElevatedButton(
                       
             
-            onPressed: () {
+            onPressed: (
+              
+            ) {
               if (!_formKey.currentState!.validate()) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -148,11 +150,11 @@ class _LoginState extends State<Login> {
     ),
   );
   return; 
-}
+}  Navigator.pushNamed(context, '/home');
 
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 23, 223, 156),
+              backgroundColor: const Color.fromARGB(255, 11, 172, 118),
               foregroundColor: const Color.fromARGB(255, 248, 245, 245),
                   minimumSize: const Size(double.infinity, 50), 
                 shape: RoundedRectangleBorder(

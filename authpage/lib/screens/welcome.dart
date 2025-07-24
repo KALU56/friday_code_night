@@ -64,7 +64,7 @@ class Welcome extends StatelessWidget {
                           Navigator.pushNamed(context, '/signup');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 23, 223, 156),
+                          backgroundColor: const Color.fromARGB(255, 11, 172, 118),
                           foregroundColor: const Color.fromARGB(255, 250, 249, 249), 
                              minimumSize: const Size(double.infinity, 50), 
                             shape: RoundedRectangleBorder(

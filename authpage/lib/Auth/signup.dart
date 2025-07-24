@@ -165,10 +165,10 @@ class _SignupState extends State<Signup> {
   );
   return; 
 }
-
+Navigator.pushNamed(context, '/home');
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 23, 223, 156),
+              backgroundColor: const Color.fromARGB(255, 11, 172, 118),
                  foregroundColor: const Color.fromARGB(255, 100, 98, 98),
                   minimumSize: const Size(double.infinity, 50), 
                   shape: RoundedRectangleBorder(

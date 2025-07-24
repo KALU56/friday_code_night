@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Auth/login.dart';
 import 'Auth/signup.dart';
 import 'screens/welcome.dart';
+import 'screens/home.dart';
 
 void main() {
   runApp(const MyAuth());
@@ -17,9 +18,10 @@ class MyAuth extends StatelessWidget {
       title: 'Auth Page',
       initialRoute: '/welcome',
       routes: {
-        '/Login': (context) => const Login(),
-        '/Signup': (context) => const Signup(),
+        '/login': (context) => const Login(),
+        '/signup': (context) => const Signup(),
         '/welcome':(context) => const Welcome(),
+        '/home':(context) => const Home(),
       },
     
      
