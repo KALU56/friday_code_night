@@ -11,6 +11,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final _formKey = GlobalKey<FormState>();
+
   bool _obscurePassword = true;
   bool _rememberMe = false;
 
@@ -22,6 +24,8 @@ class _SignupState extends State<Signup> {
       body: SingleChildScrollView(
         child:Padding(
           padding: const EdgeInsets.all(16.0),
+          child: Form(
+          key: _formKey,
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,7 +48,7 @@ class _SignupState extends State<Signup> {
             ),
           ),
                     
-          TextField(
+          TextFormField(
             decoration: InputDecoration(
               hintText: 'Enter your Name',
               enabledBorder: OutlineInputBorder(
@@ -57,13 +61,21 @@ class _SignupState extends State<Signup> {
               
             ),
             keyboardType: TextInputType.name,
+                        validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your name';
+              } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                return 'Only letters are allowed';
+              }
+              return null;
+            },
           ),
           SizedBox(height: 20,),
           Text('Email',
                       style: TextStyle(
               fontWeight: FontWeight.bold,
             ),),
-          TextField(
+          TextFormField(
             decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
@@ -75,13 +87,21 @@ class _SignupState extends State<Signup> {
               hintText: 'Enter your email',
             ),
             keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$').hasMatch(value)) {
+      return 'Enter a valid email like test@gmail.com';
+    }
+    return null;
+  },
           ),
           SizedBox(height: 20,),
               Text('Password',
                           style: TextStyle(
               fontWeight: FontWeight.bold,
             ),),
-              TextField(
+              TextFormField(
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
@@ -106,6 +126,14 @@ class _SignupState extends State<Signup> {
                     },
                   ),
                 ),
+                  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a password';
+    } else if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  },
               ),
           SizedBox(height: 20,),
                 Row(
@@ -127,7 +155,18 @@ class _SignupState extends State<Signup> {
           ElevatedButton(
                       
             
-            onPressed: () {},
+            onPressed: () {
+              if (!_formKey.currentState!.validate()) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text("Please check your email and password or name."),
+      backgroundColor: Colors.orange,
+    ),
+  );
+  return; 
+}
+
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 23, 223, 156),
                  foregroundColor: const Color.fromARGB(255, 100, 98, 98),
@@ -263,10 +302,11 @@ class _SignupState extends State<Signup> {
             )
         
         ],
-        )
+        ),
         
 
-        )
+        ),
+        ),
         
 
       )
