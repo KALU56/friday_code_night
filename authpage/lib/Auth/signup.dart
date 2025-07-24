@@ -12,6 +12,8 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   bool _obscurePassword = true;
+  bool _rememberMe = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -106,15 +108,19 @@ class _SignupState extends State<Signup> {
                 ),
               ),
           SizedBox(height: 20,),
-            Row(
-              children: [
-                Checkbox(
-                  value: false,
-                  onChanged: null,
-                ),
-                Text('Remember me'),
-              ],
-            ),
+                Row(
+            children: [
+              Checkbox(
+                value: _rememberMe,
+                onChanged: (value) {
+                  setState(() {
+                    _rememberMe = value!;
+                  });
+                },
+              ),
+              const Text('Remember me'),
+            ],
+          ),
 
           SizedBox(width: 20,),
        

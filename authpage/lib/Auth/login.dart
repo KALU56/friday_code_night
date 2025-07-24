@@ -14,6 +14,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _obscurePassword = true;
+  bool _rememberMe = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,18 +88,19 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                 child: Row(
-                  children: [
-                                  Checkbox(
-                  value: true,
-                  onChanged: null,
-                ),
-                Text('Remember me'),
-                  ],
-                 )
-        
-                ),
+                        Row(
+                children: [
+                  Checkbox(
+                    value: _rememberMe,
+                    onChanged: (value) {
+                      setState(() {
+                        _rememberMe = value!;
+                      });
+                    },
+                  ),
+                  const Text('Remember me'),
+                ],
+              ),
            
               GestureDetector(
 
