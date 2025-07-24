@@ -14,6 +14,7 @@ class MyAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
   
       title: 'Auth Page',
       initialRoute: '/welcome',
