@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import '../core/assets.dart';
-// import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -23,12 +23,13 @@ class _SignupState extends State<Signup> {
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 15,),
+          SizedBox(height: 45,),
           Text('Register Account! ',
-            style: TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 20, 
-  ),),
+                   style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w900,
+              fontSize: 24,
+              color: Colors.black87,
+            ),),
           SizedBox(height: 15,),
 
           Text('Fill your details or continue '),
@@ -40,15 +41,20 @@ class _SignupState extends State<Signup> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          
+                    
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
               hintText: 'Enter your Name',
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: const Color.fromARGB(255, 236, 230, 230), 
+                  width: 1.5,
+                ),
+              ),
+              
             ),
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
           ),
           SizedBox(height: 20,),
           Text('Email',
@@ -57,9 +63,13 @@ class _SignupState extends State<Signup> {
             ),),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+          enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+        color:  const Color.fromARGB(255, 236, 230, 230), 
+        width: 1.5,
+      ),
+    ),
               hintText: 'Enter your email',
             ),
             keyboardType: TextInputType.emailAddress,
@@ -72,10 +82,13 @@ class _SignupState extends State<Signup> {
               TextField(
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    
-                  ),
+            enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+         color: const Color.fromARGB(255, 236, 230, 230), 
+        width: 1.5,
+      ),
+    ),
                   hintText: 'Enter your password',
                   suffixIcon: IconButton(
                     icon: Icon(

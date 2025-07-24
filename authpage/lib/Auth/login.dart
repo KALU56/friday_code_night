@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
 import 'signup.dart';
-// import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 
 class Login extends StatefulWidget {
@@ -24,11 +25,14 @@ class _LoginState extends State<Login> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 45,),
-          Text('Welcome Back!',
-            style: TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 20, 
-  ),),
+              Text(
+            'Welcome Back!',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w900,
+              fontSize: 24,
+              color: Colors.black87,
+            ),
+          ),
           SizedBox(height: 15,),
 
           Text('Fill your details or continue '),
@@ -39,9 +43,14 @@ class _LoginState extends State<Login> {
             ),),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+            enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+         color: const Color.fromARGB(255, 236, 230, 230), 
+        width: 1.5,
+      ),
+      
+    ),
               hintText: 'Enter your email',
             ),
             keyboardType: TextInputType.emailAddress,
@@ -54,9 +63,13 @@ class _LoginState extends State<Login> {
                 obscureText: _obscurePassword, 
                 decoration: InputDecoration(
                   hintText: 'Enter your password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+       color: const Color.fromARGB(255, 236, 230, 230), 
+        width: 1.5,
+      ),
+    ),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off : Icons.visibility,
