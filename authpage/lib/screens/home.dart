@@ -118,9 +118,9 @@ class _HomeState extends State<Home> {
           ),
       
       const SizedBox(height: 24),
-                Container(
+                
 
-                child:   SingleChildScrollView(
+                SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                       children: [
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
                 ],
                             ),
               ),
-                ) ,
+                
                     
                 Align(
             alignment: Alignment.centerLeft, 
