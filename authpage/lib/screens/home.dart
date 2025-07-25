@@ -11,7 +11,9 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(child: 
+    SingleChildScrollView(
       child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       child: Column(
@@ -28,7 +30,7 @@ class _HomeState extends State<Home> {
                   'Find Your',
                   style: TextStyle(
                     fontSize: 20, 
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w900,
                     color: Colors.black, 
                   ),
                 ),
@@ -37,9 +39,9 @@ class _HomeState extends State<Home> {
                   'Dream Furniture',
                   style: TextStyle(
                     fontSize: 20, 
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w900,
                     color: Colors.black, 
-                    letterSpacing: 1.2, 
+                  
                   ),
                 ),
                 ],
@@ -53,7 +55,9 @@ class _HomeState extends State<Home> {
 
 
             ],
+          
           ),
+          SizedBox(height: 15),
           Container(
              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -67,19 +71,20 @@ class _HomeState extends State<Home> {
                   children: [
                     SizedBox(height: 15,),
                        Text("30% off",  style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                           
+                              fontWeight: FontWeight.w900,
                               color: Colors.black,
-                              letterSpacing: 1.2,
+                            
                             ),),
                     
                   Text("until july 24",  style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
-                              letterSpacing: 1.2,
+                           
                             ),),
-                            SizedBox(height: 15,),
+                            SizedBox(height: 10,),
                    ElevatedButton(
                         onPressed: () {
                          
@@ -110,7 +115,7 @@ class _HomeState extends State<Home> {
               ),
             ),
 
-            const SizedBox(width: 55),
+           
               ],
 
             )
@@ -159,7 +164,8 @@ class _HomeState extends State<Home> {
       ),
 
 
-    ));
+    )
+    ),);
   }
 }
 Widget product({IconData? icon, String? label}) {

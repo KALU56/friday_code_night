@@ -61,7 +61,7 @@ class Welcome extends StatelessWidget {
                     Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/signup');
+                          Navigator.pushNamed(context, '/home');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromARGB(255, 11, 172, 118),
