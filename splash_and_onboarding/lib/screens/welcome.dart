@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
+import './taskugas.dart';
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightGreen[100],
+      backgroundColor: const Color.fromARGB(255, 187, 253, 111),
       body: Center(
         
         child: Row(
@@ -14,19 +15,32 @@ class Welcome extends StatelessWidget {
           children: [
             
              Container(
+              width: 100,
+              height: 100,
           
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(Assets.tag),
+                  
                  
                 ),
               ),
             ),
-            Text('Tasktugas',style: TextStyle(
+             const SizedBox(width: 20),
+             GestureDetector(
+              onTap: () {
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Taskugas()),
+                );
+                
+              },
+            child:Text('Tasktugas',style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w900,
-              color: const Color.fromARGB(255, 100, 245, 4),
+              color: const Color.fromARGB(255, 22, 126, 1),
             ),)
+             ),
 
           ],
 
