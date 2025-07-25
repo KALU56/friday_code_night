@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
-
+import './login_siginup.dart';
 class Taskugas extends StatefulWidget {
   const Taskugas({super.key});
 
@@ -38,12 +38,18 @@ class _TaskugasState extends State<Taskugas> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/home');
+         Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginSiginup()),
+                );
     }
   }
 
   void _skip() {
-    Navigator.pushReplacementNamed(context, '/home');
+       Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginSiginup()),
+                );
   }
 
   @override
@@ -57,7 +63,9 @@ class _TaskugasState extends State<Taskugas> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 24),
                 Container(
+                  
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
