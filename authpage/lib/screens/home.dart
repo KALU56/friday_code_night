@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
+
+
+class Product {
+  final String name;
+  final String price;
+  final String imagePath;
+
+  Product({required this.name, required this.price, required this.imagePath});
+}
+
+
+final List<Product> products = [
+  Product(name: 'Sofa', price: 'ETB 500', imagePath: Assets.product1),
+  Product(name: 'Sofa', price: 'ETB 750', imagePath: Assets.product2),
+  Product(name: 'Sofa', price: 'ETB 600', imagePath: Assets.product3),
+];
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -202,4 +218,77 @@ Widget product({IconData? icon, String? label}) {
       ],
     ),
   );
+}
+class ProductList extends StatelessWidget {
+  const ProductList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      shrinkWrap: true,                             
+      physics: const NeverScrollableScrollPhysics(), 
+      itemCount: products.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,         
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 0.99,     
+      ),
+      itemBuilder: (context, index) {
+        return ProductCard(products: products[index]);
+      },
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final Product products;
+
+  const ProductCard({super.key, required this.products});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.asset(
+                products.imagePath,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              products.name,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              products.price,
+              style: const TextStyle(fontSize: 14, color: Colors.green),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                
+              },
+              child: const Text('Add to Cart'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
