@@ -90,22 +90,21 @@ class _ResetPasswordState extends State<ResetPassword> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    TextField(
+                  TextField(
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        hintText: 'confirm your password',
+                        hintText: 'Enter your password',
+                        prefixIcon: const Icon(Icons.lock), 
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 255, 255, 255),
                             width: 1.5,
                           ),
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                            _obscurePassword ? Icons.visibility_off : Icons.visibility,
                           ),
                           onPressed: () {
                             setState(() {

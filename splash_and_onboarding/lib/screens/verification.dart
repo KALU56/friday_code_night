@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
-import './Reset_password.dart';
+import 'reset_password.dart';
 class Verification extends StatelessWidget {
   const Verification({super.key});
 
@@ -52,28 +52,7 @@ class Verification extends StatelessWidget {
             ],
           ),
           SizedBox(height: 25),
-         Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(4, (index) {
-              return SizedBox(
-                width: 60,
-                height: 60,
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  maxLength: 1,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    counterText: '', // Removes the maxLength counter
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ),
+       
         
                     const Spacer(), 
                 ElevatedButton(
