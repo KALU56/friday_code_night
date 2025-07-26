@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/assets.dart';
+
 class Siginup extends StatefulWidget {
   const Siginup({super.key});
 
@@ -54,7 +54,7 @@ class _LoginState extends State<Siginup> {
                     SizedBox(height: 10),
 
                     TextField(
-                      // obscureText: _obscurePassword,
+                      obscureText: _obscurePassword,
                       decoration: InputDecoration(
                         hintText: 'Enter your password',
                         enabledBorder: OutlineInputBorder(

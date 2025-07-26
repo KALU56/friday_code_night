@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import '../core/assets.dart';
 import './login_siginup.dart';
 
-class ResetPassword extends StatelessWidget {
+
+
+class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
 
+  @override
+  State<ResetPassword> createState() => _ResetPasswordState();
+}
+
+class _ResetPasswordState extends State<ResetPassword> {
+   bool _obscurePassword = true;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +63,59 @@ class ResetPassword extends StatelessWidget {
             ],
           ),
           SizedBox(height: 45),
-        
-                   
+       
+         TextField(
+                      obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 1.5,
+                          ),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextField(
+                      obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        hintText: 'confirm your password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 1.5,
+                          ),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                      const Spacer(), 
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -64,7 +124,7 @@ class ResetPassword extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 244, 245, 244),
+                    backgroundColor: const Color.fromARGB(255, 151, 255, 130),
                     minimumSize: const Size(double.infinity, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -72,7 +132,7 @@ class ResetPassword extends StatelessWidget {
                   ),
                   child: const Center(child: Text('continue')),
                 ),
-                 SizedBox(height: 25),
+                
                        ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(

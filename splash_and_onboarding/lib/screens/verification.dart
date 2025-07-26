@@ -53,7 +53,7 @@ class Verification extends StatelessWidget {
           ),
           SizedBox(height: 45),
         
-                   
+                    const Spacer(), 
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(
