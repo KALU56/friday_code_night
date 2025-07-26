@@ -9,17 +9,27 @@ class LoginSiginup extends StatefulWidget {
 
 class _LoginSiginupState extends State<LoginSiginup> {
     bool _obscurePassword = true;
-  bool _rememberMe = false;
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+       backgroundColor: Colors.white,
+      body: Padding(
+        
+       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+      
+       child: 
+       
+       
+       
+      Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              
                SizedBox(height: 24),
               Container(
                 width: 50,
@@ -59,6 +69,7 @@ class _LoginSiginupState extends State<LoginSiginup> {
               
             ],
           ),
+          SizedBox(height: 45),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -71,39 +82,75 @@ class _LoginSiginupState extends State<LoginSiginup> {
             ),
           
           Expanded(
+           
             
-             child: Column(
+             child: Container(
+              color: const Color.fromARGB(255, 196, 180, 180),
+              child: Column(
               children: [
                 SizedBox(height: 9,),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            Assets.appleImage,
-                            height: 24,
-                            width: 24,
-                          ),
-                          SizedBox(width: 10),
-                          Text("login with Apple"),
-                        ],
+               ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                   Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            Assets.googleImage,
-                            height: 24,
-                            width: 24,
-                          ),
-                          SizedBox(width: 10),
-                          Text("login with Google"),
-                        ],
+                  
+                    ),
+                    onPressed: () {
+                     
+                    },
+                    child: Row(
+                 
+                      children: [
+                        Image.asset(
+                          Assets.appleImage,
+                          height: 24,
+                          width: 24,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Login with Apple",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10), 
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
+        
+                    ),
+                    onPressed: () {
+                     
+                    },
+                    child: Row(
+                 
+                      children: [
+                        Image.asset(
+                          Assets.googleImage,
+                          height: 24,
+                          width: 24,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Login with Google",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
                       SizedBox(height: 15),
                       Text('or with continue with email'),
                       SizedBox(height: 15),
 
-                      Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
+                  
                   TextFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -128,10 +175,7 @@ class _LoginSiginupState extends State<LoginSiginup> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    'Password',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+               
                   TextFormField(
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
@@ -166,33 +210,20 @@ class _LoginSiginupState extends State<LoginSiginup> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: _rememberMe,
-                            onChanged: (value) {
-                              setState(() {
-                                _rememberMe = value!;
-                              });
-                            },
-                          ),
-                          const Text('Remember me'),
-                        ],
-                      ),
+                  
+    
+              
 
-                      GestureDetector(
-                        child: const Text(
-                          'Forgot Password',
+                      
+                        
+                        Text(
+                          'Forgot Password?',
                           style: TextStyle(
-                            decoration: TextDecoration.underline,
+                          
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                    
+                    
                     SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
@@ -222,25 +253,42 @@ class _LoginSiginupState extends State<LoginSiginup> {
                   ),
 
                   SizedBox(height: 20),
-                  // ElevatedButton(
-                  //   onPressed: () {},
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-                  //     foregroundColor: const Color.fromARGB(255, 100, 98, 98),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      
 
-                  //     padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20,
-                  //       vertical: 15,
-                  //     ),
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(12),
-                  //     ),
-                  //   ),
-                  // ),
+                      Text('By signing up you agree to our '),
+                      Text(
+                        'Terms of service',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4), 
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('and '),
+                      Text(
+                        'privacy policy',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  
 
 
               ],
 
+             ),
              ),
             )
 
@@ -249,7 +297,7 @@ class _LoginSiginupState extends State<LoginSiginup> {
         
         ),
         
-        
+      )
         );
   }
 }
