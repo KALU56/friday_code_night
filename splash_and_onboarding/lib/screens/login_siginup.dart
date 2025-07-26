@@ -9,8 +9,10 @@ class LoginSiginup extends StatefulWidget {
 
 class _LoginSiginupState extends State<LoginSiginup> {
     bool _obscurePassword = true;
+    bool isLogin = true;
+    
 
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,21 +72,69 @@ class _LoginSiginupState extends State<LoginSiginup> {
             ],
           ),
           SizedBox(height: 45),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Login'),
-                Text('sign up')
-                
-              ],
+           Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isLogin = true;
+                      });
+                    },
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontWeight: isLogin ? FontWeight.bold : FontWeight.normal,
+                        color: isLogin ? Colors.black : Colors.grey,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isLogin = false;
+                      });
+                    },
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontWeight: !isLogin ? FontWeight.bold : FontWeight.normal,
+                        color: !isLogin ? Colors.black : Colors.grey,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+                Expanded(
+                  child: Container(
+                    color: const Color.fromARGB(255, 196, 180, 180),
+                    child: isLogin ? buildLoginUI() : buildSignupUI(),
+                  ),
+                ),
 
-
-            ),
           
-          Expanded(
-           
-            
-             child: Container(
+          
+
+
+        ],
+        
+        ),
+        
+      )
+        );
+  }
+}
+Widget buildLoginUI() {
+  return Form(
+    // key: _formKey,
+    child: SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Container(
               color: const Color.fromARGB(255, 196, 180, 180),
               child: Column(
               children: [
@@ -151,7 +201,7 @@ class _LoginSiginupState extends State<LoginSiginup> {
                       SizedBox(height: 15),
 
                   
-                  TextFormField(
+                  TextField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -163,21 +213,12 @@ class _LoginSiginupState extends State<LoginSiginup> {
                       hintText: 'Enter your email',
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      } else if (!RegExp(
-                        r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$',
-                      ).hasMatch(value)) {
-                        return 'Enter a valid email like test@gmail.com';
-                      }
-                      return null;
-                    },
+                    
                   ),
                   SizedBox(height: 20),
                
-                  TextFormField(
-                    obscureText: _obscurePassword,
+                  TextField(
+                    // obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       hintText: 'Enter your password',
                       enabledBorder: OutlineInputBorder(
@@ -187,27 +228,20 @@ class _LoginSiginupState extends State<LoginSiginup> {
                           width: 1.5,
                         ),
                       ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
+                      // suffixIcon: IconButton(
+                      //   icon: Icon(
+                      //     _obscurePassword
+                      //         ? Icons.visibility_off
+                      //         : Icons.visibility,
+                      //   ),
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       _obscurePassword = !_obscurePassword;
+                      //     });
+                      //   },
+                      // ),
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a password';
-                      } else if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
+                  
                   ),
                   SizedBox(height: 20),
                   
@@ -227,18 +261,18 @@ class _LoginSiginupState extends State<LoginSiginup> {
                     SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      if (!_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              "Please check your email and password.",
-                            ),
-                            backgroundColor: Colors.orange,
-                          ),
-                        );
-                        return;
-                      }
-                      Navigator.pushNamed(context, '/home');
+                      // if (!_formKey.currentState!.validate()) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     SnackBar(
+                      //       content: Text(
+                      //         "Please check your email and password.",
+                      //       ),
+                      //       backgroundColor: Colors.orange,
+                      //     ),
+                      //   );
+                      //   return;
+                      // }
+                      // Navigator.pushNamed(context, '/home');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 11, 172, 118),
@@ -290,14 +324,31 @@ class _LoginSiginupState extends State<LoginSiginup> {
 
              ),
              ),
-            )
-
-
         ],
-        
-        ),
-        
-      )
-        );
-  }
+      ),
+    ),
+  );
+}
+Widget buildSignupUI() {
+  return Form(
+    // key: _formKey,
+    child: SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          // Replace with sign up fields
+          TextFormField(
+            decoration: InputDecoration(hintText: 'Enter your name'),
+            validator: (value) => value == null || value.isEmpty
+                ? 'Please enter your name'
+                : null,
+          ),
+          SizedBox(height: 10),
+          // Add email, password, confirm password
+          // Add Signup Button
+          // Terms & Privacy
+        ],
+      ),
+    ),
+  );
 }
