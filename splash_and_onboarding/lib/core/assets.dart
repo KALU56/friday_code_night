@@ -8,4 +8,5 @@ class Assets {
   static const image5 = 'assets/images/User research-pana.png';
   static const appleImage = 'assets/images/apple.png';
   static const googleImage = 'assets/images/google.png';
+  static const forgot = 'assets/images/forget.png';
 }

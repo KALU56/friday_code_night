@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
-import '../screens/';
+import '../screens/forgot_password.dart';
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -134,7 +134,7 @@ class _LoginState extends State<Login> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordPage(),
+                          builder: (context) => const ForgotPassword(),
                         ),
                       );
                     },
