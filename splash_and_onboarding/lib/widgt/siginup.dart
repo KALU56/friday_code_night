@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/assets.dart';
+
 class Siginup extends StatefulWidget {
   const Siginup({super.key});
 
@@ -11,79 +11,16 @@ class _LoginState extends State<Siginup> {
   bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
-    return   Form(
-  
-    child: SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Container(
+    return Scaffold(
+      body: Column(
+          children: [
+            Container(
               color: const Color.fromARGB(255, 196, 180, 180),
               child: Column(
-              children: [
-                SizedBox(height: 9,),
-               ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 1,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                  
-                    ),
-                    onPressed: () {
-                     
-                    },
-                    child: Row(
-                 
-                      children: [
-                        Image.asset(
-                          Assets.appleImage,
-                          height: 24,
-                          width: 24,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "Login with Apple",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10), 
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 1,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-        
-                    ),
-                    onPressed: () {
-                     
-                    },
-                    child: Row(
-                 
-                      children: [
-                        Image.asset(
-                          Assets.googleImage,
-                          height: 24,
-                          width: 24,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "Login with Google",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                      SizedBox(height: 15),
-                      Text('or with continue with email'),
-                      SizedBox(height: 15),
+                children: [
+                  SizedBox(height: 25),
+              
 
-                  
                   TextField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -93,13 +30,26 @@ class _LoginState extends State<Siginup> {
                           width: 1.5,
                         ),
                       ),
-                      hintText: 'Enter your email',
+                      hintText: 'Your name',
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    
+                    keyboardType: TextInputType.name,
                   ),
-                  SizedBox(height: 20),
-               
+                  SizedBox(height:10),
+                      TextField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 236, 230, 230),
+                          width: 1.5,
+                        ),
+                      ),
+                      hintText: 'enter your Email',
+                    ),
+                    keyboardType: TextInputType.name,
+                  ),
+                  SizedBox(height:10),
+
                   TextField(
                     // obscureText: _obscurePassword,
                     decoration: InputDecoration(
@@ -124,28 +74,45 @@ class _LoginState extends State<Siginup> {
                         },
                       ),
                     ),
-                  
                   ),
-                  SizedBox(height: 20),
-                  
-    
+                  SizedBox(height:10),
+                  TextField(
+                    // obscureText: _obscurePassword,
+                    decoration: InputDecoration(
+                      hintText: 'confirm your password',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 236, 230, 230),
+                          width: 1.5,
+                        ),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:10),
+                  Text('At least 8 character'),
+                  Text('At least 1 number'),
+                  Text('both upper and lower case letters'),
+                   SizedBox(height:50),
+                  Text('By signing up you agree to our By signing up you agree to our By signing up you agree to our By signing up you agree to our'),
+
               
 
-                      
-                        
-                        Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                          
-                          ),
-                        ),
-                    
-                    
-                    SizedBox(height: 20),
+                  SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 11, 172, 118),
                       foregroundColor: const Color.fromARGB(255, 248, 245, 245),
@@ -155,50 +122,17 @@ class _LoginState extends State<Siginup> {
                       ),
                     ),
 
-                    child: Center(child: Text('Login')),
+                    child: Center(child: Text('Sign up')),
                   ),
-
-                  SizedBox(height: 20),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      
-
-                      Text('By signing up you agree to our '),
-                      Text(
-                        'Terms of service',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 4), 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('and '),
-                      Text(
-                        'privacy policy',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
-                  ),
-
+                   SizedBox(height:50),
+      
                   
-
-
-              ],
-
-             ),
-             ),
-        ],
-      ),
-    ),
-  );
+                ],
+              ),
+            ),
+          ],
+        ),
+      
+    );
   }
 }

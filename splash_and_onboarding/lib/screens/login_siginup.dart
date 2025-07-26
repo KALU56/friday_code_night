@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../core/assets.dart';
 import '../widgt/login.dart';
 import '../widgt/siginup.dart';
+
 class LoginSiginup extends StatefulWidget {
   const LoginSiginup({super.key});
 
@@ -10,31 +11,19 @@ class LoginSiginup extends StatefulWidget {
 }
 
 class _LoginSiginupState extends State<LoginSiginup> {
-    
-    bool isLogin = true;
-    
+  bool isLogin = true;
 
-  // final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Colors.white,
-      body: Padding(
-        
-       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-      
-       child: 
-       
-       
-       
-      Column(
+      backgroundColor: Colors.white,
+      body: Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
-               SizedBox(height: 24),
+              SizedBox(height: 24),
               Container(
                 width: 50,
                 height: 50,
@@ -46,86 +35,75 @@ class _LoginSiginupState extends State<LoginSiginup> {
                 ),
               ),
               const SizedBox(width: 15),
-              
-            
-             Text(
-                  'Tasktugas',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: Color.fromARGB(255, 22, 126, 1),
-                  ),
+
+              Text(
+                'Tasktugas',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 22, 126, 1),
                 ),
-            
+              ),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Welcome to tasktugas',style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w900,
-              ),),
-                 SizedBox(height: 8),
+              Text(
+                'Welcome to tasktugas',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              ),
+              SizedBox(height: 8),
               Text('Welcome to tasktugas to tasktugas'),
               Text('Welcome to tasktugas'),
-              
             ],
           ),
           SizedBox(height: 45),
-           Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isLogin = true;
-                      });
-                    },
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontWeight: isLogin ? FontWeight.bold : FontWeight.normal,
-                        color: isLogin ? Colors.black : Colors.grey,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isLogin = false;
-                      });
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontWeight: !isLogin ? FontWeight.bold : FontWeight.normal,
-                        color: !isLogin ? Colors.black : Colors.grey,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-                Expanded(
-                  child: Container(
-                    color: const Color.fromARGB(255, 196, 180, 180),
-                    child: isLogin ? Login() : Siginup(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isLogin = true;
+                  });
+                },
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontWeight: isLogin ? FontWeight.bold : FontWeight.normal,
+                    color: isLogin ? Colors.black : Colors.grey,
+                    fontSize: 16,
                   ),
                 ),
-
-          
-          
-
-
+              ),
+              SizedBox(width: 20),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isLogin = false;
+                  });
+                },
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontWeight: !isLogin ? FontWeight.bold : FontWeight.normal,
+                    color: !isLogin ? Colors.black : Colors.grey,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              color: const Color.fromARGB(255, 196, 180, 180),
+              child: isLogin ? Login() : Siginup(),
+            ),
+          ),
         ],
-        
-        ),
-        
-      )
-        );
+      ),
+    );
   }
 }
