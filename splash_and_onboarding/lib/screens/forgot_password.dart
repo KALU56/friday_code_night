@@ -37,22 +37,24 @@ class ForgotPassword extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: 28),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'forget password',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 1),
               Text('enter yor email account to reset password'),
              
             ],
           ),
-          
+          SizedBox(height: 45),
            Container(
-                
+                width: 300,
+                height: 300,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(Assets.forgot),
@@ -60,7 +62,66 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
               ),
-                 
+                   TextField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          width: 1.5,
+                        ),
+                      ),
+                      hintText: 'Enter your email',
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    
+                  ), 
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          11,
+                          172,
+                          118,
+                        ),
+                        foregroundColor: const Color.fromARGB(
+                          255,
+                          248,
+                          245,
+                          245,
+                        ),
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+
+                      child: Center(child: Text('continue')),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          11,
+                          172,
+                          118,
+                        ),
+                        foregroundColor: const Color.fromARGB(
+                          255,
+                          248,
+                          245,
+                          245,
+                        ),
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+
+                      child: Center(child: Text('cancel')),
+                    ),
         ],
       ),
     );
