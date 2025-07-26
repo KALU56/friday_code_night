@@ -1,148 +1,116 @@
 import 'package:flutter/material.dart';
+import '../core/assets.dart';
 
-class Siginup extends StatefulWidget {
-  const Siginup({super.key});
+class Verification extends StatelessWidget {
+  const Verification({super.key});
 
-  @override
-  State<Siginup> createState() => _LoginState();
-}
-
-class _LoginState extends State<Siginup> {
-  bool _obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 24),
               Container(
-               color: const Color.fromARGB(255, 236, 234, 234),
-                child: Column(
-                  children: [
-                    SizedBox(height: 25),
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.tag),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
 
-                    TextField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            width: 1.5,
-                          ),
-                        ),
-                        hintText: 'Your name',
-                      ),
-                      keyboardType: TextInputType.name,
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            width: 1.5,
-                          ),
-                        ),
-                        hintText: 'enter your Email',
-                      ),
-                      keyboardType: TextInputType.name,
-                    ),
-                    SizedBox(height: 10),
-
-                    TextField(
-                      // obscureText: _obscurePassword,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your password',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            width: 1.5,
-                          ),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscurePassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscurePassword = !_obscurePassword;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      obscureText: _obscurePassword,
-                      decoration: InputDecoration(
-                        hintText: 'confirm your password',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            width: 1.5,
-                          ),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscurePassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscurePassword = !_obscurePassword;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text('At least 8 character'),
-                    Text('At least 1 number'),
-                    Text('both upper and lower case letters'),
-                    SizedBox(height: 50),
-                    Text(
-                      'By signing up you agree to our By signing up you agree to our By signing up you agree to our By signing up you agree to our',
-                    ),
-
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(
-                          255,
-                          11,
-                          172,
-                          118,
-                        ),
-                        foregroundColor: const Color.fromARGB(
-                          255,
-                          248,
-                          245,
-                          245,
-                        ),
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-
-                      child: Center(child: Text('Sign up')),
-                    ),
-                    SizedBox(height: 50),
-                  ],
+              Text(
+                'Tasktugas',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 22, 126, 1),
                 ),
               ),
             ],
           ),
-        ),
+          SizedBox(height: 28),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'forget password',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+              ),
+              SizedBox(height: 1),
+              Text('enter yor email account to reset password'),
+             
+            ],
+          ),
+          SizedBox(height: 45),
+           Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.forgot),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+                   TextField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          width: 1.5,
+                        ),
+                      ),
+                      hintText: 'Enter your email',
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    
+                  ), 
+                  SizedBox(height: 24),
+                 ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Verification()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 11, 172, 118),
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Center(child: Text('Continue')),
+                  ),
+                   
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginSiginup()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 244, 245, 244),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Center(child: Text('Cancel')),
+                ),
+        ],
       ),
     );
   }

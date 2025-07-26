@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
+import './verification.dart';
+import './login_siginup.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
@@ -76,52 +78,40 @@ class ForgotPassword extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     
                   ), 
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(
-                          255,
-                          11,
-                          172,
-                          118,
-                        ),
-                        foregroundColor: const Color.fromARGB(
-                          255,
-                          248,
-                          245,
-                          245,
-                        ),
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                  SizedBox(height: 24),
+                 ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Verification()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 11, 172, 118),
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-
-                      child: Center(child: Text('continue')),
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(
-                          255,
-                          11,
-                          172,
-                          118,
-                        ),
-                        foregroundColor: const Color.fromARGB(
-                          255,
-                          248,
-                          245,
-                          245,
-                        ),
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-
-                      child: Center(child: Text('cancel')),
+                    child: const Center(child: Text('Continue')),
+                  ),
+                   
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginSiginup()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 244, 245, 244),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
+                  ),
+                  child: const Center(child: Text('Cancel')),
+                ),
         ],
       ),
     );
