@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/assets.dart';
+import '../screens/';
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -18,7 +19,7 @@ class _LoginState extends State<Login> {
       child: Column(
         children: [
           Container(
-              color: const Color.fromARGB(255, 196, 180, 180),
+             color: const Color.fromARGB(255, 236, 234, 234),
               child: Column(
               children: [
                 SizedBox(height: 9,),
@@ -89,7 +90,7 @@ class _LoginState extends State<Login> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 236, 230, 230),
+                          color: const Color.fromARGB(255, 255, 255, 255),
                           width: 1.5,
                         ),
                       ),
@@ -107,7 +108,7 @@ class _LoginState extends State<Login> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 236, 230, 230),
+                          color: const Color.fromARGB(255, 255, 255, 255),
                           width: 1.5,
                         ),
                       ),
@@ -128,17 +129,29 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(height: 20),
                   
-    
-              
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordPage(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                                
 
                       
                         
-                        Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                          
-                          ),
-                        ),
+                      
                     
                     
                     SizedBox(height: 20),

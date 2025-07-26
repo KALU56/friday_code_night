@@ -96,10 +96,13 @@ class _LoginSiginupState extends State<LoginSiginup> {
               ),
             ],
           ),
-          Expanded(
+                  Expanded(
             child: Container(
-              color: const Color.fromARGB(255, 196, 180, 180),
-              child: isLogin ? Login() : Siginup(),
+              color: const Color.fromARGB(255, 236, 234, 234), // background for both
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 300),
+                child: isLogin ? const Login() : const Siginup(),
+              ),
             ),
           ),
         ],

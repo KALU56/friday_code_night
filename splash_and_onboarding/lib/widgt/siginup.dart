@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../core/assets.dart';
 class Siginup extends StatefulWidget {
   const Siginup({super.key});
 
@@ -10,129 +10,143 @@ class Siginup extends StatefulWidget {
 class _LoginState extends State<Siginup> {
   bool _obscurePassword = true;
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-          children: [
-            Container(
-              color: const Color.fromARGB(255, 196, 180, 180),
-              child: Column(
-                children: [
-                  SizedBox(height: 25),
-              
+ Widget build(BuildContext context) {
+    return   Form(
+  
+    child: SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          
+              Container(
+               color: const Color.fromARGB(255, 236, 234, 234),
+                child: Column(
+                  children: [
+                    SizedBox(height: 25),
 
-                  TextField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 236, 230, 230),
-                          width: 1.5,
+                    TextField(
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 1.5,
+                          ),
                         ),
+                        hintText: 'Your name',
                       ),
-                      hintText: 'Your name',
+                      keyboardType: TextInputType.name,
                     ),
-                    keyboardType: TextInputType.name,
-                  ),
-                  SizedBox(height:10),
-                      TextField(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 236, 230, 230),
-                          width: 1.5,
+                    SizedBox(height: 10),
+                    TextField(
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 1.5,
+                          ),
                         ),
+                        hintText: 'enter your Email',
                       ),
-                      hintText: 'enter your Email',
+                      keyboardType: TextInputType.name,
                     ),
-                    keyboardType: TextInputType.name,
-                  ),
-                  SizedBox(height:10),
+                    SizedBox(height: 10),
 
-                  TextField(
-                    // obscureText: _obscurePassword,
-                    decoration: InputDecoration(
-                      hintText: 'Enter your password',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 236, 230, 230),
-                          width: 1.5,
+                    TextField(
+                      // obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 1.5,
+                          ),
                         ),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(height:10),
-                  TextField(
-                    // obscureText: _obscurePassword,
-                    decoration: InputDecoration(
-                      hintText: 'confirm your password',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: const Color.fromARGB(255, 236, 230, 230),
-                          width: 1.5,
-                        ),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
                       ),
                     ),
-                  ),
-                  SizedBox(height:10),
-                  Text('At least 8 character'),
-                  Text('At least 1 number'),
-                  Text('both upper and lower case letters'),
-                   SizedBox(height:50),
-                  Text('By signing up you agree to our By signing up you agree to our By signing up you agree to our By signing up you agree to our'),
-
-              
-
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 11, 172, 118),
-                      foregroundColor: const Color.fromARGB(255, 248, 245, 245),
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    SizedBox(height: 10),
+                    TextField(
+                      obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        hintText: 'confirm your password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 1.5,
+                          ),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
                       ),
                     ),
+                    SizedBox(height: 10),
+                    Text('At least 8 character'),
+                    Text('At least 1 number'),
+                    Text('both upper and lower case letters'),
+                    SizedBox(height: 50),
+                    Text(
+                      'By signing up you agree to our By signing up you agree to our By signing up you agree to our By signing up you agree to our',
+                    ),
 
-                    child: Center(child: Text('Sign up')),
-                  ),
-                   SizedBox(height:50),
-      
-                  
-                ],
+                    SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          11,
+                          172,
+                          118,
+                        ),
+                        foregroundColor: const Color.fromARGB(
+                          255,
+                          248,
+                          245,
+                          245,
+                        ),
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+
+                      child: Center(child: Text('Sign up')),
+                    ),
+                    SizedBox(height: 50),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+        ]
+
+          
       
-    );
+      ),
+    ),
+  );
   }
 }
