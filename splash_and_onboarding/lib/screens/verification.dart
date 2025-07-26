@@ -52,7 +52,74 @@ class Verification extends StatelessWidget {
             ],
           ),
           SizedBox(height: 25),
-       
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: TextField(
+                  maxLength: 1,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    counterText: '',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: TextField(
+                  maxLength: 1,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    counterText: '',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: TextField(
+                  maxLength: 1,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    counterText: '',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: TextField(
+                  maxLength: 1,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    counterText: '',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         
                     const Spacer(), 
                 ElevatedButton(
