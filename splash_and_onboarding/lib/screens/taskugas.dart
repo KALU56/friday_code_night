@@ -140,7 +140,7 @@ class _TaskugasState extends State<Taskugas> {
           ),
 
             
-          child: Column(
+           Column(
             children: [
               Text(
                 onboardingData[_currentIndex]['title']!,
