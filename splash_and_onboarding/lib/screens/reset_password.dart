@@ -68,6 +68,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
                         hintText: 'Enter your password',
+                        prefixIcon: const Icon(Icons.lock), 
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
@@ -93,7 +94,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   TextField(
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        hintText: 'Enter your password',
+                        hintText: 'conform your password',
                         prefixIcon: const Icon(Icons.lock), 
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),

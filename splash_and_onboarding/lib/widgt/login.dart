@@ -87,6 +87,7 @@ class _LoginState extends State<Login> {
                   
                   TextField(
                     decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.email),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(
@@ -102,9 +103,10 @@ class _LoginState extends State<Login> {
                   SizedBox(height: 20),
                
                   TextField(
-                    // obscureText: _obscurePassword,
+                    obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       hintText: 'Enter your password',
+                      prefixIcon: const Icon(Icons.lock),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(

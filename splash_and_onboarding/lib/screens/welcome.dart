@@ -26,7 +26,7 @@ class Welcome extends StatelessWidget {
                 ),
               ),
             ),
-             const SizedBox(width: 20),
+            
              GestureDetector(
               onTap: () {
                  Navigator.push(

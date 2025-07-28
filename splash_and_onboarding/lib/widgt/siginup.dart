@@ -26,7 +26,9 @@ class _LoginState extends State<Siginup> {
 
                     TextField(
                       decoration: InputDecoration(
+                         prefixIcon: const Icon(Icons.person),
                         enabledBorder: OutlineInputBorder(
+                          
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
                             color: const Color.fromARGB(255, 255, 255, 255),
@@ -40,6 +42,7 @@ class _LoginState extends State<Siginup> {
                     SizedBox(height: 10),
                     TextField(
                       decoration: InputDecoration(
+                         prefixIcon: const Icon(Icons.email),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
@@ -56,6 +59,7 @@ class _LoginState extends State<Siginup> {
                     TextField(
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
+                         prefixIcon: const Icon(Icons.lock),
                         hintText: 'Enter your password',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -82,6 +86,7 @@ class _LoginState extends State<Siginup> {
                     TextField(
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
+                         prefixIcon: const Icon(Icons.lock),
                         hintText: 'confirm your password',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
