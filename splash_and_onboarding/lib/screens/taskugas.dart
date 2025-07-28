@@ -139,8 +139,7 @@ class _TaskugasState extends State<Taskugas> {
             ),
           ),
 
-             Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+            
           child: Column(
             children: [
               Text(
@@ -159,7 +158,7 @@ class _TaskugasState extends State<Taskugas> {
               ),
             ],
           ),
-        ),
+        
 
           const SizedBox(height: 24),
 
