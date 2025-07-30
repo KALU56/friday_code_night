@@ -17,13 +17,17 @@ class _HomeState extends State<Home> {
         child:Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hello jack'),
+                      Text('Hello jack',style: TextStyle(fontWeight: FontWeight.bold),),
                       Text('you have work today')
                     ],
                   ),
@@ -49,16 +53,17 @@ class _HomeState extends State<Home> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
+                             Icon(Icons.access_time, color: const Color.fromARGB(255, 250, 250, 248)),
                              SizedBox(height: 10),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 
                                 Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                             
                                
                                 SizedBox(width: 8),
-                                Text("Rating: 5"),
+                                Text(" 5"),
                               ],
                             ),
                           ],
@@ -79,16 +84,17 @@ class _HomeState extends State<Home> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
+                             Icon(Icons.access_time, color: const Color.fromARGB(255, 250, 250, 248)),
                              SizedBox(height: 10),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 
                                 Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                             
                                
                                 SizedBox(width: 8),
-                                Text("Rating: 5"),
+                                Text(" 5"),
                               ],
                             ),
                           ],
@@ -118,16 +124,17 @@ class _HomeState extends State<Home> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
+                             Icon(Icons.access_time, color: const Color.fromARGB(255, 250, 250, 248)),
                              SizedBox(height: 10),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 
                                 Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                             
                                
-                                SizedBox(width: 8),
-                                Text("Rating: 5"),
+                                
+                                Text("5"),
                               ],
                             ),
                           ],
@@ -148,16 +155,17 @@ class _HomeState extends State<Home> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
+                             Icon(Icons.access_time, color: const Color.fromARGB(255, 250, 250, 248)),
                              SizedBox(height: 10),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 
                                 Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                             
                                
-                                SizedBox(width: 8),
-                                Text("Rating: 5"),
+                             
+                                Text(" 5"),
                               ],
                             ),
                           ],
@@ -167,8 +175,12 @@ class _HomeState extends State<Home> {
                       
                                   ],),
                   
-        
-                Text('today task'),
+               SizedBox(height: 15,),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25),
+                  child: Text('today task',style: TextStyle(fontWeight: FontWeight.bold),),
+                ),
+                SizedBox(height: 5,),
                 Container(
                   padding: EdgeInsets.all(16),
                     
@@ -179,24 +191,30 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(105),
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                         
                            
-                          Row(
-                            children: [
-                               Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                           Text('4:30pm')
-        
-                            ]
-                           
-        
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Row(
+                              children: [
+                                 Icon(Icons.access_time, color: const Color.fromARGB(255, 255, 255, 255)),
+                                 Text('today'),
+                                SizedBox(width: 10),
+                                Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
+                                SizedBox(width: 10),
+                                Text('4:30pm')
+                                    
+                              ]
+                             
+                                    
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            
                             
                           
                             children: [
@@ -212,13 +230,17 @@ class _HomeState extends State<Home> {
                               
                             ),
                               Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
+                     
                             ],
                           ),
                           
                       
                               
-                              Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 50),
+                                
+                                child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
                           
                             
                         ],
@@ -230,97 +252,113 @@ class _HomeState extends State<Home> {
         
         
                 ),/////#1
-                SizedBox(height: 20),
-                      Container(
-                  padding: EdgeInsets.all(16),
-                      height: 125,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 136, 205, 245),
-                        borderRadius: BorderRadius.circular(105),
-                      ),
-                     
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        
-                           
-                          Row(
-                            children: [
-                               Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                           Text('4:30pm')
-        
-                            ]
-                           
-        
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            
+                     SizedBox(height: 20),
+                       Container(
+                        padding: EdgeInsets.all(16),
                           
-                            children: [
-                               Checkbox(
-                              value: isChecked,
-                              onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                              });
-                              },
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50), ),
-                              
+                            height: 125,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 136, 205, 245),
+                              borderRadius: BorderRadius.circular(105),
                             ),
-                              Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            ],
-                          ),
-                          
-                      
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
                               
-                              Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          
+                                
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 50),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.calendar_today, color: const Color.fromARGB(255, 255, 255, 255)),
+                                      Text('today'),
+                                      SizedBox(width: 10),
+                                      Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
+                                      SizedBox(width: 10),
+                                      Text('4:30pm')
+                                          
+                                    ]
+                                  
+                                          
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  
+                                  
+                                
+                                  children: [
+                                    Checkbox(
+                                    value: isChecked,
+                                    onChanged: (bool? newValue) {
+                                    setState(() {
+                                      isChecked = newValue!;
+                                    });
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50), ),
+                                    
+                                  ),
+                                    Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
+                               
+                                  ],
+                                ),
+                                
                             
-                        ],
-                      ),
-        
-        
-        
+                                    
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 50),
+                                      
+                                      child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                    ),
+                                
+                                  
+                              ],
+                            ),
+              
+              
+              
         
         
         
                 ),/////#2
                 SizedBox(height: 20),
-                      Container(
-                  padding: EdgeInsets.all(16),
-                                          height: 125,
+                       Container(
+              
+                    
+                      // height: 255,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 136, 205, 245),
-                       borderRadius: BorderRadius.circular(105),
+                        borderRadius: BorderRadius.circular(55),
                       ),
-                     
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                         
                            
-                          Row(
-                            children: [
-                               Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                           Text('4:30pm')
-        
-                            ]
-                           
-        
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Row(
+                              children: [
+                                 Icon(Icons.calendar_today, color: const Color.fromARGB(255, 255, 255, 253)),
+                                 Text('today,'),
+                             SizedBox(width: 10),
+                              Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
+                             SizedBox(width: 10),
+                             Text('4:30pm')
+                                    
+                              ]
+                             
+                                    
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            
                             
                           
                             children: [
@@ -336,13 +374,66 @@ class _HomeState extends State<Home> {
                               
                             ),
                               Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
+                          
                             ],
                           ),
                           
                       
                               
-                              Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 50),
+                                
+                                child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 50),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                     children: [
+                                           Checkbox(
+                                              value: isChecked,
+                                              onChanged: (bool? newValue) {
+                                              setState(() {
+                                                isChecked = newValue!;
+                                              });
+                                              },
+                                              ),
+                                            Text('pink up bug')
+                                            
+                                      ],
+                                    ),
+                                    Row(
+                                     children: [
+                                           Checkbox(
+                                              value: isChecked,
+                                              onChanged: (bool? newValue) {
+                                              setState(() {
+                                                isChecked = newValue!;
+                                              });
+                                              },
+                                              ),
+                                            Text('pink up bug')
+                                            
+                                      ],
+                                    ),
+                                    Row(
+                                     children: [
+                                           Checkbox(
+                                              value: isChecked,
+                                              onChanged: (bool? newValue) {
+                                              setState(() {
+                                                isChecked = newValue!;
+                                              });
+                                              },
+                                              ),
+                                            Text('pink up bug')
+                                            
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
                           
                             
                         ],
@@ -358,32 +449,38 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 20),
                       Container(
                   padding: EdgeInsets.all(16),
-                                         height: 125,
+                    
+                      height: 125,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 136, 205, 245),
-                       borderRadius: BorderRadius.circular(105),
+                        borderRadius: BorderRadius.circular(105),
                       ),
-                     
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                         
                            
-                          Row(
-                            children: [
-                               Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                           Text('4:30pm')
-        
-                            ]
-                           
-        
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Row(
+                              children: [
+                                  Icon(Icons.calendar_today, color: const Color.fromARGB(255, 255, 255, 255)),
+                                 Text('today'),
+                                SizedBox(width: 10),
+                                Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
+                                SizedBox(width: 10),
+                                Text('4:30pm')
+                                    
+                              ]
+                             
+                                    
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            
                             
                           
                             children: [
@@ -405,7 +502,11 @@ class _HomeState extends State<Home> {
                           
                       
                               
-                              Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 50),
+                                
+                                child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
                           
                             
                         ],
@@ -418,84 +519,7 @@ class _HomeState extends State<Home> {
         
                 ),/////#4
                 SizedBox(height: 20),
-                      Container(
-                  padding: EdgeInsets.all(16),
-                      height: 125,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 136, 205, 245),
-                       borderRadius: BorderRadius.circular(105),
-                      ),
-                     
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        
-                           
-                          Row(
-                            children: [
-                               Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            Icon(Icons.access_time, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                           Text('4:30pm')
-        
-                            ]
-                           
-        
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            
-                          
-                            children: [
-                               Checkbox(
-                              value: isChecked,
-                              onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                              });
-                              },
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50), ),
-                              
-                            ),
-                              Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            ],
-                          ),
-                          
-                      
-                              
-                              Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          
-                              
-                              
-                          
-                            
-                        ],
-                      ),
-        
-        
-        
-        
-        
-        
-                ),/////#5
-              
-        
-                
-                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
             ],
             
@@ -506,22 +530,22 @@ class _HomeState extends State<Home> {
         
             ),
              Positioned(
-        bottom: 20,
-        right: 20,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            shape: BoxShape.circle,
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
-          ),
-          child: IconButton(
-            icon: Icon(Icons.add, color: Colors.white),
-            onPressed: () {
-              // handle add button press here
-            },
-          ),
-        ),
-      )
+                bottom: 20,
+                right: 20,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    shape: BoxShape.circle,
+                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.add, color: Colors.white),
+                    onPressed: () {
+                    
+                    },
+                  ),
+                ),
+              )
       
         ],
       ),
