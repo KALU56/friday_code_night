@@ -24,7 +24,7 @@ class TaskCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(15),
             color: backgroundColor,
           ),
           child: Column(
@@ -39,7 +39,7 @@ class TaskCard extends StatelessWidget {
                     title,
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  Text(count.toString()),
+                  Text(count.toString(), ),
                 ],
               ),
             ],

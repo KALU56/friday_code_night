@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/screens/all_detal.dart';
 import 'package:todo/widget/continer.dart';
+import 'package:todo/widget/continer2.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -96,351 +97,64 @@ class _HomeState extends State<Home> {
                     ),
                 
               
-                  
                SizedBox(height: 15,),
                 Padding(
                   padding: const EdgeInsets.only(left: 25),
-                  child: Text('today task',style: TextStyle(fontWeight: FontWeight.bold),),
+                  child: Text('Today task',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                 ),
                 SizedBox(height: 5,),
                 Container(
-                  padding: EdgeInsets.all(16),
-                    
-                      height: 125,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 136, 205, 245),
-                        borderRadius: BorderRadius.circular(105),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        
-                           
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Row(
-                              children: [
-                                 Icon(Icons.access_time, color: const Color.fromARGB(255, 255, 255, 255)),
-                                 Text('today'),
-                                SizedBox(width: 10),
-                                Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
-                                SizedBox(width: 10),
-                                Text('4:30pm')
-                                    
-                              ]
-                             
-                                    
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            
-                            
-                          
-                            children: [
-                               Checkbox(
-                              value: isChecked,
-                              onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                              });
-                              },
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50), ),
-                              
-                            ),
-                              Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                     
-                            ],
-                          ),
-                          
-                      
-                              
-                              Padding(
-                                padding: const EdgeInsets.only(left: 50),
-                                
-                                child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                              ),
-                          
-                            
-                        ],
-                      ),
-        
-        
-        
-        
-        
-        
-                ),/////#1
+
+                ),
+                 TaskList(
+                  title:"project retrospective",
+                  day:'Today',
+                  icon: Icons.access_time,
+                  time:"4:00 pm",
+  
+
+                 ),
+                /////#1
                      SizedBox(height: 20),
-                       Container(
-                        padding: EdgeInsets.all(16),
-                          
-                            height: 125,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 136, 205, 245),
-                              borderRadius: BorderRadius.circular(105),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                              
-                                
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 50),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.calendar_today, color: const Color.fromARGB(255, 255, 255, 255)),
-                                      Text('today'),
-                                      SizedBox(width: 10),
-                                      Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
-                                      SizedBox(width: 10),
-                                      Text('4:30pm')
-                                          
-                                    ]
-                                  
-                                          
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  
-                                  
-                                
-                                  children: [
-                                    Checkbox(
-                                    value: isChecked,
-                                    onChanged: (bool? newValue) {
-                                    setState(() {
-                                      isChecked = newValue!;
-                                    });
-                                    },
-                                    shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50), ),
-                                    
-                                  ),
-                                    Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                               
-                                  ],
-                                ),
-                                
-                            
-                                    
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 50),
-                                      
-                                      child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                                    ),
-                                
-                                  
-                              ],
-                            ),
-              
-              
-              
-        
-        
-        
-                ),/////#2
+                     TaskList(
+                  title:"Evening team meeting",
+                  day:'Today',
+                  icon: Icons.access_time,
+                  time:"4:00 pm",
+    
+
+                 ),
+                       /////#2
                 SizedBox(height: 20),
-                       Container(
-              
-                    
-                      // height: 255,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 136, 205, 245),
-                        borderRadius: BorderRadius.circular(55),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        
-                           
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Row(
-                              children: [
-                                 Icon(Icons.calendar_today, color: const Color.fromARGB(255, 255, 255, 253)),
-                                 Text('today,'),
-                             SizedBox(width: 10),
-                              Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
-                             SizedBox(width: 10),
-                             Text('4:30pm')
-                                    
-                              ]
-                             
-                                    
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            
-                            
-                          
-                            children: [
-                               Checkbox(
-                              value: isChecked,
-                              onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                              });
-                              },
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50), ),
-                              
-                            ),
-                              Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                          
-                            ],
-                          ),
-                          
-                      
-                              
-                              Padding(
-                                padding: const EdgeInsets.only(left: 50),
-                                
-                                child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 50),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                     children: [
-                                           Checkbox(
-                                              value: isChecked,
-                                              onChanged: (bool? newValue) {
-                                              setState(() {
-                                                isChecked = newValue!;
-                                              });
-                                              },
-                                              ),
-                                            Text('pink up bug')
-                                            
-                                      ],
-                                    ),
-                                    Row(
-                                     children: [
-                                           Checkbox(
-                                              value: isChecked,
-                                              onChanged: (bool? newValue) {
-                                              setState(() {
-                                                isChecked = newValue!;
-                                              });
-                                              },
-                                              ),
-                                            Text('pink up bug')
-                                            
-                                      ],
-                                    ),
-                                    Row(
-                                     children: [
-                                           Checkbox(
-                                              value: isChecked,
-                                              onChanged: (bool? newValue) {
-                                              setState(() {
-                                                isChecked = newValue!;
-                                              });
-                                              },
-                                              ),
-                                            Text('pink up bug')
-                                            
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                          
-                            
-                        ],
-                      ),
-        
-        
-        
-        
-        
-        
-                ),/////#3
+                TaskList(
+                  title:"Create monthly deck",
+                  day:'Today',
+                  icon: Icons.access_time,
+                  time:"4:00 pm",
+
+
+                 ),
+                      /////#3
                 
                 SizedBox(height: 20),
-                      Container(
-                  padding: EdgeInsets.all(16),
-                    
-                      height: 125,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 136, 205, 245),
-                        borderRadius: BorderRadius.circular(105),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        
-                           
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Row(
-                              children: [
-                                  Icon(Icons.calendar_today, color: const Color.fromARGB(255, 255, 255, 255)),
-                                 Text('today'),
-                                SizedBox(width: 10),
-                                Icon(Icons.access_time, color: const Color.fromARGB(255, 253, 253, 252)),
-                                SizedBox(width: 10),
-                                Text('4:30pm')
-                                    
-                              ]
-                             
-                                    
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            
-                            
-                          
-                            children: [
-                               Checkbox(
-                              value: isChecked,
-                              onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                              });
-                              },
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50), ),
-                              
-                            ),
-                              Icon(Icons.access_alarm, color: const Color.fromARGB(255, 189, 189, 188)),
-                           SizedBox(width: 10),
-                            ],
-                          ),
-                          
-                      
-                              
-                              Padding(
-                                padding: const EdgeInsets.only(left: 50),
-                                
-                                child: Text("project retrospective", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                              ),
-                          
-                            
-                        ],
-                      ),
-        
-        
-        
-        
-        
-        
-                ),/////#4
+                  TaskList(
+                  title:"Shop for groceries",
+                  day:'Today',
+                  icon: Icons.access_time,
+                  time:"4:00 pm",
+
+
+                 ),
+                    /////#4
                 SizedBox(height: 20),
+                  TaskList(
+                  title:"Read book",
+                  day:'Today',
+                  icon: Icons.access_time,
+                  time:"4:00 pm",
+
+
+                 ),
 
         
             ],
