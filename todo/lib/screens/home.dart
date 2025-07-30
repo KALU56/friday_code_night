@@ -539,23 +539,24 @@ class _HomeState extends State<Home> {
         
         
             ),
-             Positioned(
-                bottom: 20,
-                right: 20,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    shape: BoxShape.circle,
-                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
-                  ),
-                  child: IconButton(
-                    icon: Icon(Icons.add, color: Colors.white),
-                    onPressed: () {
-                    
-                    },
-                  ),
-                ),
-              )
+             Padding(
+               padding: const EdgeInsets.all(32.0),
+               child: Align(
+                alignment: Alignment.bottomRight,
+                 child: Container(
+                  
+                   decoration: BoxDecoration(
+                     color: Colors.blue,
+                     shape: BoxShape.circle,
+                       
+                   ),
+                   child: IconButton(
+                     icon: Icon(Icons.add, color: Colors.white,),
+                     onPressed: () {},
+                   ),
+                 ),
+               ),
+             )
       
         ],
       ),
