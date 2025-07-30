@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                           padding: EdgeInsets.all(16),
                                                 
                           decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(25),
                           color: const Color.fromARGB(255, 136, 205, 245),
                                                ),
                                               
