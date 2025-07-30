@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/screens/all_detal.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -90,7 +91,7 @@ class _HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 
-                                Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                Text("Scheduled", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                             
                                
                                 SizedBox(width: 8),
@@ -112,34 +113,43 @@ class _HomeState extends State<Home> {
                   Row(
                         children: [
                          Expanded(child: 
-                        Container(
-                        padding: EdgeInsets.all(16),
-                      
-                        decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                        color: const Color.fromARGB(255, 136, 205, 245),
-                     ),
-                    
-                        
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                             Icon(Icons.access_time, color: const Color.fromARGB(255, 250, 250, 248)),
-                             SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                
-                                Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            
-                               
-                                
-                                Text("5"),
-                              ],
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AllDetal()),
+                              );
+
+                          },
+                          child: Container(
+                          padding: EdgeInsets.all(16),
+                                                
+                          decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(25),
+                          color: const Color.fromARGB(255, 136, 205, 245),
+                                               ),
+                                              
+                          
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                               Icon(Icons.access_time, color: const Color.fromARGB(255, 250, 250, 248)),
+                               SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  
+                                  Text("all", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              
+                                 
+                                  
+                                  Text("5"),
+                                ],
+                              ),
+                            ],
+                          ),
+                                                ),
                         ),
-                      ),
                       ),
                     SizedBox(width: 10),
                     Expanded(child: 
@@ -161,7 +171,7 @@ class _HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 
-                                Text("today", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                Text("overdue", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                             
                                
                              
