@@ -184,7 +184,11 @@ class _HomeState extends State<Home> {
                    ),
                    child: IconButton(
                      icon: Icon(Icons.add, color: Colors.white,),
-                     onPressed: () {},
+                     onPressed: (
+                      
+                     ) {
+                       opensmallscreen();
+                     },
                    ),
                  ),
                ),
@@ -192,7 +196,24 @@ class _HomeState extends State<Home> {
       
         ],
       ),
-
     );
   }
+
+  Future opensmallscreen() => showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(' add new task'),
+      content: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(hintText: 'ENTER YOUR TASK'),
+          ),
+          
+        ],
+      ),
+      actions: [
+        TextButton(onPressed: (){}, child: Text('save'))
+      ]
+    ),
+  );
 }
