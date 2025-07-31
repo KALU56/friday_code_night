@@ -6,6 +6,7 @@ class TaskList extends StatefulWidget {
   final IconData icon;
   final String time;
   final Color backgroundColor;
+  final ImageProvider image;
 
 
   const TaskList({
@@ -14,6 +15,7 @@ class TaskList extends StatefulWidget {
     required this.icon,
     required this.day,
     required this.time,
+    required this.image,
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
   
   });
@@ -36,7 +38,7 @@ class _TaskListState extends State<TaskList> {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  
         children: [
            Checkbox(
                 value: isChecked,
@@ -91,9 +93,16 @@ class _TaskListState extends State<TaskList> {
 
               ),
         
-          
-    
-              const Icon(Icons.access_alarm, color: Colors.white),
+          Spacer(),
+            
+            Container(
+                width: 25,
+                height: 25,
+
+                decoration: BoxDecoration(
+                  image: DecorationImage(image:widget.image),
+                ),
+              ),
            
     
        

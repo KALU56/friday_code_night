@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/core/assets.dart';
 import 'package:todo/screens/all_detal.dart';
 import 'package:todo/widget/continer.dart';
 import 'package:todo/widget/continer2.dart';
@@ -30,7 +31,8 @@ class _HomeState extends State<Home> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hello jack',style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('Hello jack',style: TextStyle( fontSize: 20,fontWeight: FontWeight.bold),),
+
                       Text('you have work today')
                     ],
                   ),
@@ -45,7 +47,7 @@ class _HomeState extends State<Home> {
                         children: [
                           TaskCard(
                             title: "Today",
-                            icon: Icons.access_time,
+                            image: AssetImage(Assets.clock),
                             backgroundColor: Color.fromRGBO(181, 194, 251, 1.0),
                             count: 6,
                             onTap: () {
@@ -55,12 +57,11 @@ class _HomeState extends State<Home> {
                           const SizedBox(width: 10),
                           TaskCard(
                             title: "Schedule",
-                            icon: Icons.warning_amber_rounded,
+                            image: AssetImage(Assets.schedule),
                             backgroundColor: Color.fromRGBO(255, 245, 128, 1.0),
                             count: 5,
                             onTap: () {
-                              // Navigate to another page or show alert
-                              print("Overdue tapped");
+                          
                             },
                           ),
                         ],
@@ -72,7 +73,7 @@ class _HomeState extends State<Home> {
                       children: [
                         TaskCard(
                           title: "All",
-                          icon: Icons.access_time,
+                          image: AssetImage(Assets.all),
                           backgroundColor: Color.fromRGBO(208, 245, 235, 1.0),
                           count: 14,
                           onTap: () {
@@ -85,12 +86,12 @@ class _HomeState extends State<Home> {
                         const SizedBox(width: 10),
                         TaskCard(
                           title: "Overdue",
-                          icon: Icons.warning_amber_rounded,
+                          image: AssetImage(Assets.over),
                           backgroundColor: Color.fromRGBO(253, 192, 245, 1.0),
                           count: 3,
                           onTap: () {
-                            // Navigate to another page or show alert
-                            print("Overdue tapped");
+                        
+
                           },
                         ),
                       ],
@@ -111,6 +112,7 @@ class _HomeState extends State<Home> {
                   day:'Today',
                   icon: Icons.access_time,
                   time:"4:00 pm",
+                  image: AssetImage(Assets.dot),
   
 
                  ),
@@ -121,6 +123,7 @@ class _HomeState extends State<Home> {
                   day:'Today',
                   icon: Icons.access_time,
                   time:"4:00 pm",
+                  image: AssetImage(Assets.dot),
     
 
                  ),
@@ -131,6 +134,7 @@ class _HomeState extends State<Home> {
                   day:'Today',
                   icon: Icons.access_time,
                   time:"4:00 pm",
+                  image: AssetImage(Assets.dot),
 
 
                  ),
@@ -142,6 +146,7 @@ class _HomeState extends State<Home> {
                   day:'Today',
                   icon: Icons.access_time,
                   time:"4:00 pm",
+                  image: AssetImage(Assets.dot),
 
 
                  ),
@@ -152,6 +157,7 @@ class _HomeState extends State<Home> {
                   day:'Today',
                   icon: Icons.access_time,
                   time:"4:00 pm",
+                  image: AssetImage(Assets.dot),
 
 
                  ),
