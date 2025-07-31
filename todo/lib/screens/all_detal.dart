@@ -16,34 +16,81 @@ class _AllDetalState extends State<AllDetal> {
         title: Center(child: Text('All Task List',style: TextStyle(fontWeight: FontWeight.bold),))
  
       ),
-      body: Column(
+      body: 
+      Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Container(
+            color: const Color.fromRGBO(244, 250, 255, 1),
+            child: Column(
               children: [
-                GestureDetector(
-                  onTap: (){},
-                  child: Text('Today'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text('Today'),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text('Daily'),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text('Monthly'),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text('weekly'),
+                      )
+                    ],
+                  ),
                 ),
-                 GestureDetector(
-                  onTap: (){},
-                  child: Text('Daily'),
-                ),
-                 GestureDetector(
-                  onTap: (){},
-                  child: Text('Monthly'),
-                ),
-                 GestureDetector(
-                  onTap: (){},
-                  child: Text('weekly'),
-                )
-                
-            
               ],
             ),
-          )
+          ),
+
+
+
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+          ),
+           Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+          ),
         ],
       )
     )
@@ -52,3 +99,4 @@ class _AllDetalState extends State<AllDetal> {
     );
   }
 }
+
