@@ -61,7 +61,58 @@ List<Widget> buildTaskCards() {
   }
   return cards;
 }
-
+ List<Map<String, dynamic>> tasklist = [
+    {
+      'title': 'project retrospective',
+      'day': DateTime.now(),
+      'icon': Icons.access_time,
+       'time': TimeOfDay.now(),
+       'image': AssetImage(Assets.dot),
+    },
+    {
+      'title': "Evening team meeting",
+       'day': DateTime.now(),
+       'icon': Icons.access_time,
+       'time': TimeOfDay.now(),
+        'image': AssetImage(Assets.dot),
+    },
+    {
+      'title': "Create monthly deck",
+      'day': DateTime.now(),
+      'icon': Icons.access_time,
+      'time': TimeOfDay.now(),
+      'image': AssetImage(Assets.dot),
+    },
+    {
+      'title': "Shop for groceries",
+      'day': DateTime.now(),
+      'icon': Icons.access_time,
+      'time': TimeOfDay.now(),
+      'image': AssetImage(Assets.dot),
+    },
+        {
+      'title': "Read book",
+      'day': DateTime.now(),
+      'icon': Icons.access_time,
+      'time': TimeOfDay.now(),
+      'image': AssetImage(Assets.dot),
+    },
+  ];
+List<Widget> buildTaskLists() {
+  List<Widget> cards = [];
+  for (int i = 0; i < todolist.length; i++) {
+    cards.add(
+      TaskList(
+        title: tasklist[i]['title'],
+        day: tasklist[i]['day'],
+        icon: tasklist[i]['icon'],
+        time: tasklist[i]['time'],
+        image: tasklist[i]['image'],
+      ),
+    );
+  }
+  return cards;
+}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -124,51 +175,13 @@ List<Widget> buildTaskCards() {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Container(),
-                    TaskList(
-                      title: "project retrospective",
-                      day: DateTime.now(),
-                      icon: Icons.access_time,
-                      time: TimeOfDay.now(),
-                      image: AssetImage(Assets.dot),
-                    ),
-                    /////#1
-                    SizedBox(height: 20),
-                    TaskList(
-                      title: "Evening team meeting",
-                      day: DateTime.now(),
-                      icon: Icons.access_time,
-                      time: TimeOfDay.now(),
-                      image: AssetImage(Assets.dot),
-                    ),
-                    /////#2
-                    SizedBox(height: 20),
-                    TaskList(
-                      title: "Create monthly deck",
-                      day: DateTime.now(),
-                      icon: Icons.access_time,
-                      time: TimeOfDay.now(),
-                      image: AssetImage(Assets.dot),
-                    ),
+               
+                Column(
+                  children: [
+                    ...buildTaskLists(),
 
-                    /////#3
-                    SizedBox(height: 20),
-                    TaskList(
-                      title: "Shop for groceries",
-                      day: DateTime.now(),
-                      icon: Icons.access_time,
-                      time: TimeOfDay.now(),
-                      image: AssetImage(Assets.dot),
-                    ),
-                    /////#4
-                    SizedBox(height: 20),
-                    TaskList(
-                      title: "Read book",
-                      day: DateTime.now(),
-                      icon: Icons.access_time,
-                      time: TimeOfDay.now(),
-                      image: AssetImage(Assets.dot),
-                    ),
+                  ],
+                )
                   ],
                 ),
               ),
