@@ -100,8 +100,8 @@ List<Widget> buildTaskCards() {
 
                     GridView.count(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 40,
-                        mainAxisSpacing: 40,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
                         
                         shrinkWrap: true,
                              
