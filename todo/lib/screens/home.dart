@@ -15,7 +15,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final TimeOfDay _timeOfDay = TimeOfDay.now();
   TextEditingController _datecontroller = TextEditingController();
-
+  TextEditingController _timecontroller = TextEditingController();
+  TextEditingController _titlecontroller = TextEditingController();
   bool isChecked = false;
 
   List<Map<String, dynamic>> todolist = [
@@ -116,7 +117,21 @@ class _HomeState extends State<Home> {
     }
     return cards;
   }
+void save() {
 
+
+  setState(() {
+    tasklist.add({
+      'title': _titleController.text,
+      'day': DateTime.now(), 
+      'icon': Icons.access_time,
+      'time': TimeOfDay.now(),
+      'image': AssetImage(Assets.dot),
+    });
+  });
+
+
+}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -212,7 +227,9 @@ class _HomeState extends State<Home> {
       content: SizedBox(
         child: Column(
           children: [
-            TextField(decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
+            TextField(
+              controller: _titlecontroller,
+              decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
 
             GestureDetector(
               child: Padding(
@@ -241,20 +258,44 @@ class _HomeState extends State<Home> {
                 _selectTime();
               },
 
-              child: Text(
-                '${_timeOfDay.hour}:${_timeOfDay.minute}',
-                style: const TextStyle(fontSize: 20),
+              child: TextField(
+                controller: _timecontroller,
+                decoration: InputDecoration(
+                  labelText: 'time',
+                  prefixIcon: Icon(Icons.access_time),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                ),
+                readOnly: true,
+                onTap: () {
+                  _selectTime();
+                },
               ),
             ),
           ],
         ),
       ),
-      actions: [TextButton(onPressed: () {}, child: Text('save'))],
+      actions: [TextButton(onPressed: () {save()}, child: Text('save'))],
     ),
   );
   Future<void> _selectTime() async {
-    await showTimePicker(initialTime: _timeOfDay, context: context);
-    return;
+    TimeOfDay? picked = await showTimePicker(
+      initialTime: _timeOfDay,
+      context: context,
+    );
+    if (picked != null) {
+      setState(() {
+        final now = DateTime.now();
+        final formattedTime = DateFormat.jm().format(
+          DateTime(now.year, now.month, picked.hour, picked.minute),
+        );
+        _timecontroller.text = formattedTime;
+      });
+    }
   }
 
   Future<void> _selectDate() async {
