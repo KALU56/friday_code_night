@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
       'image': AssetImage(Assets.all),
       'backgroundColor': Color.fromRGBO(208, 245, 235, 1.0),
       'count': 6,
-      'onTap': (){}, 
+      'onTap': () {},
     },
     {
       'title': 'Overdue',
@@ -46,35 +46,36 @@ class _HomeState extends State<Home> {
       'onTap': () {},
     },
   ];
-List<Widget> buildTaskCards() {
-  List<Widget> cards = [];
-  for (int i = 0; i < todolist.length; i++) {
-    cards.add(
-      TaskCard(
-        title: todolist[i]['title'],
-        image: todolist[i]['image'],
-        backgroundColor: todolist[i]['backgroundColor'],
-        count: todolist[i]['count'],
-        onTap: todolist[i]['onTap'],
-      ),
-    );
+  List<Widget> buildTaskCards() {
+    List<Widget> cards = [];
+    for (int i = 0; i < todolist.length; i++) {
+      cards.add(
+        TaskCard(
+          title: todolist[i]['title'],
+          image: todolist[i]['image'],
+          backgroundColor: todolist[i]['backgroundColor'],
+          count: todolist[i]['count'],
+          onTap: todolist[i]['onTap'],
+        ),
+      );
+    }
+    return cards;
   }
-  return cards;
-}
- List<Map<String, dynamic>> tasklist = [
+
+  List<Map<String, dynamic>> tasklist = [
     {
       'title': 'project retrospective',
       'day': DateTime.now(),
       'icon': Icons.access_time,
-       'time': TimeOfDay.now(),
-       'image': AssetImage(Assets.dot),
+      'time': TimeOfDay.now(),
+      'image': AssetImage(Assets.dot),
     },
     {
       'title': "Evening team meeting",
-       'day': DateTime.now(),
-       'icon': Icons.access_time,
-       'time': TimeOfDay.now(),
-        'image': AssetImage(Assets.dot),
+      'day': DateTime.now(),
+      'icon': Icons.access_time,
+      'time': TimeOfDay.now(),
+      'image': AssetImage(Assets.dot),
     },
     {
       'title': "Create monthly deck",
@@ -90,7 +91,7 @@ List<Widget> buildTaskCards() {
       'time': TimeOfDay.now(),
       'image': AssetImage(Assets.dot),
     },
-        {
+    {
       'title': "Read book",
       'day': DateTime.now(),
       'icon': Icons.access_time,
@@ -98,21 +99,22 @@ List<Widget> buildTaskCards() {
       'image': AssetImage(Assets.dot),
     },
   ];
-List<Widget> buildTaskLists() {
-  List<Widget> cards = [];
-  for (int i = 0; i < todolist.length; i++) {
-    cards.add(
-      TaskList(
-        title: tasklist[i]['title'],
-        day: tasklist[i]['day'],
-        icon: tasklist[i]['icon'],
-        time: tasklist[i]['time'],
-        image: tasklist[i]['image'],
-      ),
-    );
+  List<Widget> buildTaskLists() {
+    List<Widget> cards = [];
+    for (int i = 0; i < todolist.length; i++) {
+      cards.add(
+        TaskList(
+          title: tasklist[i]['title'],
+          day: tasklist[i]['day'],
+          icon: tasklist[i]['icon'],
+          time: tasklist[i]['time'],
+          image: tasklist[i]['image'],
+        ),
+      );
+    }
+    return cards;
   }
-  return cards;
-}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -150,18 +152,14 @@ List<Widget> buildTaskLists() {
                     ),
 
                     GridView.count(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 15,
-                        
-                        shrinkWrap: true,
-                             
-                        children: [
-                          ...buildTaskCards(),
-                        ],
-                    ),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
 
-               
+                      shrinkWrap: true,
+
+                      children: [...buildTaskCards()],
+                    ),
 
                     SizedBox(height: 15),
                     Padding(
@@ -175,13 +173,8 @@ List<Widget> buildTaskLists() {
                       ),
                     ),
                     SizedBox(height: 5),
-               
-                Column(
-                  children: [
-                    ...buildTaskLists(),
 
-                  ],
-                )
+                    Column(children: [...buildTaskLists()]),
                   ],
                 ),
               ),
@@ -219,23 +212,53 @@ List<Widget> buildTaskLists() {
         child: Column(
           children: [
             TextField(decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
-            GestureDetector(
-              onTap: () {
-                _selectTime();
-              },
-              child: Text(
-                '${_timeOfDay.hour}:${_timeOfDay.minute}',
-                style: const TextStyle(fontSize: 20),
-              ),
+            Row(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Date',
+                    prefixIcon: Icon(Icons.calendar_today),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  readOnly: true,
+                  onTap: () {
+                    _selectDate();
+                  },
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _selectTime();
+                  },
+
+                  child: Text(
+                    '${_timeOfDay.hour}:${_timeOfDay.minute}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
-      actions: [TextButton(onPressed: (){}, child: Text('save'))],
+      actions: [TextButton(onPressed: () {}, child: Text('save'))],
     ),
   );
   Future<void> _selectTime() async {
     await showTimePicker(initialTime: _timeOfDay, context: context);
     return;
+  }
+
+  Future<void> _selectDate() async {
+    await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2000),
+    );
   }
 }
