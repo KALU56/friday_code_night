@@ -13,16 +13,54 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final TimeOfDay _timeOfDay = TimeOfDay.now();
-  final _controller = TextEditingController();
+
   bool isChecked = false;
-  List todolist =[
- 
+  int _CurrentIndex = 0;
+  List<Map<String, dynamic>> todolist = [
+    {
+      'title': 'Today',
+      'image': AssetImage(Assets.clock),
+      'backgroundColor': Color.fromRGBO(181, 194, 251, 1.0),
+      'count': 6,
+      'onTap': () {},
+    },
+    {
+      'title': 'Schedule',
+      'image': AssetImage(Assets.schedule),
+      'backgroundColor': Color.fromRGBO(255, 245, 128, 1.0),
+      'count': 6,
+      'onTap': () {},
+    },
+    {
+      'title': 'All',
+      'image': AssetImage(Assets.all),
+      'backgroundColor': Color.fromRGBO(208, 245, 235, 1.0),
+      'count': 6,
+      'onTap': (){}, 
+    },
+    {
+      'title': 'Overdue',
+      'image': AssetImage(Assets.over),
+      'backgroundColor': Color.fromRGBO(253, 192, 245, 1.0),
+      'count': 6,
+      'onTap': () {},
+    },
   ];
-  void save() {
-    setState(() {
-      todolist.add([_controller.text]);
-    });
+List<Widget> buildTaskCards() {
+  List<Widget> cards = [];
+  for (int i = 0; i < todolist.length; i++) {
+    cards.add(
+      TaskCard(
+        title: todolist[i]['title'],
+        image: todolist[i]['image'],
+        backgroundColor: todolist[i]['backgroundColor'],
+        count: todolist[i]['count'],
+        onTap: todolist[i]['onTap'],
+      ),
+    );
   }
+  return cards;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -62,52 +100,21 @@ class _HomeState extends State<Home> {
 
                     Row(
                       children: [
-                        TaskCard(
-                          title: "Today",
-                          image: AssetImage(Assets.clock),
-                          backgroundColor: Color.fromRGBO(181, 194, 251, 1.0),
-                          count: 6,
-                          onTap: () {},
-                        ),
+                        ...buildTaskCards(),
                         const SizedBox(width: 10),
-                        TaskCard(
-                          title: "Schedule",
-                          image: AssetImage(Assets.schedule),
-                          backgroundColor: Color.fromRGBO(255, 245, 128, 1.0),
-                          count: 5,
-                          onTap: () {},
-                        ),
+                   
                       ],
                     ),
 
                     SizedBox(height: 20),
 
-                    Row(
-                      children: [
-                        TaskCard(
-                          title: "All",
-                          image: AssetImage(Assets.all),
-                          backgroundColor: Color.fromRGBO(208, 245, 235, 1.0),
-                          count: 14,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AllDetal(),
-                              ),
-                            );
-                          },
-                        ),
-                        const SizedBox(width: 10),
-                        TaskCard(
-                          title: "Overdue",
-                          image: AssetImage(Assets.over),
-                          backgroundColor: Color.fromRGBO(253, 192, 245, 1.0),
-                          count: 3,
-                          onTap: () {},
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                     
+                    //     const SizedBox(width: 10),
+                  
+                    //   ],
+                    // ),
 
                     SizedBox(height: 15),
                     Padding(
@@ -202,10 +209,7 @@ class _HomeState extends State<Home> {
         height: 100,
         child: Column(
           children: [
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(hintText: 'ENTER YOUR TASK'),
-            ),
+            TextField(decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
             GestureDetector(
               onTap: () {
                 _selectTime();
@@ -218,7 +222,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      actions: [TextButton(onPressed: save, child: Text('save'))],
+      actions: [TextButton(onPressed: (){}, child: Text('save'))],
     ),
   );
   Future<void> _selectTime() async {
