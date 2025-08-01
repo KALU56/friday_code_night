@@ -120,10 +120,7 @@ class _HomeState extends State<Home> {
 
   void save() {
     setState(() {
-        if (_titlecontroller.text.isEmpty || _datecontroller.text.isEmpty || _timecontroller.text.isEmpty) {
-    // Optional: show a warning dialog or snackbar
-    return;
-  }
+      
       tasklist.add({
         'title': _titlecontroller.text,
         'day': _timecontroller,
@@ -132,7 +129,7 @@ class _HomeState extends State<Home> {
         'image': AssetImage(Assets.dot),
       });
     });
-      Navigator.of(context).pop(); // Close the dialog
+      Navigator.of(context).pop();
   _titlecontroller.clear();
   _datecontroller.clear();
   _timecontroller.clear();
