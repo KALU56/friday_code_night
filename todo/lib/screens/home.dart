@@ -68,41 +68,7 @@ class _HomeState extends State<Home> {
   }
 
   List<Map<String, dynamic>> tasklist = [
-    {
-      'title': 'project retrospective',
-      'day': DateTime.now(),
-      'icon': Icons.access_time,
-      'time': TimeOfDay.now(),
-      'image': AssetImage(Assets.dot),
-    },
-    {
-      'title': "Evening team meeting",
-      'day': DateTime.now(),
-      'icon': Icons.access_time,
-      'time': TimeOfDay.now(),
-      'image': AssetImage(Assets.dot),
-    },
-    {
-      'title': "Create monthly deck",
-      'day': DateTime.now(),
-      'icon': Icons.access_time,
-      'time': TimeOfDay.now(),
-      'image': AssetImage(Assets.dot),
-    },
-    {
-      'title': "Shop for groceries",
-      'day': DateTime.now(),
-      'icon': Icons.access_time,
-      'time': TimeOfDay.now(),
-      'image': AssetImage(Assets.dot),
-    },
-    {
-      'title': "Read book",
-      'day': DateTime.now(),
-      'icon': Icons.access_time,
-      'time': TimeOfDay.now(),
-      'image': AssetImage(Assets.dot),
-    },
+
   ];
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
