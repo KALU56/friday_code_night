@@ -14,9 +14,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final TimeOfDay _timeOfDay = TimeOfDay.now();
-  TextEditingController _datecontroller = TextEditingController();
-  TextEditingController _timecontroller = TextEditingController();
-  TextEditingController _titlecontroller = TextEditingController();
+  final TextEditingController _datecontroller = TextEditingController();
+  final TextEditingController _timecontroller = TextEditingController();
+  final TextEditingController _titlecontroller = TextEditingController();
   bool isChecked = false;
 
   List<Map<String, dynamic>> todolist = [
@@ -117,21 +117,27 @@ class _HomeState extends State<Home> {
     }
     return cards;
   }
-void save() {
 
-
-  setState(() {
-    tasklist.add({
-      'title': _titleController.text,
-      'day': DateTime.now(), 
-      'icon': Icons.access_time,
-      'time': TimeOfDay.now(),
-      'image': AssetImage(Assets.dot),
+  void save() {
+    setState(() {
+        if (_titlecontroller.text.isEmpty || _datecontroller.text.isEmpty || _timecontroller.text.isEmpty) {
+    // Optional: show a warning dialog or snackbar
+    return;
+  }
+      tasklist.add({
+        'title': _titlecontroller.text,
+        'day': _timecontroller,
+        'icon': Icons.access_time,
+        'time': _datecontroller.text,
+        'image': AssetImage(Assets.dot),
+      });
     });
-  });
+      Navigator.of(context).pop(); // Close the dialog
+  _titlecontroller.clear();
+  _datecontroller.clear();
+  _timecontroller.clear();
+  }
 
-
-}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -229,7 +235,8 @@ void save() {
           children: [
             TextField(
               controller: _titlecontroller,
-              decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
+              decoration: InputDecoration(hintText: 'ENTER YOUR TASK'),
+            ),
 
             GestureDetector(
               child: Padding(
@@ -279,7 +286,14 @@ void save() {
           ],
         ),
       ),
-      actions: [TextButton(onPressed: () {save()}, child: Text('save'))],
+      actions: [
+        TextButton(
+          onPressed: () {
+            save();
+          },
+          child: Text('save'),
+        ),
+      ],
     ),
   );
   Future<void> _selectTime() async {
@@ -299,14 +313,14 @@ void save() {
   }
 
   Future<void> _selectDate() async {
-    DateTime? _picked = await showDatePicker(
+    DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
-    if (_picked != null) {
-      final formttedDate = DateFormat.yMEd().format(_picked);
+    if (picked != null) {
+      final formttedDate = DateFormat.yMEd().format(picked);
       setState(() {
         _datecontroller.text = formttedDate;
       });
