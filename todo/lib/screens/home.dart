@@ -3,6 +3,7 @@ import 'package:todo/core/assets.dart';
 import 'package:todo/screens/all_detal.dart';
 import 'package:todo/widget/continer.dart';
 import 'package:todo/widget/continer2.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final TimeOfDay _timeOfDay = TimeOfDay.now();
+  TextEditingController _datecontroller = TextEditingController();
 
   bool isChecked = false;
 
@@ -208,13 +210,15 @@ class _HomeState extends State<Home> {
     builder: (context) => AlertDialog(
       title: Text(' add new task'),
       content: SizedBox(
-      
         child: Column(
           children: [
             TextField(decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
-         
-              
-                TextField(
+
+            GestureDetector(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _datecontroller,
                   decoration: InputDecoration(
                     labelText: 'Date',
                     prefixIcon: Icon(Icons.calendar_today),
@@ -230,19 +234,19 @@ class _HomeState extends State<Home> {
                     _selectDate();
                   },
                 ),
-                GestureDetector(
-                  onTap: () {
-                    _selectTime();
-                  },
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                _selectTime();
+              },
 
-                  child: Text(
-                    '${_timeOfDay.hour}:${_timeOfDay.minute}',
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-              ],
-            
-          
+              child: Text(
+                '${_timeOfDay.hour}:${_timeOfDay.minute}',
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ],
         ),
       ),
       actions: [TextButton(onPressed: () {}, child: Text('save'))],
@@ -254,11 +258,17 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _selectDate() async {
-    await showDatePicker(
+    DateTime? _picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2000),
+      lastDate: DateTime(2100),
     );
+    if (_picked != null) {
+      final formttedDate = DateFormat.yMEd().format(_picked);
+      setState(() {
+        _datecontroller.text = formttedDate;
+      });
+    }
   }
 }
