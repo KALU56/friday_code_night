@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class TaskList extends StatefulWidget {
   final String title;
-  final String day;
+  final DateTime day;
   final IconData icon;
-  final String time;
+  final TimeOfDay time;
   final Color backgroundColor;
   final ImageProvider image;
 
@@ -61,14 +61,14 @@ class _TaskListState extends State<TaskList> {
                 Icon(Icons.calendar_today, color: const Color.fromRGBO(185, 188, 194, 1)),
                 const SizedBox(width: 8),
                 Text(
-                  widget.day,
+                  "${widget.day.day}/${widget.day.month}/${widget.day.year}",
                   style: const TextStyle(color:  Color.fromRGBO(185, 188, 194, 1)),
                 ),
                 const SizedBox(width: 16),
                 Icon(widget.icon, color:  Color.fromRGBO(185, 188, 194, 1)),
                 const SizedBox(width: 8),
                 Text(
-                  widget.time,
+                  widget.time.format(context),
                   style: const TextStyle(color:  Color.fromRGBO(185, 188, 194, 1)),
                 ),
               ],

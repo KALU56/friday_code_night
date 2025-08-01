@@ -8,6 +8,7 @@ class AllDetal extends StatefulWidget {
 }
 
 class _AllDetalState extends State<AllDetal> {
+    final TimeOfDay _timeOfDay = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -82,16 +83,36 @@ class _AllDetalState extends State<AllDetal> {
     );
   }
 
-  Future opensmallscreen() => showDialog(
+Future opensmallscreen() => showDialog(
     context: context,
     builder: (context) => AlertDialog(
       title: Text(' add new task'),
-      content: TextField(
-        decoration: InputDecoration(hintText: 'ENTER YOUR TASK'),
+      content: SizedBox(
+        height: 100,
+        child: Column(
+          
+          children: [
+            TextField(decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
+            GestureDetector(
+              onTap: (){
+                _selectTime();
+              },
+              child: Text(
+                '${_timeOfDay.hour}:${_timeOfDay.minute}',
+                 style: const TextStyle(fontSize: 20),
+              ),
+            )
+          ],
+        ),
       ),
-      actions: [
-        TextButton(onPressed: (){}, child: Text('save'))
-      ]
+      actions: [TextButton(onPressed: () {}, child: Text('save'))],
     ),
   );
+  Future<void> _selectTime() async {
+    await showTimePicker(
+      initialTime: _timeOfDay,
+      context: context,
+    );
+    return;
+  }
 }
