@@ -228,7 +228,9 @@ class _HomeState extends State<Home> {
     builder: (context) => AlertDialog(
       title: Text(' add new task'),
       content: SizedBox(
+        
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: _titlecontroller,
