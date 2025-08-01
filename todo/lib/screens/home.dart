@@ -208,12 +208,12 @@ class _HomeState extends State<Home> {
     builder: (context) => AlertDialog(
       title: Text(' add new task'),
       content: SizedBox(
-        height: 100,
+      
         child: Column(
           children: [
             TextField(decoration: InputDecoration(hintText: 'ENTER YOUR TASK')),
-            Row(
-              children: [
+         
+              
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Date',
@@ -241,8 +241,8 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
-            ),
-          ],
+            
+          
         ),
       ),
       actions: [TextButton(onPressed: () {}, child: Text('save'))],
