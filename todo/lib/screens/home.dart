@@ -13,6 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
   final TimeOfDay _timeOfDay = TimeOfDay.now();
   final TextEditingController _datecontroller = TextEditingController();
   final TextEditingController _timecontroller = TextEditingController();
@@ -104,7 +106,7 @@ class _HomeState extends State<Home> {
   ];
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
-    for (int i = 0; i < todolist.length; i++) {
+    for (int i = 0; i < tasklist.length; i++) {
       cards.add(
         TaskList(
           title: tasklist[i]['title'],
@@ -120,19 +122,18 @@ class _HomeState extends State<Home> {
 
   void save() {
     setState(() {
-      
       tasklist.add({
         'title': _titlecontroller.text,
-        'day': _timecontroller,
+        'day': _selectedDate,
         'icon': Icons.access_time,
-        'time': _datecontroller.text,
+        'time': _selectedTime,
         'image': AssetImage(Assets.dot),
       });
     });
-      Navigator.of(context).pop();
-  _titlecontroller.clear();
-  _datecontroller.clear();
-  _timecontroller.clear();
+    Navigator.of(context).pop();
+    _titlecontroller.clear();
+    _datecontroller.clear();
+    _timecontroller.clear();
   }
 
   @override
@@ -228,7 +229,6 @@ class _HomeState extends State<Home> {
     builder: (context) => AlertDialog(
       title: Text(' add new task'),
       content: SizedBox(
-        
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -307,6 +307,7 @@ class _HomeState extends State<Home> {
           DateTime(now.year, now.month, picked.hour, picked.minute),
         );
         _timecontroller.text = formattedTime;
+        _selectedTime = picked;
       });
     }
   }
@@ -322,6 +323,7 @@ class _HomeState extends State<Home> {
       final formttedDate = DateFormat.yMEd().format(picked);
       setState(() {
         _datecontroller.text = formttedDate;
+        _selectedDate = picked;
       });
     }
   }
