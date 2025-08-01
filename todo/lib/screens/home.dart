@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   final TimeOfDay _timeOfDay = TimeOfDay.now();
 
   bool isChecked = false;
-  int _CurrentIndex = 0;
+
   List<Map<String, dynamic>> todolist = [
     {
       'title': 'Today',
@@ -98,23 +98,19 @@ List<Widget> buildTaskCards() {
                       ],
                     ),
 
-                    Row(
-                      children: [
-                        ...buildTaskCards(),
-                        const SizedBox(width: 10),
-                   
-                      ],
+                    GridView.count(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 40,
+                        mainAxisSpacing: 40,
+                        
+                        shrinkWrap: true,
+                             
+                        children: [
+                          ...buildTaskCards(),
+                        ],
                     ),
 
-                    SizedBox(height: 20),
-
-                    // Row(
-                    //   children: [
-                     
-                    //     const SizedBox(width: 10),
-                  
-                    //   ],
-                    // ),
+               
 
                     SizedBox(height: 15),
                     Padding(
