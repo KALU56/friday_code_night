@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../screens/home.dart';
 class TaskList extends StatefulWidget {
   final String title;
   final DateTime day;
@@ -7,6 +7,7 @@ class TaskList extends StatefulWidget {
   final TimeOfDay time;
   final Color backgroundColor;
   final ImageProvider image;
+  final VoidCallback? onEdit;
   // final Function(int index) onChecked;
 
   const TaskList({
@@ -18,6 +19,7 @@ class TaskList extends StatefulWidget {
     required this.image,
     // required this.onChecked,
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
+    this.onEdit,
   });
 
   @override
@@ -110,10 +112,14 @@ class _TaskListState extends State<TaskList> {
               ),
             ),
             onSelected: (value) {
+              if(value == 'edit'&& widget.onEdit != null){
+                widget.onEdit!();
+              }
         
             },
             itemBuilder: (context) => [
               PopupMenuItem(
+                
                 value: 'edit',
                 child: Row(
                   children: [

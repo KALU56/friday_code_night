@@ -15,7 +15,7 @@ class TaskCard extends StatelessWidget {
    
     required this.count,
     this.backgroundColor = const Color.fromARGB(255, 136, 205, 245),
-    this.onTap,
+    this.onTap, required Future Function() onEdit,
   });
 
   @override

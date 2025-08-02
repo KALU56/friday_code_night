@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
       'backgroundColor': Color.fromRGBO(181, 194, 251, 1.0),
       'count': 0,
       'onTap': () {},
+       'onEdit': () {},
     },
     {
       'title': 'Schedule',
@@ -35,6 +36,7 @@ class _HomeState extends State<Home> {
       'backgroundColor': Color.fromRGBO(255, 245, 128, 1.0),
       'count': 0,
       'onTap': () {},
+       'onEdit': () {},
     },
     {
       'title': 'All',
@@ -42,6 +44,7 @@ class _HomeState extends State<Home> {
       'backgroundColor': Color.fromRGBO(208, 245, 235, 1.0),
       'count': 0,
       'onTap': () {},
+       'onEdit': () {},
     },
     {
       'title': 'Overdue',
@@ -49,6 +52,7 @@ class _HomeState extends State<Home> {
       'backgroundColor': Color.fromRGBO(253, 192, 245, 1.0),
       'count': 0,
       'onTap': () {},
+       'onEdit': () {},
     },
   ];
   List<Widget> buildTaskCards() {
@@ -61,6 +65,7 @@ class _HomeState extends State<Home> {
           backgroundColor: todolist[i]['backgroundColor'],
           count: todolist[i]['count'],
           onTap: todolist[i]['onTap'],
+          onEdit: opensmallscreen,
         ),
       );
     }
