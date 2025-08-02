@@ -10,7 +10,7 @@ class TaskList extends StatefulWidget {
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
 
-  // final Function(int index) onChecked;
+  final Function(int index) onChecked;
 
   const TaskList({
     super.key,
@@ -19,7 +19,7 @@ class TaskList extends StatefulWidget {
     required this.day,
     required this.time,
     required this.image,
-    // required this.onChecked,
+    required this.onChecked,
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
     this.onEdit, 
      this.onDelete,
@@ -52,7 +52,7 @@ class _TaskListState extends State<TaskList> {
             onChanged: (bool? newValue) {
               setState(() {
                 isChecked = newValue!;
-                // widget.onChecked;
+                widget.onDelete;
               });
             },
             shape: RoundedRectangleBorder(

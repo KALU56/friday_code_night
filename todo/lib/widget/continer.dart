@@ -6,7 +6,6 @@ class TaskCard extends StatelessWidget {
   final ImageProvider image;
   final int count;
   final Color backgroundColor;
-  // final VoidCallback? onTap;
 
   const TaskCard({
     super.key,
@@ -15,7 +14,7 @@ class TaskCard extends StatelessWidget {
    
     required this.count,
     this.backgroundColor = const Color.fromARGB(255, 136, 205, 245),
-    // this.onTap, required Future Function() onEdit,
+
   });
 
   @override
@@ -23,7 +22,7 @@ class TaskCard extends StatelessWidget {
     return  SizedBox(
         height: 50,
         child: GestureDetector(
-          // onTap: onTap,
+       
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
