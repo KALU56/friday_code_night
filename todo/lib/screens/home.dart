@@ -65,7 +65,9 @@ class _HomeState extends State<Home> {
           backgroundColor: todolist[i]['backgroundColor'],
           count: todolist[i]['count'],
           onTap: todolist[i]['onTap'],
-          onEdit: opensmallscreen,
+          onEdit: () async {
+  await openTaskDialog(isEdit: true, task: task, index: index);
+}
         ),
       );
     }
@@ -76,6 +78,10 @@ class _HomeState extends State<Home> {
   List<Map<String, dynamic>> todayTaskList = [];
   List<Map<String, dynamic>> scheduledTaskList = [];
   List<Map<String, dynamic>> overdue = [];
+  
+  get task => null;
+  
+  get index => null;
 
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
@@ -87,9 +93,14 @@ class _HomeState extends State<Home> {
           icon: tasklist[i]['icon'],
           time: tasklist[i]['time'],
           image: tasklist[i]['image'],
-          // onChecked: (){
-          //   tasklist.removeAt(i);
-          // },
+        //   onEdit: () {
+        //   openTaskDialog(
+        //     isEdit: true,
+        //     task: tasklist[i],
+        //     index: i,
+        //   );
+        // },
+     
         ),
       );
     }
@@ -127,6 +138,19 @@ class _HomeState extends State<Home> {
  void cancel(){
    Navigator.of(context).pop();
  }
+ void updateTask(int index) {
+  setState(() {
+    tasklist[index] = {
+      'title': _titlecontroller.text,
+      'day': _selectedDate,
+      'icon': Icons.access_time,
+      'time': _selectedTime,
+      'image': AssetImage(Assets.dot),
+    };
+  });
+  Navigator.of(context).pop();
+}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -203,7 +227,7 @@ class _HomeState extends State<Home> {
                   child: IconButton(
                     icon: Icon(Icons.add, color: Colors.white),
                     onPressed: () {
-                      opensmallscreen();
+                      openTaskDialog();
                     },
                   ),
                 ),
@@ -214,91 +238,86 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+Future<void> openTaskDialog({bool isEdit = false, Map<String, dynamic>? task, int? index}) async {
+  if (isEdit && task != null) {
+    _titlecontroller.text = task['title'];
+    _selectedDate = task['day'];
+    _selectedTime = task['time'];
 
-  Future opensmallscreen() => showDialog(
+    _datecontroller.text = DateFormat.yMEd().format(_selectedDate!);
+    _timecontroller.text = _selectedTime!.format(context);
+  } else {
+    _titlecontroller.clear();
+    _datecontroller.clear();
+    _timecontroller.clear();
+    _selectedDate = null;
+    _selectedTime = null;
+  }
+
+  await showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text(' add new task'),
-      content: SizedBox(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _titlecontroller,
-              decoration: InputDecoration(hintText: 'ENTER YOUR TASK'),
-            ),
-
-            GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _datecontroller,
-                  decoration: InputDecoration(
-                    labelText: 'Date',
-                    prefixIcon: Icon(Icons.calendar_today),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                  readOnly: true,
-                  onTap: () {
-                    _selectDate();
-                  },
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                _selectTime();
-              },
-
+      title: Text(isEdit ? 'Edit Task' : 'Add New Task'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _titlecontroller,
+            decoration: InputDecoration(hintText: isEdit ? 'Edit your task' : 'Enter your task'),
+          ),
+          GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
-                controller: _timecontroller,
+                controller: _datecontroller,
                 decoration: InputDecoration(
-                  labelText: 'time',
-                  prefixIcon: Icon(Icons.access_time),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
+                  labelText: 'Date',
+                  prefixIcon: Icon(Icons.calendar_today),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
                 ),
                 readOnly: true,
-                onTap: () {
-                  _selectTime();
-                },
+                onTap: () => _selectDate(),
               ),
             ),
-          ],
-        ),
+          ),
+          GestureDetector(
+            onTap: () => _selectTime(),
+            child: TextField(
+              controller: _timecontroller,
+              decoration: InputDecoration(
+                labelText: 'Time',
+                prefixIcon: Icon(Icons.access_time),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              ),
+              readOnly: true,
+              onTap: () => _selectTime(),
+            ),
+          ),
+        ],
       ),
       actions: [
-        Row(
-       
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(
-              onPressed: () {
-                cancel();
-              },
-              child: Text('cancel'),
-            ),
-            Spacer(),
-            TextButton(
-              onPressed: () {
-                save();
-              },
-              child: Text('save'),
-            ),
-          ],
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text('Cancel'),
+        ),
+        Spacer(),
+        TextButton(
+          onPressed: () {
+            if (isEdit && index != null) {
+              updateTask(index);
+            } else {
+              save();
+            }
+          },
+          child: Text(isEdit ? 'Update' : 'Save'),
         ),
       ],
     ),
   );
+}
+
   Future<void> _selectTime() async {
     TimeOfDay? picked = await showTimePicker(
       initialTime: _timeOfDay,

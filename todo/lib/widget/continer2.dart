@@ -8,6 +8,7 @@ class TaskList extends StatefulWidget {
   final Color backgroundColor;
   final ImageProvider image;
   final VoidCallback? onEdit;
+
   // final Function(int index) onChecked;
 
   const TaskList({
@@ -19,7 +20,9 @@ class TaskList extends StatefulWidget {
     required this.image,
     // required this.onChecked,
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
-    this.onEdit,
+    this.onEdit, 
+    
+  
   });
 
   @override
@@ -112,9 +115,11 @@ class _TaskListState extends State<TaskList> {
               ),
             ),
             onSelected: (value) {
-              if(value == 'edit'&& widget.onEdit != null){
-                widget.onEdit!();
-              }
+                if (value == 'edit') {
+                   if (value == 'edit' && widget.onEdit != null) {
+                      widget.onEdit!(); 
+                    }
+                }
         
             },
             itemBuilder: (context) => [
