@@ -64,7 +64,6 @@ class _HomeState extends State<Home> {
           image: todolist[i]['image'],
           backgroundColor: todolist[i]['backgroundColor'],
           count: todolist[i]['count'],
-       
         ),
       );
     }
@@ -75,8 +74,6 @@ class _HomeState extends State<Home> {
   List<Map<String, dynamic>> todayTaskList = [];
   List<Map<String, dynamic>> scheduledTaskList = [];
   List<Map<String, dynamic>> overdue = [];
-
-
 
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
@@ -90,6 +87,11 @@ class _HomeState extends State<Home> {
           image: tasklist[i]['image'],
           onEdit: () async {
             await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
+          },
+          onDelete: () {
+            deleteTask(i);
+            // onChecked:
+            // (index) {};
           },
         ),
       );
@@ -127,6 +129,28 @@ class _HomeState extends State<Home> {
     _timecontroller.clear();
   }
 
+  void deleteTask(int index) {
+    setState(() {
+      final task = tasklist[index];
+      final DateTime day = task['day'];
+      final now = DateTime.now();
+
+      final isToday =
+          day.year == now.year && day.month == now.month && day.day == now.day;
+
+      if (isToday) {
+        todolist[0]['count'] = (todolist[0]['count'] ?? 0) - 1;
+        todolist[1]['count'] = (todolist[1]['count'] ?? 0) - 1;
+        todolist[2]['count'] = (todolist[2]['count'] ?? 0) - 1;
+      } else {
+        todolist[1]['count'] = (todolist[1]['count'] ?? 0) - 1;
+        todolist[2]['count'] = (todolist[2]['count'] ?? 0) - 1;
+      }
+
+      tasklist.removeAt(index);
+    });
+  }
+
   void updateTask(int index) {
     setState(() {
       tasklist[index] = {
@@ -152,7 +176,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
-            
+
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,25 +191,25 @@ class _HomeState extends State<Home> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-            
+
                             Text('you have work today'),
                           ],
                         ),
-            
+
                         Icon(Icons.notification_add),
                       ],
                     ),
-            
+
                     GridView.count(
                       crossAxisCount: 2,
                       crossAxisSpacing: 15,
                       mainAxisSpacing: 15,
-            
+
                       shrinkWrap: true,
-            
+
                       children: [...buildTaskCards()],
                     ),
-            
+
                     SizedBox(height: 15),
                     Padding(
                       padding: const EdgeInsets.only(left: 25),
@@ -198,7 +222,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SizedBox(height: 5),
-            
+
                     Column(children: [...buildTaskLists()]),
                   ],
                 ),
