@@ -67,9 +67,7 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-  List<Map<String, dynamic>> tasklist = [
-
-  ];
+  List<Map<String, dynamic>> tasklist = [];
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
     for (int i = 0; i < tasklist.length; i++) {
@@ -80,11 +78,15 @@ class _HomeState extends State<Home> {
           icon: tasklist[i]['icon'],
           time: tasklist[i]['time'],
           image: tasklist[i]['image'],
+          // onChecked: (){
+          //   tasklist.removeAt(i);
+          // },
         ),
       );
     }
     return cards;
   }
+
 
   void save() {
     setState(() {
@@ -287,6 +289,10 @@ class _HomeState extends State<Home> {
     );
     if (picked != null) {
       final formttedDate = DateFormat.yMEd().format(picked);
+      final now = DateTime.now();
+      bool isToday = picked.year == now.year &&
+                    picked.month == now.month &&
+                    picked.day == now.day;
       setState(() {
         _datecontroller.text = formttedDate;
         _selectedDate = picked;
