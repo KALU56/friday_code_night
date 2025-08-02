@@ -76,9 +76,7 @@ class _HomeState extends State<Home> {
   List<Map<String, dynamic>> scheduledTaskList = [];
   List<Map<String, dynamic>> overdue = [];
 
-  get task => null;
 
-  get index => null;
 
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
