@@ -26,28 +26,28 @@ class _HomeState extends State<Home> {
       'title': 'Today',
       'image': AssetImage(Assets.clock),
       'backgroundColor': Color.fromRGBO(181, 194, 251, 1.0),
-      'count': 6,
+      'count': 0,
       'onTap': () {},
     },
     {
       'title': 'Schedule',
       'image': AssetImage(Assets.schedule),
       'backgroundColor': Color.fromRGBO(255, 245, 128, 1.0),
-      'count': 6,
+      'count': 0,
       'onTap': () {},
     },
     {
       'title': 'All',
       'image': AssetImage(Assets.all),
       'backgroundColor': Color.fromRGBO(208, 245, 235, 1.0),
-      'count': 6,
+      'count': 0,
       'onTap': () {},
     },
     {
       'title': 'Overdue',
       'image': AssetImage(Assets.over),
       'backgroundColor': Color.fromRGBO(253, 192, 245, 1.0),
-      'count': 6,
+      'count': 0,
       'onTap': () {},
     },
   ];
@@ -68,6 +68,10 @@ class _HomeState extends State<Home> {
   }
 
   List<Map<String, dynamic>> tasklist = [];
+  List<Map<String, dynamic>> todayTaskList = [];
+  List<Map<String, dynamic>> scheduledTaskList = [];
+  List<Map<String, dynamic>> overdue = [];
+
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
     for (int i = 0; i < tasklist.length; i++) {
@@ -87,9 +91,13 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-
   void save() {
     setState(() {
+        final now = DateTime.now();
+        final isToday = _selectedDate != null &&
+                  _selectedDate!.year == now.year &&
+                  _selectedDate!.month == now.month &&
+                  _selectedDate!.day == now.day;
       tasklist.add({
         'title': _titlecontroller.text,
         'day': _selectedDate,
@@ -97,6 +105,14 @@ class _HomeState extends State<Home> {
         'time': _selectedTime,
         'image': AssetImage(Assets.dot),
       });
+      if (isToday) {
+        todolist[0]['count'] = (todolist[0]['count'] ?? 0) + 1;
+        todolist[1]['count'] = (todolist[1]['count'] ?? 0) + 1;
+        todolist[2]['count'] = (todolist[2]['count'] ?? 0) + 1;
+      }else {
+         todolist[1]['count'] = (todolist[1]['count'] ?? 0) + 1;
+          todolist[2]['count'] = (todolist[2]['count'] ?? 0) + 1;
+      }
     });
     Navigator.of(context).pop();
     _titlecontroller.clear();
@@ -289,10 +305,11 @@ class _HomeState extends State<Home> {
     );
     if (picked != null) {
       final formttedDate = DateFormat.yMEd().format(picked);
-      final now = DateTime.now();
-      bool isToday = picked.year == now.year &&
-                    picked.month == now.month &&
-                    picked.day == now.day;
+      // final now = DateTime.now();
+      // bool isToday =
+      //     picked.year == now.year &&
+      //     picked.month == now.month &&
+      //     picked.day == now.day;
       setState(() {
         _datecontroller.text = formttedDate;
         _selectedDate = picked;
