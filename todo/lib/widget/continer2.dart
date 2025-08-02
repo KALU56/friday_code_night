@@ -99,33 +99,43 @@ class _TaskListState extends State<TaskList> {
 
           Spacer(),
 
-          GestureDetector(
-            onTap: () {
-              opensmallscreen() => showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(' add new task'),
-                  content: SizedBox(
-                    child: Column(
-                      
-                      children: [
+     Spacer(),
 
-                      ],
-                    ),
-
-                  ),
-                ),
-              );
-            },
-            child: Container(
+          PopupMenuButton<String>(
+            icon: Container(
               width: 25,
               height: 25,
-
               decoration: BoxDecoration(
                 image: DecorationImage(image: widget.image),
               ),
             ),
+            onSelected: (value) {
+        
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'edit',
+                child: Row(
+                  children: [
+                    Icon(Icons.edit, size: 18),
+                    SizedBox(width: 8),
+                    Text('Edit'),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'delete',
+                child: Row(
+                  children: [
+                    Icon(Icons.delete, size: 18),
+                    SizedBox(width: 8),
+                    Text('Delete'),
+                  ],
+                ),
+              ),
+            ],
           ),
+
         ],
       ),
     );
