@@ -119,7 +119,9 @@ class _HomeState extends State<Home> {
     _datecontroller.clear();
     _timecontroller.clear();
   }
-
+ void cancel(){
+   Navigator.of(context).pop();
+ }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -270,11 +272,24 @@ class _HomeState extends State<Home> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            save();
-          },
-          child: Text('save'),
+        Row(
+       
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: () {
+                cancel();
+              },
+              child: Text('cancel'),
+            ),
+            Spacer(),
+            TextButton(
+              onPressed: () {
+                save();
+              },
+              child: Text('save'),
+            ),
+          ],
         ),
       ],
     ),
@@ -305,11 +320,6 @@ class _HomeState extends State<Home> {
     );
     if (picked != null) {
       final formttedDate = DateFormat.yMEd().format(picked);
-      // final now = DateTime.now();
-      // bool isToday =
-      //     picked.year == now.year &&
-      //     picked.month == now.month &&
-      //     picked.day == now.day;
       setState(() {
         _datecontroller.text = formttedDate;
         _selectedDate = picked;
