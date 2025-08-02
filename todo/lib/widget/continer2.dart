@@ -99,12 +99,31 @@ class _TaskListState extends State<TaskList> {
 
           Spacer(),
 
-          Container(
-            width: 25,
-            height: 25,
+          GestureDetector(
+            onTap: () {
+              opensmallscreen() => showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(' add new task'),
+                  content: SizedBox(
+                    child: Column(
+                      
+                      children: [
 
-            decoration: BoxDecoration(
-              image: DecorationImage(image: widget.image),
+                      ],
+                    ),
+
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: 25,
+              height: 25,
+
+              decoration: BoxDecoration(
+                image: DecorationImage(image: widget.image),
+              ),
             ),
           ),
         ],
