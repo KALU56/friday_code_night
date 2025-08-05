@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/assets.dart';
-
 import 'package:todo/widget/continer.dart';
 import 'package:todo/widget/continer2.dart';
 import 'package:intl/intl.dart';
@@ -90,10 +89,7 @@ class _HomeState extends State<Home> {
           },
           onDelete: () {
             deleteTask(i);
-            // onChecked:
-            // (index) {};
           },
-          
         ),
       );
     }
@@ -165,6 +161,7 @@ class _HomeState extends State<Home> {
     Navigator.of(context).pop();
   }
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -277,23 +274,58 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(isEdit ? 'Edit Task' : 'Add New Task'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _titlecontroller,
-              decoration: InputDecoration(
-                hintText: isEdit ? 'Edit your task' : 'Enter your task',
+        content: Form(
+          key: _formKey,
+          child: Column(
+            
+
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextFormField(
+                controller: _titlecontroller,
+                decoration: InputDecoration(
+                  hintText: isEdit ? 'Edit your task' : 'Enter your task',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your task';
+                  }
+                  return null;
+                },
               ),
-            ),
-            GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _datecontroller,
+              GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _datecontroller,
+                    decoration: InputDecoration(
+                      labelText: 'Date',
+                      prefixIcon: Icon(Icons.calendar_today),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    readOnly: true,
+                    onTap: () => _selectDate(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter date';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => _selectTime(),
+                child: TextFormField(
+                  controller: _timecontroller,
                   decoration: InputDecoration(
-                    labelText: 'Date',
-                    prefixIcon: Icon(Icons.calendar_today),
+                    labelText: 'Time',
+                    prefixIcon: Icon(Icons.access_time),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                     ),
@@ -302,29 +334,17 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   readOnly: true,
-                  onTap: () => _selectDate(),
+                  onTap: () => _selectTime(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter date';
+                    }
+                    return null;
+                  },
                 ),
               ),
-            ),
-            GestureDetector(
-              onTap: () => _selectTime(),
-              child: TextField(
-                controller: _timecontroller,
-                decoration: InputDecoration(
-                  labelText: 'Time',
-                  prefixIcon: Icon(Icons.access_time),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-                readOnly: true,
-                onTap: () => _selectTime(),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
         actions: [
           TextButton(
@@ -334,10 +354,12 @@ class _HomeState extends State<Home> {
           Spacer(),
           TextButton(
             onPressed: () {
-              if (isEdit && index != null) {
-                updateTask(index);
-              } else {
-                save();
+              if (_formKey.currentState!.validate()) {
+                if (isEdit && index != null) {
+                  updateTask(index);
+                } else {
+                  save();
+                }
               }
             },
             child: Text(isEdit ? 'Update' : 'Save'),
