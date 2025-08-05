@@ -72,9 +72,7 @@ class _HomeState extends State<Home> {
   }
 
   List<TasklistModel> tasklist = [];
-  List<TodaytaskModel> todayTaskList = [];
-  List<ScheduledtasklistModel> scheduledTaskList = [];
-  List<OverdueModel> overdue = [];
+
 
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
