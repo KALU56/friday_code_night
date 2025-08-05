@@ -33,6 +33,8 @@ class TaskList extends StatefulWidget {
 
 class _TaskListState extends State<TaskList> {
   bool isChecked = false;
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,13 @@ class _TaskListState extends State<TaskList> {
         children: [
           Checkbox(
             value: isChecked,
-            onChanged: (bool? newValue) {
+            checkColor: Colors.black,
+            activeColor: Colors.white,
+            onChanged: (bool? newValue)
+             {
               setState(() {
                 isChecked = newValue!;
-                widget.onDelete;
+             
               });
             },
             shape: RoundedRectangleBorder(
@@ -94,10 +99,12 @@ class _TaskListState extends State<TaskList> {
                 padding: const EdgeInsets.only(left: 16, top: 8),
                 child: Text(
                   widget.title,
-                  style: const TextStyle(
+                  
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: Colors.black,
+                    decoration: isChecked?TextDecoration.lineThrough:TextDecoration.none,
                   ),
                 ),
               ),
