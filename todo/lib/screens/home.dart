@@ -98,54 +98,54 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-void save() {
-  setState(() {
-    final now = DateTime.now();
+    void save() {
+      setState(() {
+        final now = DateTime.now();
 
-    final taskDateTime = DateTime(
-      _selectedDate!.year,
-      _selectedDate!.month,
-      _selectedDate!.day,
-      _selectedTime!.hour,
-      _selectedTime!.minute,
-    );
+        final taskDateTime = DateTime(
+          _selectedDate!.year,
+          _selectedDate!.month,
+          _selectedDate!.day,
+          _selectedTime!.hour,
+          _selectedTime!.minute,
+        );
 
-    final isToday =
-        _selectedDate != null &&
-        _selectedDate!.year == now.year &&
-        _selectedDate!.month == now.month &&
-        _selectedDate!.day == now.day;
+        final isToday =
+            _selectedDate != null &&
+            _selectedDate!.year == now.year &&
+            _selectedDate!.month == now.month &&
+            _selectedDate!.day == now.day;
 
-    final isOverdue = taskDateTime.isBefore(now);
+        final isOverdue = taskDateTime.isBefore(now);
 
-    tasklist.add(
-      TasklistModel(
-        title: _titlecontroller.text,
-        day: _selectedDate!,
-        icon: Icons.access_time,
-        time: _selectedTime!,
-        image: AssetImage(Assets.dot),
-      ),
-    );
+        tasklist.add(
+          TasklistModel(
+            title: _titlecontroller.text,
+            day: _selectedDate!,
+            icon: Icons.access_time,
+            time: _selectedTime!,
+            image: AssetImage(Assets.dot),
+          ),
+        );
 
-    if (isOverdue) {
-      todolist[3].count += 1; 
-      todolist[2].count += 1; 
-    } else if (isToday) {
-      todolist[0].count += 1; 
-      todolist[1].count += 1; 
-      todolist[2].count += 1; 
-    } else {
-      todolist[1].count += 1; 
-      todolist[2].count += 1; 
+        if (isOverdue) {
+          todolist[3].count += 1; 
+          todolist[2].count += 1; 
+        } else if (isToday) {
+          todolist[0].count += 1; 
+          todolist[1].count += 1; 
+          todolist[2].count += 1; 
+        } else {
+          todolist[1].count += 1; 
+          todolist[2].count += 1; 
+        }
+      });
+
+      Navigator.of(context).pop();
+      _titlecontroller.clear();
+      _datecontroller.clear();
+      _timecontroller.clear();
     }
-  });
-
-  Navigator.of(context).pop();
-  _titlecontroller.clear();
-  _datecontroller.clear();
-  _timecontroller.clear();
-}
 
 
   void deleteTask(int index) {
