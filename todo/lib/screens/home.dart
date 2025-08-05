@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/assets.dart';
+import 'package:todo/model/overdue.dart';
+import 'package:todo/model/scheduledtasklist.dart';
 import 'package:todo/model/tasklist.dart';
+import 'package:todo/model/todaytask.dart';
 import 'package:todo/model/todolist.dart';
 import 'package:todo/widget/continer.dart';
 
@@ -69,9 +72,9 @@ class _HomeState extends State<Home> {
   }
 
   List<TasklistModel> tasklist = [];
-  List<Map<String, dynamic>> todayTaskList = [];
-  List<Map<String, dynamic>> scheduledTaskList = [];
-  List<Map<String, dynamic>> overdue = [];
+  List<TodaytaskModel> todayTaskList = [];
+  List<ScheduledtasklistModel> scheduledTaskList = [];
+  List<OverdueModel> overdue = [];
 
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
@@ -256,13 +259,13 @@ class _HomeState extends State<Home> {
 
   Future<void> openTaskDialog({
     bool isEdit = false,
-    Map<String, dynamic>? task,
+    TasklistModel? task,
     int? index,
   }) async {
     if (isEdit && task != null) {
-      _titlecontroller.text = task['title'];
-      _selectedDate = task['day'];
-      _selectedTime = task['time'];
+      _titlecontroller.text = task.title;
+      _selectedDate = task.day;
+      _selectedTime = task.time;
 
       _datecontroller.text = DateFormat.yMEd().format(_selectedDate!);
       _timecontroller.text = _selectedTime!.format(context);
