@@ -78,18 +78,21 @@ class _HomeState extends State<Home> {
     List<Widget> cards = [];
     for (int i = 0; i < tasklist.length; i++) {
       cards.add(
-        TaskList(
-          title: tasklist[i]['title'],
-          day: tasklist[i]['day'],
-          icon: tasklist[i]['icon'],
-          time: tasklist[i]['time'],
-          image: tasklist[i]['image'],
-          onEdit: () async {
-            await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
-          },
-          onDelete: () {
-            deleteTask(i);
-          },
+        Padding(
+          padding: const EdgeInsets.only(bottom:8.0),
+          child: TaskList(
+            title: tasklist[i]['title'],
+            day: tasklist[i]['day'],
+            icon: tasklist[i]['icon'],
+            time: tasklist[i]['time'],
+            image: tasklist[i]['image'],
+            onEdit: () async {
+              await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
+            },
+            onDelete: () {
+              deleteTask(i);
+            },
+          ),
         ),
       );
     }
@@ -221,7 +224,9 @@ class _HomeState extends State<Home> {
                     ),
                     SizedBox(height: 5),
 
-                    Column(children: [...buildTaskLists()]),
+                    Column( 
+                    
+                      children: [...buildTaskLists()]),
                   ],
                 ),
               ),
