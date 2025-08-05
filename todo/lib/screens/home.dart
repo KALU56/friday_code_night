@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/assets.dart';
+import 'package:todo/model/tasklist.dart';
 import 'package:todo/model/todolist.dart';
 import 'package:todo/widget/continer.dart';
 
@@ -29,33 +30,28 @@ class _HomeState extends State<Home> {
       backgroundColor: Color.fromRGBO(181, 194, 251, 1.0),
       count: 0,
       onTap: () {},
-
     ),
-        TodolistModel(
+    TodolistModel(
       title: 'Schedule',
       image: AssetImage(Assets.schedule),
       backgroundColor: Color.fromRGBO(255, 245, 128, 1.0),
       count: 0,
       onTap: () {},
-
     ),
-        TodolistModel(
+    TodolistModel(
       title: 'All',
       image: AssetImage(Assets.all),
       backgroundColor: Color.fromRGBO(208, 245, 235, 1.0),
       count: 0,
       onTap: () {},
-
     ),
-        TodolistModel(
+    TodolistModel(
       title: 'Overdue',
       image: AssetImage(Assets.over),
       backgroundColor: Color.fromRGBO(253, 192, 245, 1.0),
       count: 0,
       onTap: () {},
-
     ),
-   
   ];
   List<Widget> buildTaskCards() {
     List<Widget> cards = [];
@@ -72,7 +68,7 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-  List<Map<String, dynamic>> tasklist = [];
+  List<TasklistModel> tasklist = [];
   List<Map<String, dynamic>> todayTaskList = [];
   List<Map<String, dynamic>> scheduledTaskList = [];
   List<Map<String, dynamic>> overdue = [];
@@ -82,13 +78,13 @@ class _HomeState extends State<Home> {
     for (int i = 0; i < tasklist.length; i++) {
       cards.add(
         Padding(
-          padding: const EdgeInsets.only(bottom:8.0),
+          padding: const EdgeInsets.only(bottom: 8.0),
           child: TaskList(
-            title: tasklist[i]['title'],
-            day: tasklist[i]['day'],
-            icon: tasklist[i]['icon'],
-            time: tasklist[i]['time'],
-            image: tasklist[i]['image'],
+            title: tasklist[i].title,
+            day: tasklist[i].day,
+            icon: tasklist[i].icon,
+            time: tasklist[i].time,
+            image: tasklist[i].image,
             onEdit: () async {
               await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
             },
@@ -110,13 +106,15 @@ class _HomeState extends State<Home> {
           _selectedDate!.year == now.year &&
           _selectedDate!.month == now.month &&
           _selectedDate!.day == now.day;
-      tasklist.add({
-        'title': _titlecontroller.text,
-        'day': _selectedDate,
-        'icon': Icons.access_time,
-        'time': _selectedTime,
-        'image': AssetImage(Assets.dot),
-      });
+      tasklist.add(
+        TasklistModel(
+          title: _titlecontroller.text,
+          day: _selectedDate!,
+          icon: Icons.access_time,
+          time: _selectedTime!,
+          image: AssetImage(Assets.dot),
+        ),
+      );
       if (isToday) {
         todolist[0].count += 1;
         todolist[1].count += 1;
@@ -135,7 +133,7 @@ class _HomeState extends State<Home> {
   void deleteTask(int index) {
     setState(() {
       final task = tasklist[index];
-      final DateTime day = task['day'];
+      final DateTime day = task.day;
       final now = DateTime.now();
 
       final isToday =
@@ -156,13 +154,13 @@ class _HomeState extends State<Home> {
 
   void updateTask(int index) {
     setState(() {
-      tasklist[index] = {
-        'title': _titlecontroller.text,
-        'day': _selectedDate,
-        'icon': Icons.access_time,
-        'time': _selectedTime,
-        'image': AssetImage(Assets.dot),
-      };
+      tasklist[index] = TasklistModel(
+        title: _titlecontroller.text,
+        day: _selectedDate!,
+        icon: Icons.access_time,
+        time: _selectedTime!,
+        image: AssetImage(Assets.dot),
+      );
     });
     Navigator.of(context).pop();
   }
@@ -227,9 +225,7 @@ class _HomeState extends State<Home> {
                     ),
                     SizedBox(height: 5),
 
-                    Column( 
-                    
-                      children: [...buildTaskLists()]),
+                    Column(children: [...buildTaskLists()]),
                   ],
                 ),
               ),
@@ -285,8 +281,6 @@ class _HomeState extends State<Home> {
         content: Form(
           key: _formKey,
           child: Column(
-            
-
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextFormField(
