@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/assets.dart';
+import 'package:todo/model/todolist.dart';
 import 'package:todo/widget/continer.dart';
+
 import 'package:todo/widget/continer2.dart';
 import 'package:intl/intl.dart';
 
@@ -20,49 +22,50 @@ class _HomeState extends State<Home> {
   final TextEditingController _titlecontroller = TextEditingController();
   bool isChecked = false;
 
-  List<Map<String, dynamic>> todolist = [
-    {
-      'title': 'Today',
-      'image': AssetImage(Assets.clock),
-      'backgroundColor': Color.fromRGBO(181, 194, 251, 1.0),
-      'count': 0,
-      'onTap': () {},
-      'onEdit': () {},
-    },
-    {
-      'title': 'Schedule',
-      'image': AssetImage(Assets.schedule),
-      'backgroundColor': Color.fromRGBO(255, 245, 128, 1.0),
-      'count': 0,
-      'onTap': () {},
-      'onEdit': () {},
-    },
-    {
-      'title': 'All',
-      'image': AssetImage(Assets.all),
-      'backgroundColor': Color.fromRGBO(208, 245, 235, 1.0),
-      'count': 0,
-      'onTap': () {},
-      'onEdit': () {},
-    },
-    {
-      'title': 'Overdue',
-      'image': AssetImage(Assets.over),
-      'backgroundColor': Color.fromRGBO(253, 192, 245, 1.0),
-      'count': 0,
-      'onTap': () {},
-      'onEdit': () {},
-    },
+  List<TodolistModel> todolist = [
+    TodolistModel(
+      title: 'Today',
+      image: AssetImage(Assets.clock),
+      backgroundColor: Color.fromRGBO(181, 194, 251, 1.0),
+      count: 0,
+      onTap: () {},
+
+    ),
+        TodolistModel(
+      title: 'Schedule',
+      image: AssetImage(Assets.schedule),
+      backgroundColor: Color.fromRGBO(255, 245, 128, 1.0),
+      count: 0,
+      onTap: () {},
+
+    ),
+        TodolistModel(
+      title: 'All',
+      image: AssetImage(Assets.all),
+      backgroundColor: Color.fromRGBO(208, 245, 235, 1.0),
+      count: 0,
+      onTap: () {},
+
+    ),
+        TodolistModel(
+      title: 'Overdue',
+      image: AssetImage(Assets.over),
+      backgroundColor: Color.fromRGBO(253, 192, 245, 1.0),
+      count: 0,
+      onTap: () {},
+
+    ),
+   
   ];
   List<Widget> buildTaskCards() {
     List<Widget> cards = [];
     for (int i = 0; i < todolist.length; i++) {
       cards.add(
         TaskCard(
-          title: todolist[i]['title'],
-          image: todolist[i]['image'],
-          backgroundColor: todolist[i]['backgroundColor'],
-          count: todolist[i]['count'],
+          title: todolist[i].title,
+          image: todolist[i].image,
+          backgroundColor: todolist[i].backgroundColor,
+          count: todolist[i].count,
         ),
       );
     }
@@ -115,12 +118,12 @@ class _HomeState extends State<Home> {
         'image': AssetImage(Assets.dot),
       });
       if (isToday) {
-        todolist[0]['count'] = (todolist[0]['count'] ?? 0) + 1;
-        todolist[1]['count'] = (todolist[1]['count'] ?? 0) + 1;
-        todolist[2]['count'] = (todolist[2]['count'] ?? 0) + 1;
+        todolist[0].count += 1;
+        todolist[1].count += 1;
+        todolist[2].count += 1;
       } else {
-        todolist[1]['count'] = (todolist[1]['count'] ?? 0) + 1;
-        todolist[2]['count'] = (todolist[2]['count'] ?? 0) + 1;
+        todolist[1].count += 1;
+        todolist[2].count += 1;
       }
     });
     Navigator.of(context).pop();
@@ -139,12 +142,12 @@ class _HomeState extends State<Home> {
           day.year == now.year && day.month == now.month && day.day == now.day;
 
       if (isToday) {
-        todolist[0]['count'] = (todolist[0]['count'] ?? 0) - 1;
-        todolist[1]['count'] = (todolist[1]['count'] ?? 0) - 1;
-        todolist[2]['count'] = (todolist[2]['count'] ?? 0) - 1;
+        todolist[0].count -= 1;
+        todolist[1].count -= 1;
+        todolist[2].count -= 1;
       } else {
-        todolist[1]['count'] = (todolist[1]['count'] ?? 0) - 1;
-        todolist[2]['count'] = (todolist[2]['count'] ?? 0) - 1;
+        todolist[1].count -= 1;
+        todolist[2].count -= 1;
       }
 
       tasklist.removeAt(index);
