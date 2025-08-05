@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/assets.dart';
-import 'package:todo/model/overdue.dart';
-import 'package:todo/model/scheduledtasklist.dart';
+
 import 'package:todo/model/tasklist.dart';
-import 'package:todo/model/todaytask.dart';
+
 import 'package:todo/model/todolist.dart';
 import 'package:todo/widget/continer.dart';
 
@@ -209,6 +208,7 @@ class _HomeState extends State<Home> {
                       mainAxisSpacing: 15,
 
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
 
                       children: [...buildTaskCards()],
                     ),
