@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/assets.dart';
 
-import 'package:todo/model/tasklist.dart';
+import 'package:todo/models/tasklist.dart';
 
-import 'package:todo/model/todolist.dart';
+import 'package:todo/models/todolist.dart';
 import 'package:todo/widget/continer.dart';
 
 import 'package:todo/widget/continer2.dart';
@@ -98,7 +101,7 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-    void save() {
+    void save()  async  {
       setState(() {
         final now = DateTime.now();
 
@@ -140,6 +143,7 @@ class _HomeState extends State<Home> {
           todolist[2].count += 1; 
         }
       });
+      await saveTaskListToPrefs();
 
       Navigator.of(context).pop();
       _titlecontroller.clear();
@@ -147,7 +151,21 @@ class _HomeState extends State<Home> {
       _timecontroller.clear();
     }
 
+Future<void> saveTaskListToPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
 
+
+  List<Map<String, dynamic>> jsonList = tasklist.map((task) => {
+    'title': task.title,
+    'day': task.day.toIso8601String(),
+    'time': '${task.time.hour}:${task.time.minute}',
+    'icon': task.icon.codePoint,
+    'image': task.image.assetName,
+  }).toList();
+
+  String jsonString = jsonEncode(jsonList);
+  await prefs.setString('tasklist', jsonString);
+}
   void deleteTask(int index) {
     setState(() {
       final task = tasklist[index];
@@ -436,3 +454,9 @@ class _HomeState extends State<Home> {
     }
   }
 }
+
+extension on ImageProvider<Object> {
+  get assetName => null;
+}
+
+
