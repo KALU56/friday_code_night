@@ -75,7 +75,6 @@ class _HomeState extends State<Home> {
 
   List<TasklistModel> tasklist = [];
 
-
   List<Widget> buildTaskLists() {
     List<Widget> cards = [];
     for (int i = 0; i < tasklist.length; i++) {
@@ -92,7 +91,7 @@ class _HomeState extends State<Home> {
               await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
             },
             onDelete: () {
-              deleteTask(i);
+              deleteTaskListToPrefs();
             },
           ),
         ),
@@ -101,76 +100,62 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-    void save()  async  {
-      setState(() {
-        final now = DateTime.now();
-
-        final taskDateTime = DateTime(
-          _selectedDate!.year,
-          _selectedDate!.month,
-          _selectedDate!.day,
-          _selectedTime!.hour,
-          _selectedTime!.minute,
-        );
-
-        final isToday =
-            _selectedDate != null &&
-            _selectedDate!.year == now.year &&
-            _selectedDate!.month == now.month &&
-            _selectedDate!.day == now.day;
-
-        final isOverdue = taskDateTime.isBefore(now);
-
-        tasklist.add(
-          TasklistModel(
-            title: _titlecontroller.text,
-            day: _selectedDate!,
-            icon: Icons.access_time,
-            time: _selectedTime!,
-            image: AssetImage(Assets.dot),
-          ),
-        );
-
-        if (isOverdue) {
-          todolist[3].count += 1; 
-          todolist[2].count += 1; 
-        } else if (isToday) {
-          todolist[0].count += 1; 
-          todolist[1].count += 1; 
-          todolist[2].count += 1; 
-        } else {
-          todolist[1].count += 1; 
-          todolist[2].count += 1; 
-        }
-      });
-      await saveTaskListToPrefs();
-
-      Navigator.of(context).pop();
-      _titlecontroller.clear();
-      _datecontroller.clear();
-      _timecontroller.clear();
-    }
-
-Future<void> saveTaskListToPrefs() async {
+  Future<void> saveTaskListToPrefs() async {
     final prefs = await SharedPreferences.getInstance();
 
+    List<Map<String, dynamic>> jsonList = tasklist
+        .map(
+          (task) => {
+            'title': task.title,
+            'day': task.day.toIso8601String(),
+            'time': '${task.time.hour}:${task.time.minute}',
+            'icon': task.icon.codePoint,
+            'image': task.image.assetName,
+          },
+        )
+        .toList();
 
-  List<Map<String, dynamic>> jsonList = tasklist.map((task) => {
-    'title': task.title,
-    'day': task.day.toIso8601String(),
-    'time': '${task.time.hour}:${task.time.minute}',
-    'icon': task.icon.codePoint,
-    'image': task.image.assetName,
-  }).toList();
+    String jsonString = jsonEncode(jsonList);
+    await prefs.setString('tasklist', jsonString);
+  }
 
-  String jsonString = jsonEncode(jsonList);
-  await prefs.setString('tasklist', jsonString);
-}
-  void deleteTask(int index) {
-    setState(() {
-      final task = tasklist[index];
-      final DateTime day = task.day;
-      final now = DateTime.now();
+  Future<void> loadTaskListFromPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString('tasklist');
+
+    if (jsonString != null) {
+      final List<dynamic> jsonList = jsonDecode(jsonString);
+
+      setState(() {
+        tasklist = jsonList
+            .map(
+              (json) => TasklistModel(
+                title: json['title'],
+                day: DateTime.parse(json['day']),
+                icon: IconData(json['icon'], fontFamily: 'MaterialIcons'),
+                time: TimeOfDay(
+                  hour: int.parse(json['time'].split(':')[0]),
+                  minute: int.parse(json['time'].split(':')[1]),
+                ),
+                image: AssetImage(json['image']),
+              ),
+            )
+            .toList();
+      });
+
+      CategoryCounts();
+    }
+  }
+
+  void CategoryCounts() {
+    // Reset all counts
+    for (var todo in todolist) {
+      todo.count = 0;
+    }
+
+    final now = DateTime.now();
+
+    for (var task in tasklist) {
       final taskDateTime = DateTime(
         task.day.year,
         task.day.month,
@@ -178,26 +163,75 @@ Future<void> saveTaskListToPrefs() async {
         task.time.hour,
         task.time.minute,
       );
-      final isOverdue = taskDateTime.isBefore(DateTime.now());
 
       final isToday =
-          day.year == now.year && day.month == now.month && day.day == now.day;
+          task.day.year == now.year &&
+          task.day.month == now.month &&
+          task.day.day == now.day;
 
-      if (isToday) {
-        todolist[0].count -= 1;
-        todolist[1].count -= 1;
-        todolist[2].count -= 1;
+      final isOverdue = taskDateTime.isBefore(now);
+
+      if (isOverdue) {
+        todolist[3].count += 1; // Overdue
+        todolist[2].count += 1; // All
+      } else if (isToday) {
+        todolist[0].count += 1; // Today
+        todolist[1].count += 1; // Schedule
+        todolist[2].count += 1; // All
       } else {
-        todolist[1].count -= 1;
-        todolist[2].count -= 1;
+        todolist[1].count += 1; // Schedule
+        todolist[2].count += 1; // All
       }
-      if(isOverdue){
-        todolist[3].count += 1;
-        todolist[1].count -= 1;
-        todolist[2].count -= 1;
-      }
+    }
+  }
 
-      tasklist.removeAt(index);
+  Future<void> deleteTaskListToPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('tasklist');
+
+    setState(() {
+      tasklist.clear();
+    });
+    recalculatedCategoryCounts();
+  }
+
+  void recalculatedCategoryCounts() {
+    setState(() {
+       for (var todo in todolist) {
+      todo.count = 0;
+    }
+
+    final now = DateTime.now();
+
+    for (var task in tasklist) {
+      final taskDateTime = DateTime(
+        task.day.year,
+        task.day.month,
+        task.day.day,
+        task.time.hour,
+        task.time.minute,
+      );
+
+      final isToday =
+          task.day.year == now.year &&
+          task.day.month == now.month &&
+          task.day.day == now.day;
+
+      final isOverdue = taskDateTime.isBefore(now);
+
+      if (isOverdue) {
+        todolist[3].count -= 1; // Overdue
+        todolist[2].count -= 1; // All
+      } else if (isToday) {
+        todolist[0].count -= 1; // Today
+        todolist[1].count -= 1; // Schedule
+        todolist[2].count -= 1; // All
+      } else {
+        todolist[1].count -= 1; // Schedule
+        todolist[2].count -= 1; // All
+      }
+    }
+
     });
   }
 
@@ -216,6 +250,11 @@ Future<void> saveTaskListToPrefs() async {
 
   final _formKey = GlobalKey<FormState>();
   @override
+  void initState() {
+    super.initState();
+    loadTaskListFromPrefs();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -410,7 +449,7 @@ Future<void> saveTaskListToPrefs() async {
                 if (isEdit && index != null) {
                   updateTask(index);
                 } else {
-                  save();
+                  saveTaskListToPrefs();
                 }
               }
             },
@@ -455,8 +494,11 @@ Future<void> saveTaskListToPrefs() async {
   }
 }
 
-extension on ImageProvider<Object> {
-  get assetName => null;
+extension ImageProviderExtension on ImageProvider {
+  String get assetName {
+    if (this is AssetImage) {
+      return (this as AssetImage).assetName;
+    }
+    return '';
+  }
 }
-
-
