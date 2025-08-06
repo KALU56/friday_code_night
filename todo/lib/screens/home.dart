@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'dart:convert';
-
+import 'package:intl/intl.dart'; 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/assets.dart';
@@ -10,7 +11,7 @@ import 'package:todo/models/todolist.dart';
 import 'package:todo/widget/continer.dart';
 
 import 'package:todo/widget/continer2.dart';
-import 'package:intl/intl.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -148,7 +149,7 @@ class _HomeState extends State<Home> {
   }
 
   void CategoryCounts() {
-    // Reset all counts
+ 
     for (var todo in todolist) {
       todo.count = 0;
     }
@@ -172,15 +173,15 @@ class _HomeState extends State<Home> {
       final isOverdue = taskDateTime.isBefore(now);
 
       if (isOverdue) {
-        todolist[3].count += 1; // Overdue
-        todolist[2].count += 1; // All
+        todolist[3].count += 1; 
+        todolist[2].count += 1; 
       } else if (isToday) {
-        todolist[0].count += 1; // Today
-        todolist[1].count += 1; // Schedule
-        todolist[2].count += 1; // All
+        todolist[0].count += 1;
+        todolist[1].count += 1; 
+        todolist[2].count += 1; 
       } else {
-        todolist[1].count += 1; // Schedule
-        todolist[2].count += 1; // All
+        todolist[1].count += 1; 
+        todolist[2].count += 1; 
       }
     }
   }
@@ -220,22 +221,38 @@ class _HomeState extends State<Home> {
       final isOverdue = taskDateTime.isBefore(now);
 
       if (isOverdue) {
-        todolist[3].count -= 1; // Overdue
-        todolist[2].count -= 1; // All
+        todolist[3].count -= 1; 
+        todolist[2].count -= 1;
       } else if (isToday) {
-        todolist[0].count -= 1; // Today
-        todolist[1].count -= 1; // Schedule
-        todolist[2].count -= 1; // All
+        todolist[0].count -= 1; 
+        todolist[1].count -= 1; 
+        todolist[2].count -= 1;
       } else {
-        todolist[1].count -= 1; // Schedule
-        todolist[2].count -= 1; // All
+        todolist[1].count -= 1; 
+        todolist[2].count -= 1; 
       }
     }
 
     });
   }
+    void addNewTask() async {
+      setState(() {
+        tasklist.add(
+          TasklistModel(
+            title: _titlecontroller.text,
+            day: _selectedDate!,
+            time: _selectedTime!,
+            icon: Icons.access_time,
+            image: AssetImage(Assets.dot),
+          ),
+        );
+      });
 
-  void updateTask(int index) {
+      await saveTaskListToPrefs();
+      CategoryCounts();
+      Navigator.of(context).pop();
+    }
+  void updateTask(int index) async{
     setState(() {
       tasklist[index] = TasklistModel(
         title: _titlecontroller.text,
@@ -245,6 +262,8 @@ class _HomeState extends State<Home> {
         image: AssetImage(Assets.dot),
       );
     });
+     await saveTaskListToPrefs();
+     CategoryCounts(); 
     Navigator.of(context).pop();
   }
 
@@ -254,8 +273,9 @@ class _HomeState extends State<Home> {
     super.initState();
     loadTaskListFromPrefs();
   }
-
+@override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -449,7 +469,7 @@ class _HomeState extends State<Home> {
                 if (isEdit && index != null) {
                   updateTask(index);
                 } else {
-                  saveTaskListToPrefs();
+                  addNewTask();
                 }
               }
             },

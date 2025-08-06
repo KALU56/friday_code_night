@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TodolistModel {
-  String title;
-  ImageProvider image;
-  Color backgroundColor;
+  final String title;
+  final ImageProvider image;
+  final Color backgroundColor;
   int count;
-  Function() onTap;
+  final VoidCallback? onTap;
 
   TodolistModel({
     required this.title,
     required this.image,
     required this.backgroundColor,
-    required this.count,
-    required this.onTap,
+    this.count = 0,
+    this.onTap,
   });
 }
