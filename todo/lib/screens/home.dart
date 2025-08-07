@@ -92,7 +92,7 @@ class _HomeState extends State<Home> {
               await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
             },
             onDelete: () {
-              deleteTaskListToPrefs();
+              showDeleteConfirmation(i);
             },
           ),
         ),
@@ -101,54 +101,25 @@ class _HomeState extends State<Home> {
     return cards;
   }
 
-  Future<void> saveTaskListToPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
+Future<void> saveTaskListToPrefs() async {
+  final prefs = await SharedPreferences.getInstance();
+  final jsonList = tasklist.map((task) => task.toJson()).toList();
+  final jsonString = jsonEncode(jsonList);
+  await prefs.setString('tasklist', jsonString);
+}
+    Future<void> loadTaskListFromPrefs() async {
+      final prefs = await SharedPreferences.getInstance();
+      final jsonString = prefs.getString('tasklist');
 
-    List<Map<String, dynamic>> jsonList = tasklist
-        .map(
-          (task) => {
-            'title': task.title,
-            'day': task.day.toIso8601String(),
-            'time': '${task.time.hour}:${task.time.minute}',
-            'icon': task.icon.codePoint,
-            'image': task.image.assetName,
-          },
-        )
-        .toList();
-
-    String jsonString = jsonEncode(jsonList);
-    await prefs.setString('tasklist', jsonString);
-  }
-
-  Future<void> loadTaskListFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString('tasklist');
-
-    if (jsonString != null) {
-      final List<dynamic> jsonList = jsonDecode(jsonString);
-
-      setState(() {
-        tasklist = jsonList
-            .map(
-              (json) => TasklistModel(
-                title: json['title'],
-                day: DateTime.parse(json['day']),
-                icon: IconData(json['icon'], fontFamily: 'MaterialIcons'),
-                time: TimeOfDay(
-                  hour: int.parse(json['time'].split(':')[0]),
-                  minute: int.parse(json['time'].split(':')[1]),
-                ),
-                image: AssetImage(json['image']),
-              ),
-            )
-            .toList();
-      });
-
-      CategoryCounts();
+      if (jsonString != null) {
+        final List<dynamic> jsonList = jsonDecode(jsonString);
+        setState(() {
+          tasklist = jsonList.map((json) => TasklistModel.fromJson(json)).toList();
+        });
+        categoryCounts();
+      }
     }
-  }
-
-  void CategoryCounts() {
+  void categoryCounts() {
  
     for (var todo in todolist) {
       todo.count = 0;
@@ -185,16 +156,44 @@ class _HomeState extends State<Home> {
       }
     }
   }
+void deleteSingleTask(int index) async {
+  setState(() {
+    tasklist.removeAt(index);
+  });
 
-  Future<void> deleteTaskListToPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('tasklist');
+  await saveTaskListToPrefs();
+  categoryCounts();
+}
+void showDeleteConfirmation(int index) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Delete Task"),
+        content: Text("Are you sure you want to delete this task?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); 
+              deleteSingleTask(index); 
+            },
+            child: Text(
+              "Delete",
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
 
-    setState(() {
-      tasklist.clear();
-    });
-    recalculatedCategoryCounts();
-  }
 
   void recalculatedCategoryCounts() {
     setState(() {
@@ -249,7 +248,7 @@ class _HomeState extends State<Home> {
       });
 
       await saveTaskListToPrefs();
-      CategoryCounts();
+      categoryCounts();
       Navigator.of(context).pop();
     }
   void updateTask(int index) async{
@@ -263,7 +262,7 @@ class _HomeState extends State<Home> {
       );
     });
      await saveTaskListToPrefs();
-     CategoryCounts(); 
+     categoryCounts(); 
     Navigator.of(context).pop();
   }
 
