@@ -52,7 +52,7 @@ class TasklistModel {
         hour: json['timeHour'],
         minute: json['timeMinute'],
       ),
-      image: const AssetImage('assets/default.png'), 
+      image: const AssetImage('assets/images/dot.png'), 
       backgroundColor: Color(json['backgroundColor']),
       onEdit: null,
       onDelete: null,
