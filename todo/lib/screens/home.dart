@@ -85,9 +85,10 @@ class _HomeState extends State<Home> {
           child: TaskList(
             title: tasklist[i].title,
             day: tasklist[i].day,
-            icon: tasklist[i].icon,
-            time: tasklist[i].time,
-            image: tasklist[i].image,
+            icon: tasklist[i].icon ?? Icons.access_time,
+           
+            image: tasklist[i].image ?? const AssetImage('assets/images/dot.png'),
+             time: tasklist[i].time,
             onEdit: () async {
               await openTaskDialog(isEdit: true, task: tasklist[i], index: i);
             },
