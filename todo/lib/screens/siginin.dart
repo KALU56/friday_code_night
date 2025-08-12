@@ -26,7 +26,7 @@ class _SigininState extends State<Siginin> {
     
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => Home(userEmail: userEmail)),
       );
     } catch (e) {
     
@@ -92,7 +92,7 @@ class _SigininState extends State<Siginin> {
                 ElevatedButton(
                   onPressed: login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color.fromARGB(255, 243, 75, 33),
                     foregroundColor: Colors.white,
                     minimumSize: const Size(double.infinity, 50),
                     shape: RoundedRectangleBorder(
@@ -113,7 +113,7 @@ class _SigininState extends State<Siginin> {
                   },
                   child: const Text(
                     "Don't have an account? Sign up",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Color.fromARGB(255, 243, 47, 33)),
                   ),
                 ),
               ],

@@ -35,7 +35,7 @@ class _SiginupState extends State<Siginup> {
       UserEmailModel userEmail = UserEmailModel(email: _emailController.text.trim());
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => Home(userEmail: userEmail)),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -96,7 +96,7 @@ class _SiginupState extends State<Siginup> {
                 ElevatedButton(
                   onPressed: signUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color.fromARGB(255, 243, 65, 33),
                     foregroundColor: Colors.white,
                     minimumSize: const Size(double.infinity, 50),
                     shape: RoundedRectangleBorder(
@@ -115,7 +115,7 @@ class _SiginupState extends State<Siginup> {
                   },
                   child: const Text(
                     "Already have an account? Sign in",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Color.fromARGB(255, 243, 65, 33)),
                   ),
                 ),
               ],
