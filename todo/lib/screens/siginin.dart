@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/models/auth.dart';
 import 'package:todo/screens/home.dart';
 import 'package:todo/screens/siginup.dart';
 
@@ -21,7 +22,7 @@ class _SigininState extends State<Siginin> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-
+     UserEmailModel userEmail = UserEmailModel(email: _emailController.text.trim());
     
       Navigator.pushReplacement(
         context,

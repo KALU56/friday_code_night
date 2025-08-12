@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/models/auth.dart';
 import 'package:todo/screens/home.dart';
 import 'package:todo/screens/siginin.dart';
 
@@ -31,6 +32,7 @@ class _SiginupState extends State<Siginup> {
         email: email,
         password: password,
       );
+      UserEmailModel userEmail = UserEmailModel(email: _emailController.text.trim());
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Home()),
