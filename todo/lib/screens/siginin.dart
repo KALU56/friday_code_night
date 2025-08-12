@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/screens/home.dart';
 import 'package:todo/screens/siginup.dart';
@@ -10,87 +11,115 @@ class Siginin extends StatefulWidget {
 }
 
 class _SigininState extends State<Siginin> {
+  bool _obscurePassword = true;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+    
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    } catch (e) {
+    
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    }
+  }
+
   @override
-    bool _obscurePassword = true;
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(
-      child: Center(
-      child: Column(
-        children: [
-          TextField(
-            controller: emailController,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.email),
-              enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.white, width: 1.5),
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+      
+                TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your email',
+                    prefixIcon: const Icon(Icons.email),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.5),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                TextField(
+                  controller: _passwordController,
+                  obscureText: _obscurePassword,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your password',
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.5),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+         
+                ElevatedButton(
+                  onPressed: login,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Login'),
+                ),
+                const SizedBox(height: 16),
+
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Siginup()),
+                    );
+                  },
+                  child: const Text(
+                    "Don't have an account? Sign up",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+              ],
             ),
-
           ),
-           TextField(
-            controller: passwordController,
-            obscureText: _obscurePassword,
-           decoration: InputDecoration(
-            hintText: 'Enter your password',
-          
-            prefixIcon: const Icon(Icons.lock),
-            enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-           borderSide: const BorderSide(color: Colors.white, width: 1.5),
-                      ),
-           )),
-           Row(
-            children: [
-                  ElevatedButton(
-                    onPressed: (){
-                             Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const Home()),
-                          );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text('Login'),
-                    ),
-                  ),
-                      ElevatedButton(
-                    onPressed: (){
-                             Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Siginup()),
-                        );
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text('sigin up'),
-                    ),
-                  ),
-
-            ],
-           )
-              
-        ],
+        ),
       ),
-    )));
+    );
   }
 }
