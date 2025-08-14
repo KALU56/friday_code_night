@@ -132,16 +132,25 @@ class _HomeState extends State<Home> {
     await loadTasks();
   }
 
-  Future<void> deleteTask(String taskId) async {
-    if (_userId == null) return;
-    await _firestore
-        .collection('user')
-        .doc(_userId)
-        .collection('tasks')
-        .doc(taskId)
-        .delete();
-    await loadTasks();
-  }
+    Future<void> deleteTask(String taskId) async {
+      if (_userId == null) return;
+      
+      try {
+        await _firestore
+            .collection('user')
+            .doc(_userId)
+            .collection('tasks')
+            .doc(taskId)
+            .delete();
+    
+        await loadTasks(); 
+      } catch (e) {
+    
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to delete task: $e')),
+        );
+      }
+    }
 
   void updateCategoryCounts() {
     for (var todo in todolist) {
@@ -199,9 +208,19 @@ class _HomeState extends State<Home> {
             child: const Text("Cancel"),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context);
-              deleteTask(taskId);
+              try {
+              await deleteTask(taskId);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Task deleted successfully')),
+              );
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Failed to delete task: $e')),
+              );
+            }
+          
             },
             child: const Text("Delete", style: TextStyle(color: Colors.red)),
           ),
