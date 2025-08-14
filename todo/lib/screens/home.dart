@@ -438,14 +438,22 @@ class _HomeState extends State<Home> {
           ),
           Spacer(),
           TextButton(
-            onPressed: () {
-             if (_formKey.currentState!.validate()) {
-              Navigator.pop(context);
-              isEdit && task != null 
-                  ? updateTask(task.id!) 
-                  : addTask();
+            onPressed: () async {
+            if (_formKey.currentState!.validate()) {
+              try {
+                if (isEdit && task != null) {
+                  await updateTask(task.id!);
+                } else {
+                  await addTask();
+                }
+                Navigator.pop(context);
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error saving task: $e')),
+                );
+              }
             }
-            },
+          },
             child: Text(isEdit ? 'Update' : 'Save'),
           ),
         ],
