@@ -1,8 +1,19 @@
 {
     "cSpell.words": [
-        "continer",
-        "Detal",
-        "opensmallscreen",
+        "Cupertino",
+        "datecontroller",
+        "emailcontroller",
+        "firestore",
+        "formtted",
+        "passwordcontroller",
+        "Prefs",
+        "Schyler",
+        "Siginin",
+        "Siginup",
+        "taskcard",
+        "Tasklist",
+        "timecontroller",
+        "titlecontroller",
         "todolist"
     ]
 }

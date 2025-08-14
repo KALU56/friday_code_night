@@ -14,13 +14,13 @@ class Siginup extends StatefulWidget {
 
 class _SiginupState extends State<Siginup> {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _obscurePassword = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   Future<void> createUserDocument(UserEmailModel user) async {
     await _firestore
-        .collection('users')
+        .collection('user')
         .doc(user.id)
         .set(user.toJson());
   }
@@ -37,10 +37,16 @@ class _SiginupState extends State<Siginup> {
     }
 
     try {
-      UserCredential cred=await FirebaseAuth.instance.createUserWithEmailAndPassword(
+       final cred = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      await _firestore.collection('user').doc(cred.user?.uid).set({
+        'email': email,
+        'uid': cred.user?.uid, 
+      });
+
       if (!mounted) return;
       final userModel = UserEmailModel(
         id: cred.user!.uid,
