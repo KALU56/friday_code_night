@@ -1,22 +1,16 @@
-import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:intl/intl.dart'; 
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo/core/assets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:todo/core/assets.dart';
 import 'package:todo/models/auth.dart';
 import 'package:todo/models/tasklist.dart';
-
 import 'package:todo/models/todolist.dart';
 import 'package:todo/widgets/taskcard.dart';
 import 'package:todo/widgets/tasklist.dart';
 
-
 class Home extends StatefulWidget {
   const Home({super.key, required this.userEmail});
-
   final UserEmailModel userEmail;
 
   @override
@@ -24,44 +18,44 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String? _userId = FirebaseAuth.instance.currentUser?.uid;
-  final TimeOfDay _timeOfDay = TimeOfDay.now();
-  final TextEditingController _datecontroller = TextEditingController();
-  final TextEditingController _timecontroller = TextEditingController();
-  final TextEditingController _titlecontroller = TextEditingController();
-  bool isChecked = false;
+
+  final _dateController = TextEditingController();
+  final _timeController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
+  final TimeOfDay _nowTime = TimeOfDay.now();
 
- final _formKey = GlobalKey<FormState>();
   List<TodolistModel> todolist = [
     TodolistModel(
       title: 'Today',
       image: AssetImage(Assets.clock),
-      backgroundColor: Color.fromRGBO(181, 194, 251, 1.0),
+      backgroundColor: const Color(0xFFB5C2FB),
       count: 0,
       onTap: () {},
     ),
     TodolistModel(
       title: 'Schedule',
       image: AssetImage(Assets.schedule),
-      backgroundColor: Color.fromRGBO(255, 245, 128, 1.0),
+      backgroundColor: const Color(0xFFFFF580),
       count: 0,
       onTap: () {},
     ),
     TodolistModel(
       title: 'All',
       image: AssetImage(Assets.all),
-      backgroundColor: Color.fromRGBO(208, 245, 235, 1.0),
+      backgroundColor: const Color(0xFFD0F5EB),
       count: 0,
       onTap: () {},
     ),
     TodolistModel(
       title: 'Overdue',
       image: AssetImage(Assets.over),
-      backgroundColor: Color.fromRGBO(253, 192, 245, 1.0),
+      backgroundColor: const Color(0xFFFDC0F5),
       count: 0,
       onTap: () {},
     ),
@@ -69,13 +63,13 @@ class _HomeState extends State<Home> {
 
   List<TasklistModel> tasklist = [];
 
-    @override
+  @override
   void initState() {
     super.initState();
     loadTasks();
   }
 
- Future<void> loadTasks() async {
+  Future<void> loadTasks() async {
     if (_userId == null) return;
 
     final snapshot = await _firestore
@@ -101,7 +95,7 @@ class _HomeState extends State<Home> {
     }
 
     await _firestore.collection('user').doc(_userId).collection('tasks').add({
-      'title': _titlecontroller.text,
+      'title': _titleController.text,
       'day': _selectedDate!.toIso8601String(),
       'timeHour': _selectedTime!.hour,
       'timeMinute': _selectedTime!.minute,
@@ -122,7 +116,7 @@ class _HomeState extends State<Home> {
         .collection('tasks')
         .doc(taskId)
         .update({
-          'title': _titlecontroller.text,
+          'title': _titleController.text,
           'day': _selectedDate!.toIso8601String(),
           'timeHour': _selectedTime!.hour,
           'timeMinute': _selectedTime!.minute,
@@ -180,13 +174,14 @@ class _HomeState extends State<Home> {
   }
 
   void _clearForm() {
-    _titlecontroller.clear();
-    _datecontroller.clear();
-    _timecontroller.clear();
+    _titleController.clear();
+    _dateController.clear();
+    _timeController.clear();
     _selectedDate = null;
     _selectedTime = null;
     Navigator.of(context).pop();
   }
+
   void _showDeleteDialog(String taskId) {
     showDialog(
       context: context,
@@ -210,15 +205,126 @@ class _HomeState extends State<Home> {
     );
   }
 
+    Future<void> _selectDate() async {
+      DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate ?? DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100),
+      );
+      if (picked != null) {
+        setState(() {
+          _selectedDate = picked;
+          _dateController.text = DateFormat.yMEd().format(picked);
+        });
+      }
+    }
+    Future<void> _selectTime() async {
+      TimeOfDay? picked = await showTimePicker(
+        context: context,
+        initialTime: _selectedTime ?? _nowTime,
+      );
+      if (picked != null) {
+        setState(() {
+          _selectedTime = picked;
+          _timeController.text = picked.format(context);
+        });
+      }
+    }
 
-  
+  Future<void> _openTaskDialog({
+  bool isEdit = false,
+  TasklistModel? task,
+}) async {
+  if (isEdit && task != null) {
+    _titleController.text = task.title;
+    _selectedDate = task.day;
+    _selectedTime = task.time;
+    _dateController.text = DateFormat.yMd().format(task.day);
+    _timeController.text = task.time.format(context);
+  } else {
+    _clearForm();
+  }
 
-
-
-
-@override
+  await showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text(isEdit ? 'Edit Task' : 'Add New Task'),
+      content: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Task Title',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => 
+                    value?.isEmpty ?? true ? 'Please enter a title' : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _dateController,
+                readOnly: true,
+                decoration: InputDecoration(
+                  labelText: 'Date',
+                  prefixIcon: Icon(Icons.calendar_today),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.calendar_month),
+                    onPressed: _selectDate,
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+                onTap: _selectDate,
+                validator: (value) => 
+                    value?.isEmpty ?? true ? 'Please select a date' : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _timeController,
+                readOnly: true,
+                decoration: InputDecoration(
+                  labelText: 'Time',
+                  prefixIcon: Icon(Icons.access_time),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.schedule),
+                    onPressed: _selectTime,
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+                onTap: _selectTime,
+                validator: (value) => 
+                    value?.isEmpty ?? true ? 'Please select a time' : null,
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              Navigator.pop(context);
+              isEdit && task != null 
+                  ? updateTask(task.id!) 
+                  : addTask();
+            }
+          },
+          child: Text(isEdit ? 'Update' : 'Save'),
+        ),
+      ],
+    ),
+  );
+}
+  @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -261,7 +367,7 @@ class _HomeState extends State<Home> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
 
-                       children: todolist
+                      children: todolist
                           .map(
                             (todo) => TaskCard(
                               title: todo.title,
@@ -300,9 +406,8 @@ class _HomeState extends State<Home> {
                                     const AssetImage('assets/images/dot.png'),
 
                                 time: task.time,
-                                onEdit: () async {
-                                await openTaskDialog(isEdit: true, task: task);
-                              },
+                                onEdit: () =>
+                                    _openTaskDialog(isEdit: true, task: task),
                                 onDelete: () => _showDeleteDialog(task.id!),
                               ),
                             ),
@@ -324,9 +429,7 @@ class _HomeState extends State<Home> {
                   ),
                   child: IconButton(
                     icon: Icon(Icons.add, color: Colors.white),
-                    onPressed: () {
-                      openTaskDialog();
-                    },
+                    onPressed: () => _openTaskDialog(),
                   ),
                 ),
               ),
@@ -336,162 +439,5 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  Future<void> openTaskDialog({
-    bool isEdit = false,
-    TasklistModel? task,
-    int? index,
-  }) async {
-    if (isEdit && task != null) {
-      _titlecontroller.text = task.title;
-      _selectedDate = task.day;
-      _selectedTime = task.time;
-
-      _datecontroller.text = DateFormat.yMEd().format(_selectedDate!);
-      _timecontroller.text = _selectedTime!.format(context);
-    } else {
-      _titlecontroller.clear();
-      _datecontroller.clear();
-      _timecontroller.clear();
-      _selectedDate = null;
-      _selectedTime = null;
-    }
-
-    await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(isEdit ? 'Edit Task' : 'Add New Task'),
-        content: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              TextFormField(
-                controller: _titlecontroller,
-                decoration: InputDecoration(
-                  hintText: isEdit ? 'Edit your task' : 'Enter your task',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your task';
-                  }
-                  return null;
-                },
-              ),
-              GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _datecontroller,
-                    decoration: InputDecoration(
-                      labelText: 'Date',
-                      prefixIcon: Icon(Icons.calendar_today),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                      ),
-                    ),
-                    readOnly: true,
-                    onTap: () => _selectDate(),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter date';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => _selectTime(),
-                child: TextFormField(
-                  controller: _timecontroller,
-                  decoration: InputDecoration(
-                    labelText: 'Time',
-                    prefixIcon: Icon(Icons.access_time),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                  readOnly: true,
-                  onTap: () => _selectTime(),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter date';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancel'),
-          ),
-          Spacer(),
-          TextButton(
-            onPressed: () {
-             if (_formKey.currentState!.validate()) {
-              Navigator.pop(context);
-              isEdit && task != null 
-                  ? updateTask(task.id!) 
-                  : addTask();
-            }
-            },
-            child: Text(isEdit ? 'Update' : 'Save'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _selectTime() async {
-    TimeOfDay? picked = await showTimePicker(
-      initialTime: _timeOfDay,
-      context: context,
-    );
-    if (picked != null) {
-      setState(() {
-        final now = DateTime.now();
-        final formattedTime = DateFormat.jm().format(
-          DateTime(now.year, now.month, picked.hour, picked.minute),
-        );
-        _timecontroller.text = formattedTime;
-        _selectedTime = picked;
-      });
-    }
-  }
-
-  Future<void> _selectDate() async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null) {
-      final formttedDate = DateFormat.yMEd().format(picked);
-      setState(() {
-        _datecontroller.text = formttedDate;
-        _selectedDate = picked;
-      });
-    }
-  }
 }
 
-extension ImageProviderExtension on ImageProvider {
-  String get assetName {
-    if (this is AssetImage) {
-      return (this as AssetImage).assetName;
-    }
-    return '';
-  }
-}
