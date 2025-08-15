@@ -60,15 +60,9 @@ Future<void> signUp(String email,String password) async {
       );
 
       await firestore.collection('user').doc(cred.user?.uid).set({
-        // 'email': email,
-        // 'uid': cred.user?.uid, 
+    
       });
 
-      // final userModel = UserEmailModel(
-      //   id: cred.user!.uid,
-      //   email: email,
-       
-      // );
      
     } catch (e) {
       String errorMessage;

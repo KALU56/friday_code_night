@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/assets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todo/data/task_data.dart';
 import 'package:todo/models/auth.dart';
 import 'package:todo/models/tasklist.dart';
 
@@ -23,8 +24,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String? _userId = FirebaseAuth.instance.currentUser?.uid;
+  final TaskData _taskData = TaskData();
+
+
   final TimeOfDay _timeOfDay = TimeOfDay.now();
   final TextEditingController _datecontroller = TextEditingController();
   final TextEditingController _timecontroller = TextEditingController();
@@ -73,84 +75,49 @@ class _HomeState extends State<Home> {
     loadTasks();
   }
 
-  Future<void> loadTasks() async {
-    try {
-      if (_userId == null) return;
-
-      final snapshot = await _firestore
-          .collection('user')
-          .doc(_userId)
-          .collection('tasks')
-          .get();
-
-      tasklist = snapshot.docs.map((doc) {
-        return TasklistModel.fromJson(doc.data(), id: doc.id);
-      }).toList();
-
-      updateCategoryCounts();
-      setState(() {});
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Failed to load tasks: $e')));
-    }
-  }
-
-  Future<void> addTask() async {
-    if (_userId == null || _selectedDate == null || _selectedTime == null) {
-      return;
-    }
-
-    await _firestore.collection('user').doc(_userId).collection('tasks').add({
-      'title': _titlecontroller.text,
-      'day': _selectedDate!.toIso8601String(),
-      'timeHour': _selectedTime!.hour,
-      'timeMinute': _selectedTime!.minute,
-    });
-
-    _clearForm();
-    await loadTasks();
-  }
-
-  Future<void> updateTask(String taskId) async {
-    if (_userId == null || _selectedDate == null || _selectedTime == null) {
-      return;
-    }
-
-    await _firestore
-        .collection('user')
-        .doc(_userId)
-        .collection('tasks')
-        .doc(taskId)
-        .update({
-          'title': _titlecontroller.text,
-          'day': _selectedDate!.toIso8601String(),
-          'timeHour': _selectedTime!.hour,
-          'timeMinute': _selectedTime!.minute,
+    void loadTasks() async {
+      try {
+        final tasks = await _taskData.loadTasks();
+        setState(() {
+          tasklist = tasks;
         });
-
-    _clearForm();
-    await loadTasks();
-  }
-
-  Future<void> deleteTask(String taskId) async {
-    if (_userId == null) return;
-
-    try {
-      await _firestore
-          .collection('user')
-          .doc(_userId)
-          .collection('tasks')
-          .doc(taskId)
-          .delete();
-
-      await loadTasks();
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Failed to delete task: $e')));
+        updateCategoryCounts();
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load tasks: $e')),
+        );
+      }
     }
+        Future<void> addTask() async {
+      if (_selectedDate == null || _selectedTime == null) return;
+
+      await _taskData.addTask(
+        title: _titlecontroller.text,
+        day: _selectedDate!,
+        time: _selectedTime!,
+      );
+
+      loadTasks();
+      _clearForm();
+    }
+        Future<void> updateTask(String taskId) async {
+      if (_selectedDate == null || _selectedTime == null) return;
+
+      await _taskData.updateTask(
+        taskId: taskId,
+        title: _titlecontroller.text,
+        day: _selectedDate!,
+        time: _selectedTime!,
+      );
+
+      loadTasks(); 
+      _clearForm();
+    }
+      Future<void> deleteTask(String taskId) async {
+    await _taskData.deleteTask(taskId);
+    loadTasks();
   }
+
 
   void updateCategoryCounts() {
     for (var todo in todolist) {
@@ -213,6 +180,7 @@ class _HomeState extends State<Home> {
               Navigator.pop(context);
               try {
                 await deleteTask(taskId);
+                 if (!mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Task deleted successfully')),
                 );
