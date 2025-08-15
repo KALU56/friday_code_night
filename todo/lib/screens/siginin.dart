@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:todo/models/auth.dart';
+import 'package:todo/data/auth_data.dart';
+
 import 'package:todo/screens/home.dart';
 import 'package:todo/screens/siginup.dart';
 
@@ -13,8 +13,7 @@ class Siginin extends StatefulWidget {
 }
 
 class _SigininState extends State<Siginin> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final AuthData _authData = AuthData();
   bool _obscurePassword = true;
   bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController();
@@ -31,43 +30,17 @@ class _SigininState extends State<Siginin> {
       final password = _passwordController.text.trim();
 
  
-      final cred = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
 
+      final userModel = await _authData.login(email, password);
+   
 
-      final doc = await _firestore.collection('user').doc(cred.user?.uid).get();
-      
-      if (!doc.exists) {
-        throw Exception('User document not found');
-      }
-
-      final userModel = UserEmailModel.fromJson(doc.data()!, doc.id);
 
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Home(userEmail: userModel)),
       );
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'user-not-found':
-          errorMessage = 'No user found with this email';
-          break;
-        case 'wrong-password':
-          errorMessage = 'Incorrect password';
-          break;
-        case 'invalid-email':
-          errorMessage = 'Invalid email format';
-          break;
-        default:
-          errorMessage = 'Login failed: ${e.message}';
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(errorMessage)),
-      );
+   
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}')),

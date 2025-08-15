@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class TaskList extends StatefulWidget {
@@ -12,8 +10,6 @@ class TaskList extends StatefulWidget {
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
 
-
-
   const TaskList({
     super.key,
     required this.title,
@@ -21,12 +17,10 @@ class TaskList extends StatefulWidget {
     required this.day,
     required this.time,
     required this.image,
-   
+
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
-    this.onEdit, 
-     this.onDelete,
-    
-  
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
@@ -35,8 +29,6 @@ class TaskList extends StatefulWidget {
 
 class _TaskListState extends State<TaskList> {
   bool isChecked = false;
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +47,9 @@ class _TaskListState extends State<TaskList> {
             value: isChecked,
             checkColor: Colors.black,
             activeColor: Colors.white,
-            onChanged: (bool? newValue)
-             {
+            onChanged: (bool? newValue) {
               setState(() {
                 isChecked = newValue!;
-             
               });
             },
             shape: RoundedRectangleBorder(
@@ -86,10 +76,11 @@ class _TaskListState extends State<TaskList> {
                     ),
                     const SizedBox(width: 16),
                     Icon(widget.icon, color: Color.fromRGBO(185, 188, 194, 1)),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 2),
                     Text(
                       widget.time.format(context),
                       style: const TextStyle(
+                        fontSize: 10,
                         color: Color.fromRGBO(185, 188, 194, 1),
                       ),
                     ),
@@ -101,12 +92,14 @@ class _TaskListState extends State<TaskList> {
                 padding: const EdgeInsets.only(left: 16, top: 8),
                 child: Text(
                   widget.title,
-                  
+
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: Colors.black,
-                    decoration: isChecked?TextDecoration.lineThrough:TextDecoration.none,
+                    decoration: isChecked
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
                   ),
                 ),
               ),
@@ -114,8 +107,6 @@ class _TaskListState extends State<TaskList> {
           ),
 
           Spacer(),
-
-     Spacer(),
 
           PopupMenuButton<String>(
             icon: Container(
@@ -126,22 +117,19 @@ class _TaskListState extends State<TaskList> {
               ),
             ),
             onSelected: (value) {
-                if (value == 'edit') {
-                   if (value == 'edit' && widget.onEdit != null) {
-                      widget.onEdit!(); 
-                    }
+              if (value == 'edit') {
+                if (value == 'edit' && widget.onEdit != null) {
+                  widget.onEdit!();
                 }
-                if(value == 'delete'){
-                   if (value == 'delete' && widget.onEdit != null) {
-                    widget.onDelete!();
-               
-                    }
+              }
+              if (value == 'delete') {
+                if (value == 'delete' && widget.onEdit != null) {
+                  widget.onDelete!();
                 }
-        
+              }
             },
             itemBuilder: (context) => [
               PopupMenuItem(
-                
                 value: 'edit',
                 child: Row(
                   children: [
@@ -163,7 +151,6 @@ class _TaskListState extends State<TaskList> {
               ),
             ],
           ),
-
         ],
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:intl/intl.dart'; 
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/assets.dart';
@@ -13,7 +13,6 @@ import 'package:todo/models/todolist.dart';
 import 'package:todo/widgets/taskcard.dart';
 import 'package:todo/widgets/tasklist.dart';
 
-
 class Home extends StatefulWidget {
   const Home({super.key, required this.userEmail});
 
@@ -24,7 +23,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String? _userId = FirebaseAuth.instance.currentUser?.uid;
   final TimeOfDay _timeOfDay = TimeOfDay.now();
@@ -35,7 +33,7 @@ class _HomeState extends State<Home> {
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
 
- final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   List<TodolistModel> todolist = [
     TodolistModel(
       title: 'Today',
@@ -69,30 +67,33 @@ class _HomeState extends State<Home> {
 
   List<TasklistModel> tasklist = [];
 
-    @override
+  @override
   void initState() {
     super.initState();
     loadTasks();
   }
 
- Future<void> loadTasks() async {
-    if (_userId == null) return;
+  Future<void> loadTasks() async {
+    try {
+      if (_userId == null) return;
 
-    final snapshot = await _firestore
-        .collection('user')
-        .doc(_userId)
-        .collection('tasks')
-        .get();
+      final snapshot = await _firestore
+          .collection('user')
+          .doc(_userId)
+          .collection('tasks')
+          .get();
 
-    setState(() {
       tasklist = snapshot.docs.map((doc) {
-        final data = doc.data();
-        data['id'] = doc.id;
-        return TasklistModel.fromJson(data);
+        return TasklistModel.fromJson(doc.data(), id: doc.id);
       }).toList();
-    });
 
-    updateCategoryCounts();
+      updateCategoryCounts();
+      setState(() {});
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to load tasks: $e')));
+    }
   }
 
   Future<void> addTask() async {
@@ -132,25 +133,24 @@ class _HomeState extends State<Home> {
     await loadTasks();
   }
 
-    Future<void> deleteTask(String taskId) async {
-      if (_userId == null) return;
-      
-      try {
-        await _firestore
-            .collection('user')
-            .doc(_userId)
-            .collection('tasks')
-            .doc(taskId)
-            .delete();
-    
-        await loadTasks(); 
-      } catch (e) {
-    
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to delete task: $e')),
-        );
-      }
+  Future<void> deleteTask(String taskId) async {
+    if (_userId == null) return;
+
+    try {
+      await _firestore
+          .collection('user')
+          .doc(_userId)
+          .collection('tasks')
+          .doc(taskId)
+          .delete();
+
+      await loadTasks();
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to delete task: $e')));
     }
+  }
 
   void updateCategoryCounts() {
     for (var todo in todolist) {
@@ -196,6 +196,7 @@ class _HomeState extends State<Home> {
     _selectedTime = null;
     Navigator.of(context).pop();
   }
+
   void _showDeleteDialog(String taskId) {
     showDialog(
       context: context,
@@ -211,16 +212,15 @@ class _HomeState extends State<Home> {
             onPressed: () async {
               Navigator.pop(context);
               try {
-              await deleteTask(taskId);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Task deleted successfully')),
-              );
-            } catch (e) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Failed to delete task: $e')),
-              );
-            }
-          
+                await deleteTask(taskId);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Task deleted successfully')),
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Failed to delete task: $e')),
+                );
+              }
             },
             child: const Text("Delete", style: TextStyle(color: Colors.red)),
           ),
@@ -229,15 +229,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-
-  
-
-
-
-
-@override
+  @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -280,7 +273,7 @@ class _HomeState extends State<Home> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
 
-                       children: todolist
+                      children: todolist
                           .map(
                             (todo) => TaskCard(
                               title: todo.title,
@@ -320,8 +313,11 @@ class _HomeState extends State<Home> {
 
                                 time: task.time,
                                 onEdit: () async {
-                                await openTaskDialog(isEdit: true, task: task);
-                              },
+                                  await openTaskDialog(
+                                    isEdit: true,
+                                    task: task,
+                                  );
+                                },
                                 onDelete: () => _showDeleteDialog(task.id!),
                               ),
                             ),
@@ -458,21 +454,28 @@ class _HomeState extends State<Home> {
           Spacer(),
           TextButton(
             onPressed: () async {
-            if (_formKey.currentState!.validate()) {
-              try {
-                if (isEdit && task != null) {
-                  await updateTask(task.id!);
-                } else {
-                  await addTask();
+              if (_formKey.currentState!.validate()) {
+                try {
+                  if (isEdit && task != null) {
+                    await updateTask(task.id!);
+                  } else {
+                    await addTask();
+                  }
+                  if (!mounted) {
+                    return;
+                  }
+                  // ignore: use_build_context_synchronously
+                } catch (e) {
+                  if (!mounted) {
+                    return;
+                  }
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error saving task: $e')),
+                  );
                 }
-                Navigator.pop(context);
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error saving task: $e')),
-                );
               }
-            }
-          },
+            },
             child: Text(isEdit ? 'Update' : 'Save'),
           ),
         ],

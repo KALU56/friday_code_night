@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:intl/intl.dart';
+import 'dart:core'; // import 'package:intl/intl.dart';
 
 class TasklistModel {
-  final String? id; 
+  final String? id;
   final String title;
   final DateTime day;
   final IconData? icon;
@@ -14,7 +13,7 @@ class TasklistModel {
   final VoidCallback? onDelete;
 
   TasklistModel({
-     this.id,
+    this.id,
     required this.title,
     required this.day,
     this.icon,
@@ -34,16 +33,17 @@ class TasklistModel {
     };
   }
 
-factory TasklistModel.fromJson(Map<String, dynamic> json, {String? id}) {
-  return TasklistModel(
-    id: id,
-    title: json['title'],
-    day: DateTime.parse(json['day']),
-    time: TimeOfDay(
-      hour: json['timeHour'] as int,
-      minute: json['timeMinute'] as int,
-    ),
-    image: const AssetImage('assets/images/dot.png'),
-  );
-}
+  factory TasklistModel.fromJson(Map<String, dynamic> json, {String? id}) {
+    print("this is my id: $id");
+    return TasklistModel(
+      id: id,
+      title: json['title'],
+      day: DateTime.parse(json['day']),
+      time: TimeOfDay(
+        hour: json['timeHour'] as int,
+        minute: json['timeMinute'] as int,
+      ),
+      image: const AssetImage('assets/images/dot.png'),
+    );
+  }
 }

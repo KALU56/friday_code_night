@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/data/auth_data.dart';
 import 'package:todo/models/auth.dart';
 import 'package:todo/screens/home.dart';
 import 'package:todo/screens/siginin.dart';
@@ -13,18 +14,11 @@ class Siginup extends StatefulWidget {
 }
 
 class _SiginupState extends State<Siginup> {
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthData _authData = AuthData();
   bool _obscurePassword = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  Future<void> createUserDocument(UserEmailModel user) async {
-    await _firestore
-        .collection('user')
-        .doc(user.id)
-        .set(user.toJson());
-  }
-
+  
   Future<void> signUp() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
@@ -37,27 +31,17 @@ class _SiginupState extends State<Siginup> {
     }
 
     try {
-       final cred = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      await _firestore.collection('user').doc(cred.user?.uid).set({
-        'email': email,
-        'uid': cred.user?.uid, 
-      });
-
+    
+ 
       if (!mounted) return;
-      final userModel = UserEmailModel(
-        id: cred.user!.uid,
-        email: email,
-       
-      );
+   final userModel = await _authData.login(email, password);
       Navigator.pushReplacement(
+        
         context,
         MaterialPageRoute(builder: (context) => Home(userEmail: userModel)),
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
