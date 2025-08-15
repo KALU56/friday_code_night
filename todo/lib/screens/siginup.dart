@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:todo/data/auth_data.dart';
-import 'package:todo/models/auth.dart';
+
 import 'package:todo/screens/home.dart';
 import 'package:todo/screens/siginin.dart';
 
@@ -18,6 +17,8 @@ class _SiginupState extends State<Siginup> {
   bool _obscurePassword = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _userName = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
   
   Future<void> signUp() async {
     final email = _emailController.text.trim();
@@ -89,6 +90,31 @@ class _SiginupState extends State<Siginup> {
                         });
                       },
                     ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.5),
+                    ),
+                  ),
+                ),
+                TextField(
+                  controller: _userName,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your username',
+                    prefixIcon: const Icon(Icons.person),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.5),
+                    ),
+                  ),      
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _phone,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your phone number',      
+                    prefixIcon: const Icon(Icons.phone),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide:
