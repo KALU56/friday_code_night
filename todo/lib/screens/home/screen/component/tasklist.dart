@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TaskList extends StatefulWidget {
   final String title;
@@ -17,7 +18,6 @@ class TaskList extends StatefulWidget {
     required this.day,
     required this.time,
     required this.image,
-
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
     this.onEdit,
     this.onDelete,
@@ -41,7 +41,6 @@ class _TaskListState extends State<TaskList> {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-
         children: [
           Checkbox(
             value: isChecked,
@@ -56,43 +55,42 @@ class _TaskListState extends State<TaskList> {
               borderRadius: BorderRadius.circular(50),
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 12),
-
-                child: Row(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
                     Icon(
                       Icons.calendar_today,
                       color: const Color.fromRGBO(185, 188, 194, 1),
+                      size: 16,
                     ),
                     const SizedBox(width: 8),
                     Text(
                       "${widget.day.day}/${widget.day.month}/${widget.day.year}",
                       style: const TextStyle(
                         color: Color.fromRGBO(185, 188, 194, 1),
+                        fontSize: 12,
                       ),
                     ),
                     const SizedBox(width: 16),
-                    Icon(widget.icon, color: Color.fromRGBO(185, 188, 194, 1)),
+                    Icon(widget.icon, 
+                         color: Color.fromRGBO(185, 188, 194, 1),
+                         size: 16),
                     const SizedBox(width: 2),
                     Text(
-                      widget.time.format(context),
+                      _formatTimeOfDay(widget.time),
                       style: const TextStyle(
-                        fontSize: 10,
+                        fontSize: 12,
                         color: Color.fromRGBO(185, 188, 194, 1),
                       ),
                     ),
                   ],
                 ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 16, top: 8),
-                child: Text(
+                const SizedBox(height: 8),
+                Text(
                   widget.title,
-
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -102,12 +100,9 @@ class _TaskListState extends State<TaskList> {
                         : TextDecoration.none,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-
-          Spacer(),
-
           PopupMenuButton<String>(
             icon: Container(
               width: 25,
@@ -117,15 +112,10 @@ class _TaskListState extends State<TaskList> {
               ),
             ),
             onSelected: (value) {
-              if (value == 'edit') {
-                if (value == 'edit' && widget.onEdit != null) {
-                  widget.onEdit!();
-                }
-              }
-              if (value == 'delete') {
-                if (value == 'delete' && widget.onEdit != null) {
-                  widget.onDelete!();
-                }
+              if (value == 'edit' && widget.onEdit != null) {
+                widget.onEdit!();
+              } else if (value == 'delete' && widget.onDelete != null) {
+                widget.onDelete!();
               }
             },
             itemBuilder: (context) => [
@@ -154,5 +144,11 @@ class _TaskListState extends State<TaskList> {
         ],
       ),
     );
+  }
+  
+  String _formatTimeOfDay(TimeOfDay tod) {
+    final now = DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+    return DateFormat.jm().format(dt);
   }
 }

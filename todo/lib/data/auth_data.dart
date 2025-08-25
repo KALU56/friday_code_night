@@ -13,7 +13,7 @@ class AuthData {
         password: password,
       );
 
-      final doc = await _firestore.collection('user').doc(cred.user?.uid).get();
+      final doc = await _firestore.collection('users').doc(cred.user?.uid).get();
 
       if (!doc.exists) {
         throw Exception('User document not found');
@@ -40,7 +40,7 @@ class AuthData {
   }
 
   Future<void> signUp(
-    String email,String password,String userName,String phone,
+    String email, String password, String userName, String phone,
   ) async {
     try {
       final cred = await _auth.createUserWithEmailAndPassword(
@@ -55,7 +55,10 @@ class AuthData {
         phone: phone,
       );
 
-      await saveUserToFirestore(userModel);
+      await _firestore
+          .collection('users')
+          .doc(cred.user!.uid)
+          .set(userModel.toJson());
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
@@ -75,13 +78,5 @@ class AuthData {
     } catch (e) {
       throw Exception('Sign up failed: ${e.toString()}');
     }
-  }
-
-
-  Future<void> saveUserToFirestore(UserEmailModel user) async {
-    await _firestore
-        .collection('user') 
-        .doc(user.id)
-        .set(user.toJson());
   }
 }

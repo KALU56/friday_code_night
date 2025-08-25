@@ -13,7 +13,7 @@ class TaskData {
       if (userId == null) return [];
 
       final snapshot = await _firestore
-          .collection('user')
+          .collection('users')
           .doc(userId)
           .collection('tasks')
           .get();
@@ -34,7 +34,7 @@ class TaskData {
     final userId = _auth.currentUser?.uid;
     if (userId == null) return;
 
-    await _firestore.collection('user').doc(userId).collection('tasks').add({
+    await _firestore.collection('users').doc(userId).collection('tasks').add({
       'title': title,
       'day': day.toIso8601String(),
       'timeHour': time.hour,
@@ -52,7 +52,7 @@ class TaskData {
     if (userId == null) return;
 
     await _firestore
-        .collection('user')
+        .collection('users')
         .doc(userId)
         .collection('tasks')
         .doc(taskId)
@@ -69,7 +69,7 @@ class TaskData {
     if (userId == null) return;
 
     await _firestore
-        .collection('user')
+        .collection('users')
         .doc(userId)
         .collection('tasks')
         .doc(taskId)

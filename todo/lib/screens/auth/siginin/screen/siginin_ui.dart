@@ -1,16 +1,4 @@
-
-import 'package:flutter/material.dart';
-import 'package:todo/data/auth_data.dart';
-
-import 'package:todo/screens/home.dart';
-import 'package:todo/screens/siginup.dart';
-
-class Siginin extends StatefulWidget {
-  const Siginin({super.key});
-
-  @override
-  State<Siginin> createState() => _SigininState();
-}
+part of '../sigin.dart';
 
 class _SigininState extends State<Siginin> {
   final AuthData _authData = AuthData();
@@ -29,18 +17,13 @@ class _SigininState extends State<Siginin> {
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
 
- 
-
       final userModel = await _authData.login(email, password);
-   
-
 
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Home(userEmail: userModel)),
       );
-   
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}')),
@@ -64,6 +47,11 @@ class _SigininState extends State<Siginin> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Text(
+                    'Welcome Back',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 30),
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
