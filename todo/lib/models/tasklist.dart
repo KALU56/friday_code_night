@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:intl/intl.dart'; 
+import 'dart:core'; // import 'package:intl/intl.dart';
 
 class TasklistModel {
+  final String? id;
   final String title;
   final DateTime day;
   final IconData? icon;
@@ -13,9 +13,10 @@ class TasklistModel {
   final VoidCallback? onDelete;
 
   TasklistModel({
+    this.id,
     required this.title,
     required this.day,
-     this.icon,
+    this.icon,
     required this.time,
     this.image = const AssetImage('assets/images/dot.png'),
     this.backgroundColor = const Color.fromRGBO(244, 247, 255, 1),
@@ -23,32 +24,26 @@ class TasklistModel {
     this.onDelete,
   });
 
-  
   Map<String, dynamic> toJson() {
     return {
       'title': title,
-       'day': day.toIso8601String(),
+      'day': day.toIso8601String(),
       'timeHour': time.hour,
       'timeMinute': time.minute,
-
-      
     };
   }
 
-  
-  factory TasklistModel.fromJson(Map<String, dynamic> json) {
+  factory TasklistModel.fromJson(Map<String, dynamic> json, {String? id}) {
+    print("this is my id: $id");
     return TasklistModel(
+      id: id,
       title: json['title'],
       day: DateTime.parse(json['day']),
-      
       time: TimeOfDay(
-        hour: json['timeHour'],
-        minute: json['timeMinute'],
+        hour: json['timeHour'] as int,
+        minute: json['timeMinute'] as int,
       ),
-      image: const AssetImage('assets/images/dot.png'), 
-    
-      onEdit: null,
-      onDelete: null,
+      image: const AssetImage('assets/images/dot.png'),
     );
   }
 }
