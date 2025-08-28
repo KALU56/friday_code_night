@@ -1,0 +1,133 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "username": "alicej",
+    "email": "alice.johnson@example.com",
+    "phone": "+1-202-555-0151",
+    "address": {
+      "street": "Maple Street",
+      "city": "Springfield",
+      "zipcode": "12345"
+    },
+    "company": "Acme Corp"
+  },
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "username": "bobsmith",
+    "email": "bob.smith@example.com",
+    "phone": "+1-202-555-0152",
+    "address": {
+      "street": "Oak Avenue",
+      "city": "Rivertown",
+      "zipcode": "23456"
+    },
+    "company": "GlobalTech"
+  },
+  {
+    "id": 3,
+    "name": "Carol Williams",
+    "username": "carolw",
+    "email": "carol.williams@example.com",
+    "phone": "+1-202-555-0153",
+    "address": {
+      "street": "Pine Lane",
+      "city": "Lakeside",
+      "zipcode": "34567"
+    },
+    "company": "BrightSolutions"
+  },
+  {
+    "id": 4,
+    "name": "David Brown",
+    "username": "davidb",
+    "email": "david.brown@example.com",
+    "phone": "+1-202-555-0154",
+    "address": {
+      "street": "Cedar Road",
+      "city": "Hilltown",
+      "zipcode": "45678"
+    },
+    "company": "NextGen Inc"
+  },
+  {
+    "id": 5,
+    "name": "Emma Davis",
+    "username": "emmad",
+    "email": "emma.davis@example.com",
+    "phone": "+1-202-555-0155",
+    "address": {
+      "street": "Elm Street",
+      "city": "Brookfield",
+      "zipcode": "56789"
+    },
+    "company": "Innovatech"
+  },
+  {
+    "id": 6,
+    "name": "Frank Miller",
+    "username": "frankm",
+    "email": "frank.miller@example.com",
+    "phone": "+1-202-555-0156",
+    "address": {
+      "street": "Birch Street",
+      "city": "Greenville",
+      "zipcode": "67890"
+    },
+    "company": "TechVision"
+  },
+  {
+    "id": 7,
+    "name": "Grace Wilson",
+    "username": "gracew",
+    "email": "grace.wilson@example.com",
+    "phone": "+1-202-555-0157",
+    "address": {
+      "street": "Willow Avenue",
+      "city": "Fairview",
+      "zipcode": "78901"
+    },
+    "company": "AlphaWorks"
+  },
+  {
+    "id": 8,
+    "name": "Henry Moore",
+    "username": "henrym",
+    "email": "henry.moore@example.com",
+    "phone": "+1-202-555-0158",
+    "address": {
+      "street": "Cherry Street",
+      "city": "Riverside",
+      "zipcode": "89012"
+    },
+    "company": "SmartTech"
+  },
+  {
+    "id": 9,
+    "name": "Ivy Taylor",
+    "username": "ivyt",
+    "email": "ivy.taylor@example.com",
+    "phone": "+1-202-555-0159",
+    "address": {
+      "street": "Aspen Lane",
+      "city": "Sunnyvale",
+      "zipcode": "90123"
+    },
+    "company": "Visionary Labs"
+  },
+  {
+    "id": 10,
+    "name": "Jack Anderson",
+    "username": "jacka",
+    "email": "jack.anderson@example.com",
+    "phone": "+1-202-555-0160",
+    "address": {
+      "street": "Spruce Road",
+      "city": "Mapleton",
+      "zipcode": "01234"
+    },
+    "company": "NextWave"
+  }
+
+]
