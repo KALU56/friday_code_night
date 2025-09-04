@@ -12,7 +12,7 @@ class PromotionalBanner extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: const DecorationImage(
-          image: AssetImage('assets/images/mone.png'),
+          image: AssetImage('assets/images/product.png'),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
         ),
@@ -30,38 +30,14 @@ class PromotionalBanner extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text(
-              'Total money earned',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-            Text(
-              '\$1,234.56',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Available balance',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-            Text(
-              '\$34.56',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 18),
-            ),
+         
             Spacer(),
             Align(
               alignment: Alignment.centerRight,
               child: Chip(
                 backgroundColor: Colors.white,
                 label: Text(
-                  'Show all transactions',
+                  'Show all product',
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.blue),
                 ),

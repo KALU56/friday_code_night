@@ -16,7 +16,7 @@ class _HeaderRowState extends State<HeaderRow> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Top Row
+  
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -32,7 +32,7 @@ class _HeaderRowState extends State<HeaderRow> {
                   ),
                   child: const CircleAvatar(
                     radius: 20,
-                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                    backgroundImage: AssetImage('assets/images/product.png'),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -54,7 +54,6 @@ class _HeaderRowState extends State<HeaderRow> {
         ),
         const SizedBox(height: 16),
 
-        // Search
         TextField(
           decoration: InputDecoration(
             hintText: 'Search products...',

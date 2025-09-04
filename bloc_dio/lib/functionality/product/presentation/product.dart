@@ -16,10 +16,7 @@ class ProductPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => ProductCubit(ProductRepository())..fetchProducts(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Products'),
-          backgroundColor: Colors.blue,
-        ),
+    
         body: Column(
           children: [
             const Padding(

@@ -1,7 +1,6 @@
 import 'package:bloc_dio/functionality/product/data/models/product_model.dart';
 import 'package:equatable/equatable.dart';
 
-/// Base state
 abstract class ProductState extends Equatable {
   const ProductState();
 
