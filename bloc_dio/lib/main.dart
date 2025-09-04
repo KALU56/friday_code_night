@@ -1,4 +1,4 @@
-import 'package:bloc_dio/presentation/productpage.dart';
+import 'package:bloc_dio/functionality/product/presentation/product.dart';
 import 'package:flutter/material.dart';
 
 

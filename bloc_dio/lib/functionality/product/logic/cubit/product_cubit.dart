@@ -1,4 +1,4 @@
-import 'package:bloc_dio/data/product_repository.dart';
+import 'package:bloc_dio/functionality/product/data/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'product_state.dart';
 
@@ -8,7 +8,6 @@ class ProductCubit extends Cubit<ProductState> {
 
   ProductCubit(this._repository) : super(ProductInitial());
 
-  /// Fetch all products
   Future<void> fetchProducts() async {
     emit(ProductLoading());
     try {
@@ -19,7 +18,7 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  /// Fetch single product detail
+
   Future<void> fetchProductDetail(int id) async {
     emit(ProductLoading());
     try {
